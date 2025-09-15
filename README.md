@@ -1,29 +1,30 @@
 ```mermaid
----
-config:
-  layout: fixed
-  theme: default
----
 flowchart LR
     nowhere1[" "] -- Customer arrives <br> every x minutes --> queue1[(" ")]
     queue1 --> customerService["Customer Service"]
-    customerService --> queueMaintenance[(" ")] & queueInspection[(" ")]
+    customerService -.-> needInspection{"Need Inspection?"}
+    needInspection -- No --> queueMaintenance[(" ")]
+    needInspection -- Yes --> queueInspection[(" ")]
     queueMaintenance --> maintenance["Maintenance"]
     queueInspection --> inspection("Inspection")
     maintenance --> tireQueue[(" ")] & oilQueue[(" ")] & repairQueue[(" ")]
     tireQueue --> tireChange("Tire Change")
     oilQueue --> oilChange("Oil Change")
     repairQueue --> repairWork("Repair Work")
-    tireChange --> maintenanceDone{"Maintenance Done?"}
-    oilChange --> maintenanceDone
-    repairWork --> maintenanceDone
-    maintenanceDone -- Yes --> queueInspection
+    tireChange -.-> maintenanceDone{"Maintenance Done?"}
+    oilChange -.-> maintenanceDone
+    repairWork -.-> maintenanceDone
+    maintenanceDone -. Yes .-> needInspection1{"Need Inspection?"}
+    needInspection1 -- No --> customerServed["Customer Served"]
+    needInspection1 -- Yes --> queueInspection
     maintenanceDone -- No --> queueMaintenance
-    inspection --> isPassed{"Is passed?"}
-    isPassed -- Yes <br> Customer served --> customerServed[" "]
+    inspection -.-> isPassed{"Is passed?"}
+    isPassed -- Yes --> customerServed
     isPassed -- No --> queueMaintenance
+    customerServed -- customer exit --> exit[" "]
     style nowhere1 width:0px
-    style customerServed width:0px
+    style exit width:0px
+
 ```
 ```mermaid
 flowchart TD
