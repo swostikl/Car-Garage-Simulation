@@ -15,7 +15,7 @@ flowchart LR
     oilChange -.-> maintenanceDone
     repairWork -.-> maintenanceDone
     maintenanceDone -. Yes .-> needInspection1{"Need Inspection?"}
-    needInspection1 -- No --> customerServed["Customer Served"]
+    needInspection1 -- No --> customerServed("Customer Served")
     needInspection1 -- Yes --> queueInspection
     maintenanceDone -- No --> queueMaintenance
     inspection -.-> isPassed{"Is passed?"}
