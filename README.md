@@ -37,7 +37,7 @@ flowchart TD
     eventList -. "peek.getTime" .-> A
     A --> B["<b>B Phase</b>
         B events (Arrival || Departure);
-        Schedule new B events at <b>random</b>;"]
+        Schedule new Arrival B events at <b>random</b>;"]
     eventList -. poll .-> B
     B -. event .-> eventList
     B -. Customer .-> queue[("Queue")]
