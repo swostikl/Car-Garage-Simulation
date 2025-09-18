@@ -8,5 +8,16 @@ import simu.framework.IEventType;
  * TODO: This must be adapted to the actual simulator
  */
 public enum EventType implements IEventType {
-	ARR1, DEP1, DEP2, DEP3;
+    ARR_CUSTOMER_SERVICE,
+    DEP_CS_MAINTENANCE,
+    DEP_CS_INSPECTION,
+    DEP_INSPECTION_MAINTENANCE,
+    DEP_MAINTENANCE_TIRE,
+    DEP_MAINTENANCE_OIL,
+    DEP_MAINTENANCE_OTHER,
+    DEP_TIRE_INSPECTION,
+    DEP_OIL_INSPECTION,
+    DEP_OTHER_INSPECTION,
+    DEP_INSPECTION_END,
+    DEP_END
 }
