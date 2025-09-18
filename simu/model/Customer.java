@@ -10,99 +10,106 @@ import simu.framework.*;
 
 // Here we need more method like needInspection, maintenanceType,
 public class Customer {
-	private double arrivalTime;
-	private double removalTime;
-	private int id;
-	private static int i = 1;
-	private static long sum = 0;
+    private double arrivalTime;
+    private double removalTime;
+    private int id;
+    private static int i = 1;
+    private static long sum = 0;
     private boolean needInspection; // check  need inspection or not
     private boolean passedInspection; // inspection is passed or not
     private MaintenanceType mt;
 
-	/**
-	 * Create a unique customer
-	 */
-	public Customer( boolean needInspection, MaintenanceType mt) {
-	    id = i++;
-	    this.needInspection = needInspection;
+    /**
+     * Create a unique customer
+     */
+    public Customer(boolean needInspection, MaintenanceType mt) {
+        id = i++;
+        this.needInspection = needInspection;
         this.passedInspection = false; //set default
         this.mt = mt;
 
-		arrivalTime = Clock.getInstance().getClock();
-		Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime);
-	}
+        arrivalTime = Clock.getInstance().getClock();
+        Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime);
+    }
 
-	/**
-	 * Give the time when customer has been removed (from the system to be simulated)
-	 * @return Customer removal time
-	 */
-	public double getRemovalTime() {
-		return removalTime;
-	}
+    /**
+     * Give the time when customer has been removed (from the system to be simulated)
+     *
+     * @return Customer removal time
+     */
+    public double getRemovalTime() {
+        return removalTime;
+    }
 
-	/**
-	 * Mark the time when the customer has been removed (from the system to be simulated)
-	 * @param removalTime Customer removal time
-	 */
-	public void setRemovalTime(double removalTime) {
-		this.removalTime = removalTime;
-	}
+    /**
+     * Mark the time when the customer has been removed (from the system to be simulated)
+     *
+     * @param removalTime Customer removal time
+     */
+    public void setRemovalTime(double removalTime) {
+        this.removalTime = removalTime;
+    }
 
-	/**
-	 * Give the time when the customer arrived to the system to be simulated
-	 * @return Customer arrival time
-	 */
-	public double getArrivalTime() {
-		return arrivalTime;
-	}
+    /**
+     * Give the time when the customer arrived to the system to be simulated
+     *
+     * @return Customer arrival time
+     */
+    public double getArrivalTime() {
+        return arrivalTime;
+    }
 
-	/**
-	 * Mark the time when the customer arrived to the system to be simulated
-	 * @param arrivalTime Customer arrival time
-	 */
-	public void setArrivalTime(double arrivalTime) {
-		this.arrivalTime = arrivalTime;
-	}
+    /**
+     * Mark the time when the customer arrived to the system to be simulated
+     *
+     * @param arrivalTime Customer arrival time
+     */
+    public void setArrivalTime(double arrivalTime) {
+        this.arrivalTime = arrivalTime;
+    }
 
-	/**
-	 * Get the (unique) customer id
-	 * @return Customer id
-	 */
-	public int getId() {
-		return id;
-	}
+    /**
+     * Get the (unique) customer id
+     *
+     * @return Customer id
+     */
+    public int getId() {
+        return id;
+    }
 
-	/**
-	 * Report the measured variables of the customer. In this case to the diagnostic output.
-	 */
+    /**
+     * Report the measured variables of the customer. In this case to the diagnostic output.
+     */
     public MaintenanceType getMaintenanceType() {
         return mt;
     }
 
-    public void setMaintenanceType(MaintenanceType mt){
+    public void setMaintenanceType(MaintenanceType mt) {
         this.mt = mt;
     }
 
-//boolean methods
-    public boolean needInspection(){
+    //boolean methods
+    public boolean needInspection() {
         return needInspection;
 
     }
-    public boolean hasPassedInspection(){
+
+    public boolean hasPassedInspection() {
         return passedInspection;
     }
-    public void setPassedInspection(boolean passed){
+
+    public void setPassedInspection(boolean passed) {
         this.passedInspection = passed;
     }
 
-	public void reportResults() {
-		Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
-		Trace.out(Trace.Level.INFO, "Customer "   + id + " arrived: " + arrivalTime);
-		Trace.out(Trace.Level.INFO,"Customer "    + id + " removed: " + removalTime);
-		Trace.out(Trace.Level.INFO,"Customer "    + id + " stayed: "  + (removalTime - arrivalTime));
+    public void reportResults() {
+        Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
+        Trace.out(Trace.Level.INFO, "Customer " + id + " arrived: " + arrivalTime);
+        Trace.out(Trace.Level.INFO, "Customer " + id + " removed: " + removalTime);
+        Trace.out(Trace.Level.INFO, "Customer " + id + " stayed: " + (removalTime - arrivalTime));
 
-		sum += (removalTime - arrivalTime);
-		double mean = sum/id;
-		System.out.println("Current mean of the customer service times " + mean);
-	}
+        sum += (removalTime - arrivalTime);
+        double mean = sum / id;
+        System.out.println("Current mean of the customer service times " + mean);
+    }
 }
