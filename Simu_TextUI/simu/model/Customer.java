@@ -4,22 +4,30 @@ import simu.framework.*;
 
 /**
  * Customer in a simulator
- *
  * TODO: This is to be implemented according to the requirements of the simulation model (data!)
  */
+
+
+// Here we need more method like needInspection, maintenanceType,
 public class Customer {
 	private double arrivalTime;
 	private double removalTime;
 	private int id;
 	private static int i = 1;
 	private static long sum = 0;
+    private boolean needInspection; // check  need inspection or not
+    private boolean passedInspection; // inspection is passed or not
+    private MaintenanceType mt;
 
 	/**
 	 * Create a unique customer
 	 */
-	public Customer() {
+	public Customer( boolean needInspection, MaintenanceType mt) {
 	    id = i++;
-	    
+	    this.needInspection = needInspection;
+        this.passedInspection = false; //set default
+        this.mt = mt;
+
 		arrivalTime = Clock.getInstance().getClock();
 		Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime);
 	}
@@ -67,6 +75,26 @@ public class Customer {
 	/**
 	 * Report the measured variables of the customer. In this case to the diagnostic output.
 	 */
+    public MaintenanceType getMaintenanceType() {
+        return mt;
+    }
+
+    public void setMaintenanceType(MaintenanceType mt){
+        this.mt = mt;
+    }
+
+//boolean methods
+    public boolean needInspection(){
+        return needInspection;
+
+    }
+    public boolean hasPassedInspection(){
+        return passedInspection;
+    }
+    public void setPassedInspection(boolean passed){
+        this.passedInspection = passed;
+    }
+
 	public void reportResults() {
 		Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
 		Trace.out(Trace.Level.INFO, "Customer "   + id + " arrived: " + arrivalTime);
