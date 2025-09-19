@@ -13,23 +13,27 @@ public class Customer {
     private double arrivalTime;
     private double removalTime;
     private int id;
+
     private static int i = 1;
-    private static long sum = 0;
+    private static long sum = 0;    //sum of all service time
     private boolean needInspection; // check  need inspection or not
     private boolean passedInspection; // inspection is passed or not
     private MaintenanceType mt;
+
 
     /**
      * Create a unique customer
      */
     public Customer(boolean needInspection, MaintenanceType mt) {
         id = i++;
-        this.needInspection = needInspection;
+        this.needInspection = needInspection
         this.passedInspection = false; //set default
         this.mt = mt;
 
         arrivalTime = Clock.getInstance().getClock();
-        Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime);
+        Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
+                " | Maintenance: " + mt +
+                " | Needs inspection: " + needInspection);
     }
 
     /**
@@ -103,6 +107,7 @@ public class Customer {
     }
 
     public void reportResults() {
+
         Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
         Trace.out(Trace.Level.INFO, "Customer " + id + " arrived: " + arrivalTime);
         Trace.out(Trace.Level.INFO, "Customer " + id + " removed: " + removalTime);
