@@ -13,23 +13,36 @@ public class Customer {
     private double arrivalTime;
     private double removalTime;
     private int id;
+
+    private static int totalServed = 0; // total number of customer served
     private static int i = 1;
-    private static long sum = 0;
+    private static long sum = 0;    //sum of all service time
     private boolean needInspection; // check  need inspection or not
     private boolean passedInspection; // inspection is passed or not
     private MaintenanceType mt;
 
+    private final Random rand = new Random();
+    private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
+
+
     /**
      * Create a unique customer
      */
-    public Customer(boolean needInspection, MaintenanceType mt) {
+    public Customer() {
         id = i++;
-        this.needInspection = needInspection;
+        this.needInspection = rand.nextDouble() < 0.3;
         this.passedInspection = false; //set default
-        this.mt = mt;
+        this.mt = getRandomMaintenanceType();
 
         arrivalTime = Clock.getInstance().getClock();
-        Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime);
+        Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
+                " | Maintenance: " + mt +
+                " | Needs inspection: " + needInspection);
+    }
+// Randomly pick a maintenance type
+    private MaintenanceType getRandomMaintenanceType() {
+        return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
+
     }
 
     /**
@@ -56,6 +69,7 @@ public class Customer {
      * @return Customer arrival time
      */
     public double getArrivalTime() {
+
         return arrivalTime;
     }
 
@@ -103,13 +117,16 @@ public class Customer {
     }
 
     public void reportResults() {
+
         Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
         Trace.out(Trace.Level.INFO, "Customer " + id + " arrived: " + arrivalTime);
         Trace.out(Trace.Level.INFO, "Customer " + id + " removed: " + removalTime);
         Trace.out(Trace.Level.INFO, "Customer " + id + " stayed: " + (removalTime - arrivalTime));
 
         sum += (removalTime - arrivalTime);
-        double mean = sum / id;
+        totalServed++; // increament global counter (to see total number of customer being served
+        double mean = sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
+        System.out.println(" Total number of customer served : " + totalServed);
     }
 }
