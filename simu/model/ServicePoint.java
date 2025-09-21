@@ -18,13 +18,15 @@ import java.util.LinkedList;
  *
  * Service point collects measurement parameters.
  */
-public class ServicePoint {
+public abstract class ServicePoint {
 	private LinkedList<Customer> queue = new LinkedList<>(); // Data Structure used
-	private ContinuousGenerator generator;
-	private EventList eventList;
-	private EventType eventTypeScheduled;
+	protected ContinuousGenerator generator;
+	protected EventList eventList;
+	protected EventType eventTypeScheduled;
 	//Queuestrategy strategy; // option: ordering of the customer
-	private boolean reserved = false;
+	protected boolean reserved = false;
+    protected double serviceTime;
+    protected int customerServed;
 
 
 	/**
@@ -32,12 +34,11 @@ public class ServicePoint {
 	 *
 	 * @param generator Random number generator for service time simulation
 	 * @param eventList Simulator event list, needed for the insertion of service ready event
-	 * @param type Event type for the service end event
 	 */
-	public ServicePoint(ContinuousGenerator generator, EventList eventList, EventType type){
+	public ServicePoint(ContinuousGenerator generator, EventList eventList){
 		this.eventList = eventList;
 		this.generator = generator;
-		this.eventTypeScheduled = type;
+        this.serviceTime = 0;
 	}
 
 	/**
@@ -57,6 +58,7 @@ public class ServicePoint {
 	 */
 	public Customer removeQueue() {		// Remove serviced customer
 		reserved = false;
+        customerServed++;
 		return queue.poll();
 	}
 
@@ -85,9 +87,13 @@ public class ServicePoint {
 	/**
 	 * Check whether there is customers on the waiting queue
 	 *
-	 * @return logival value indicating queue status
+	 * @return logical value indicating queue status
 	 */
 	public boolean isOnQueue(){
-		return queue.size() != 0;
+		return !queue.isEmpty();
 	}
+
+    protected LinkedList<Customer> getQueue() {
+        return queue;
+    }
 }
