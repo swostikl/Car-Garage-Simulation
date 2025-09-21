@@ -30,7 +30,7 @@ public class Customer {
      */
     public Customer() {
         id = i++;
-        this.needInspection = rand.nextDouble < 0.3;
+        this.needInspection = rand.nextDouble() < 0.3;
         this.passedInspection = false; //set default
         this.mt = getRandomMaintenanceType();
 
@@ -38,10 +38,11 @@ public class Customer {
         Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
                 " | Maintenance: " + mt +
                 " | Needs inspection: " + needInspection);
+    }
+// Randomly pick a maintenance type
+    private MaintenanceType getRandomMaintenanceType() {
+        return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
 
-        private static MaintenanceType getRandomMaintenanceType() {
-            return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
-        }
     }
 
     /**
@@ -124,7 +125,7 @@ public class Customer {
 
         sum += (removalTime - arrivalTime);
         totalServed++; // increament global counter (to see total number of customer being served
-        double mean = sum / id;
+        double mean = sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
         System.out.println(" Total number of customer served : " + totalServed);
     }
