@@ -125,7 +125,7 @@ public class Customer {
 
         sum += (removalTime - arrivalTime);
         totalServed++; // increament global counter (to see total number of customer being served
-        double mean = sum / id;
+        double mean = sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
         System.out.println(" Total number of customer served : " + totalServed);
     }
