@@ -3,6 +3,8 @@ package simu.model;
 import eduni.distributions.ContinuousGenerator;
 import simu.framework.*;
 import java.util.LinkedList;
+import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  * Service Point implements the functionalities, calculations and reporting.
@@ -55,9 +57,36 @@ public class ServicePoint {
 	 *
 	 * @return Customer retrieved from the waiting queue
 	 */
-	public Customer removeQueue() {		// Remove serviced customer
-		reserved = false;
-		return queue.poll();
+	public Customer removeQueue() {// Remove serviced customer
+        if(!queue.isEmpty()){
+            Customer customer = queue.poll();
+
+            EventType nextEventType;
+            switch (customer.getMaintenanceType()){
+                case TIRE_CHANGE:
+                    nextEventType = EventType.DEP_MAINTENANCE_TIRE;
+                    break;
+                case OIL:
+                    nextEventType = EventType.DEP_MAINTENANCE_OIL;
+                    break;
+                case OTHER_REPAIR:
+                    nextEventType = EventType.DEP_MAINTENANCE_OTHER;
+                    break;
+                default:
+                    nextEventType = EventType.DEP_INSPECTION_END;
+                    break;
+            }
+            int serviceTime = (int) generator.sample();
+
+            Event depature = new Event(nextEventType,Clock.getInstance().getClock() + serviceTime);
+            eventList.add(depature);
+
+            reserved = false;
+
+            return customer;
+        }
+
+		return null;
 	}
 
 	/**
@@ -71,6 +100,8 @@ public class ServicePoint {
 		reserved = true;
 		double serviceTime = generator.sample();
 		eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+
+
 	}
 
 	/**
