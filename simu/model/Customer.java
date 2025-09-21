@@ -1,5 +1,6 @@
 package simu.model;
 
+import java.util.Random;
 import simu.framework.*;
 
 /**
@@ -130,3 +131,4 @@ public class Customer {
         System.out.println(" Total number of customer served : " + totalServed);
     }
 }
+
