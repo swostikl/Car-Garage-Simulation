@@ -40,8 +40,8 @@ public class Customer {
                 " | Needs inspection: " + needInspection);
     }
 // Randomly pick a maintenance type
-        private MaintenanceType getRandomMaintenanceType() {
-            return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
+    private MaintenanceType getRandomMaintenanceType() {
+        return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
 
     }
 
