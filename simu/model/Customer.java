@@ -1,6 +1,10 @@
 package simu.model;
 
+import java.util.ArrayList;
 import java.util.Random;
+
+import eduni.distributions.ContinuousGenerator;
+import eduni.distributions.Normal;
 import simu.framework.*;
 
 /**
@@ -20,7 +24,7 @@ public class Customer {
     private static long sum = 0;    //sum of all service time
     private boolean needInspection; // check  need inspection or not
     private boolean passedInspection; // inspection is passed or not
-    private MaintenanceType mt;
+    private ArrayList<MaintenanceType> mt;
 
     private final Random rand = new Random();
     private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
@@ -28,16 +32,28 @@ public class Customer {
 
     /**
      * Create a unique customer
+     * @param maintenanceGenerator a continuous generator used to generate numbers of maintenance needed
+     * @param needInspectionPercentage percentage of customers that requires an inspection from 0.0 to 1.0
+     * @param inspectionFailRate percentage of customers that will fail initial inspection
      */
-    public Customer() {
+    public Customer(ContinuousGenerator maintenanceGenerator, double needInspectionPercentage, double inspectionFailRate) {
+        if (needInspectionPercentage > 1 || needInspectionPercentage < 0) {
+            throw new IllegalArgumentException("needInspectionPercentage cannot be more than 1 or less than 0.");
+        }
         id = i++;
-        this.needInspection = rand.nextDouble() < 0.3;
-        this.passedInspection = false; //set default
-        this.mt = getRandomMaintenanceType();
+        this.needInspection = rand.nextDouble() < needInspectionPercentage;
+        this.passedInspection = Math.random() < inspectionFailRate; //set default
+
+        int maintenanceNeeded = (int) maintenanceGenerator.sample();
+
+        for (int i = 0; i < maintenanceNeeded; i++) {
+            mt.add(getRandomMaintenanceType());
+        }
+
+        this.mt.add(getRandomMaintenanceType());
 
         arrivalTime = Clock.getInstance().getClock();
         Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
-                " | Maintenance: " + mt +
                 " | Needs inspection: " + needInspection);
     }
 // Randomly pick a maintenance type
@@ -95,12 +111,26 @@ public class Customer {
     /**
      * Report the measured variables of the customer. In this case to the diagnostic output.
      */
-    public MaintenanceType getMaintenanceType() {
-        return mt;
+//    public MaintenanceType[] getMaintenanceType() {
+//        return mt.toArray(new MaintenanceType[0]);
+//    }
+
+    public void addMaintenanceType(MaintenanceType mt) {
+        this.mt.add(mt);
     }
 
-    public void setMaintenanceType(MaintenanceType mt) {
-        this.mt = mt;
+    /**
+     * @return next maintenance type (without deleting)
+     */
+    public MaintenanceType peekMaintenance() {
+        return mt.getFirst();
+    }
+
+    /**
+     * @return next maintenance type (will also remove it from the list)
+     */
+    public MaintenanceType pollMaintenance() {
+        return mt.removeFirst();
     }
 
     //boolean methods
