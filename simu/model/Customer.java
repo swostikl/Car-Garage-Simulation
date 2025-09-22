@@ -125,6 +125,9 @@ public class Customer {
      * @return next maintenance type (without deleting)
      */
     public MaintenanceType peekMaintenance() {
+        if (mt.isEmpty()) {
+            return null;
+        }
         return mt.get(0);
     }
 
@@ -132,6 +135,9 @@ public class Customer {
      * @return next maintenance type (will also remove it from the list)
      */
     public MaintenanceType pollMaintenance() {
+        if (mt.isEmpty()) {
+            return null;
+        }
         return mt.remove(0);
     }
 
