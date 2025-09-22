@@ -6,6 +6,7 @@ import eduni.distributions.Uniform;
 import simu.framework.*;
 import eduni.distributions.Negexp;
 import simu.model.bEvent.BEvent;
+import simu.model.servicePoints.CustomerServicePoint;
 
 import java.util.Random;
 
@@ -30,84 +31,28 @@ public class MyEngine extends Engine {
 	 * We use exponent distribution for customer arrival times and normal distribution for the
 	 * service times.
 	 */
-	public MyEngine() {
-        // write init event here
-		servicePoints = new ServicePoint[3];
 
-		if (TEXTDEMO) {
-			/* special setup for the example in text
-			 * https://github.com/jacquesbergelius/PP-CourseMaterial/blob/master/1.1_Introduction_to_Simulation.md
-			 */
-			Random r = new Random();
+    public MyEngine() {
+        // TODO: Create service points
+        servicePoints = new ServicePoint[6];
 
-			ContinuousGenerator arrivalTime = null;
-			if (FIXEDARRIVALTIMES) {
-				/* version where the arrival times are constant (and greater than service times) */
+        /* TODO: There are six service points
+           1. Customer service
+           2. Maintenance
+           3. Tire Change
+           4. Oil Change
+           5. Other repairs
+           6. Inspection
 
-				// make a special "random number distribution" which produces constant value for the customer arrival times
-				arrivalTime = new ContinuousGenerator() {
-					@Override
-					public double sample() {
-						return 10;
-					}
+           Each service points has its own class
+         */
+        // EXAMPLE:
+        servicePoints[0] = new CustomerServicePoint(generator, eventList);
+        // NOTE: use an appropriate ContinuousGenerator (you can choose one you think it would fit)
 
-					@Override
-					public void setSeed(long seed) {
-					}
-
-					@Override
-					public long getSeed() {
-						return 0;
-					}
-
-					@Override
-					public void reseed() {
-					}
-				};
-			} else
-				// exponential distribution is used to model customer arrivals times, to get variability between programs runs, give a variable seed
-				arrivalTime = new Negexp(10, Integer.toUnsignedLong(r.nextInt()));
-
-			ContinuousGenerator serviceTime = null;
-			if (FXIEDSERVICETIMES) {
-				// make a special "random number distribution" which produces constant value for the service time in service points
-				serviceTime = new ContinuousGenerator() {
-					@Override
-					public double sample() {
-						return 9;
-					}
-
-					@Override
-					public void setSeed(long seed) {
-					}
-
-					@Override
-					public long getSeed() {
-						return 0;
-					}
-
-					@Override
-					public void reseed() {
-					}
-				};
-			} else
-				// normal distribution used to model service times
-				serviceTime = new Normal(10, 6, Integer.toUnsignedLong(r.nextInt()));
-
-			servicePoints[0] = new ServicePoint(serviceTime, eventList, EventType.DEP1);
-			servicePoints[1] = new ServicePoint(serviceTime, eventList, EventType.DEP2);
-			servicePoints[2] = new ServicePoint(serviceTime, eventList, EventType.DEP3);
-
-			arrivalProcess = new ArrivalProcess(arrivalTime, eventList, EventType.ARR1);
-		} else {
-			/* more realistic simulation case with variable customer arrival times and service times */
-			servicePoints[0] = new ServicePoint(new Normal(10, 6), eventList, EventType.DEP1);
-			servicePoints[1] = new ServicePoint(new Normal(10, 10), eventList, EventType.DEP2);
-			servicePoints[2] = new ServicePoint(new Normal(5, 3), eventList, EventType.DEP3);
-
-			arrivalProcess = new ArrivalProcess(new Negexp(15, 5), eventList, EventType.ARR1);
-		}
-	}
+        // TODO: also create an arrival process
+        arrivalProcess = new ArrivalProcess(generator, eventList, EventType.ARR_CUSTOMER_SERVICE);
+    }
 
 	@Override
 	protected void initialize() {	// First arrival in the system
