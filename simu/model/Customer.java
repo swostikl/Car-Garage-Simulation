@@ -51,8 +51,6 @@ public class Customer {
             mt.add(getRandomMaintenanceType());
         }
 
-        this.mt.add(getRandomMaintenanceType());
-
         arrivalTime = Clock.getInstance().getClock();
         Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
                 " | Needs inspection: " + needInspection);
