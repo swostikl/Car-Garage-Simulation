@@ -123,14 +123,14 @@ public class Customer {
      * @return next maintenance type (without deleting)
      */
     public MaintenanceType peekMaintenance() {
-        return mt.getFirst();
+        return mt.get(0);
     }
 
     /**
      * @return next maintenance type (will also remove it from the list)
      */
     public MaintenanceType pollMaintenance() {
-        return mt.removeFirst();
+        return mt.remove(0);
     }
 
     //boolean methods
