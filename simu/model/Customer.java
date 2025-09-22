@@ -46,7 +46,7 @@ public class Customer {
         }
         id = i++;
         this.needInspection = rand.nextDouble() < needInspectionPercentage;
-        this.passedInspection = !(Math.random() < inspectionFailRate); //set default
+        this.passedInspection = !(rand.nextDouble() < inspectionFailRate); //set default
 
         int maintenanceNeeded = (int) maintenanceGenerator.sample();
 
