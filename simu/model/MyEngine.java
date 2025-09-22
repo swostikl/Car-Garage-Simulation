@@ -5,6 +5,7 @@ import eduni.distributions.Normal;
 import eduni.distributions.Uniform;
 import simu.framework.*;
 import eduni.distributions.Negexp;
+import simu.model.bEvent.BEvent;
 
 import java.util.Random;
 
@@ -30,6 +31,7 @@ public class MyEngine extends Engine {
 	 * service times.
 	 */
 	public MyEngine() {
+        // write init event here
 		servicePoints = new ServicePoint[3];
 
 		if (TEXTDEMO) {
@@ -114,30 +116,7 @@ public class MyEngine extends Engine {
 
 	@Override
 	protected void runEvent(Event t) {  // B phase events
-		Customer a;
-
-		switch ((EventType)t.getType()) {
-		case ARR1:
-			servicePoints[0].addQueue(new Customer());
-			arrivalProcess.generateNextEvent();
-			break;
-
-		case DEP1:
-			a = servicePoints[0].removeQueue();
-			servicePoints[1].addQueue(a);
-			break;
-
-		case DEP2:
-			a = servicePoints[1].removeQueue();
-			servicePoints[2].addQueue(a);
-			break;
-
-		case DEP3:
-			a = servicePoints[2].removeQueue();
-			a.setRemovalTime(Clock.getInstance().getClock());
-		    a.reportResults();
-			break;
-		}
+        BEvent.runBEvent();
 	}
 
 	@Override
