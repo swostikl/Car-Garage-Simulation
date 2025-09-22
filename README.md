@@ -17,6 +17,18 @@ Car garages manage complex operation involving multiple vehicles, each requiring
 
 ---
 
+# System Workflow
+* Customer arrive in every **X** minutes.
+* They are first served at the **Customer Service desk**.
+* If inspection is required → sent to the **Inspection Queue**.
+* If no inspection is needed → sent to the **Maintenance Queue**.
+* Maintenance tasks include **Tire Change, Oil Change, and Repair Work**.
+* After maintenance, the customer is marked as **Served** and exits.
+* If inspection is required, and then failed go to maintenance; After maintenance cars may go back for inspection (if needed).
+* Once inspection passes, the customer is marked as **Served** and exits. 
+
+---
+
 # Contribution instructions
 1. Create a new branch.
 2. Commit changes to the new branch created.
