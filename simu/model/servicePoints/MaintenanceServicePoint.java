@@ -29,10 +29,13 @@ public class MaintenanceServicePoint extends ServicePoint {
         switch (nextCustomer.getMaintenanceType()) {
             case MaintenanceType.TIRE_CHANGE:
                 this.eventTypeScheduled = EventType.DEP_MAINTENANCE_TIRE;
+                break;
             case MaintenanceType.OIL:
                 this.eventTypeScheduled = EventType.DEP_MAINTENANCE_OIL;
+                break;
             case MaintenanceType.OTHER_REPAIR:
                 this.eventTypeScheduled = EventType.DEP_MAINTENANCE_OTHER;
+                break;
         }
         reserved = true;
         double serviceTime = generator.sample();
