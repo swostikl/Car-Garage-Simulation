@@ -1,5 +1,4 @@
 
-
 # 🚗 Car-Garage Simulation (Java)
 The Car Garage Simulation is a Java-based application that models the operations of a modern automotive garage. This object-oriented program demonstrates key Java concepts including inheritance, polymorphism, collections, and exception han-dling while simulating real-world garage operations.
 
