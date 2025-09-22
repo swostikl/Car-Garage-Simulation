@@ -1,10 +1,7 @@
 package simu.model;
 
-import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.Normal;
-import eduni.distributions.Uniform;
+import eduni.distributions.*;
 import simu.framework.*;
-import eduni.distributions.Negexp;
 import simu.model.bEvent.BEvent;
 import simu.model.servicePoints.CustomerServicePoint;
 
@@ -25,6 +22,7 @@ public class MyEngine extends Engine {
 	public static final boolean TEXTDEMO = true;
 	public static final boolean FIXEDARRIVALTIMES = false;
 	public static final boolean FXIEDSERVICETIMES = false;
+    public ContinuousGenerator cGenerator;
 
 	/**
 	 * Service Points and random number generator with different distributions are created here.
@@ -33,25 +31,29 @@ public class MyEngine extends Engine {
 	 */
 
     public MyEngine() {
+        // TODO: use an appropriate ContinuousGenerator (you can choose one you think it would fit)
+        // TODO: replace with a continuous generator
+        cGenerator = new ContinuousGenerator();
+
         // TODO: Create service points
         servicePoints = new ServicePoint[6];
 
         /* TODO: There are six service points
-           1. Customer service
-           2. Maintenance
-           3. Tire Change
-           4. Oil Change
-           5. Other repairs
-           6. Inspection
+           0. Customer service
+           1. Maintenance
+           2. Tire Change
+           3. Oil Change
+           4. Other repairs
+           5. Inspection
 
            Each service points has its own class
+           Service points should be added to the array in this order
          */
         // EXAMPLE:
-        servicePoints[0] = new CustomerServicePoint(generator, eventList);
-        // NOTE: use an appropriate ContinuousGenerator (you can choose one you think it would fit)
+        servicePoints[0] = new CustomerServicePoint(cGenerator, eventList);
 
         // TODO: also create an arrival process
-        arrivalProcess = new ArrivalProcess(generator, eventList, EventType.ARR_CUSTOMER_SERVICE);
+        arrivalProcess = new ArrivalProcess(cGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
     }
 
 	@Override
@@ -61,7 +63,7 @@ public class MyEngine extends Engine {
 
 	@Override
 	protected void runEvent(Event t) {  // B phase events
-        BEvent.runBEvent(servicePoints, arrivalProcess);
+        BEvent.runBEvent(servicePoints, arrivalProcess, t);
 	}
 
 	@Override
