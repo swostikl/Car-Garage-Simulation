@@ -1,6 +1,7 @@
 package simu.model;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Random;
 
 import eduni.distributions.ContinuousGenerator;
@@ -24,7 +25,7 @@ public class Customer {
     private static long sum = 0;    //sum of all service time
     private boolean needInspection; // check  need inspection or not
     private boolean passedInspection; // inspection is passed or not
-    private ArrayList<MaintenanceType> mt;
+    private LinkedList<MaintenanceType> mt;
 
     private final Random rand = new Random();
     private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
@@ -37,7 +38,7 @@ public class Customer {
      * @param inspectionFailRate percentage of customers that will fail initial inspection
      */
     public Customer(ContinuousGenerator maintenanceGenerator, double needInspectionPercentage, double inspectionFailRate) {
-        this.mt = new ArrayList<>();
+        this.mt = new LinkedList<>();
         if (needInspectionPercentage > 1 || needInspectionPercentage < 0) {
             throw new IllegalArgumentException("needInspectionPercentage cannot be more than 1 or less than 0.");
         }
