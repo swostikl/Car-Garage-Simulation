@@ -11,7 +11,7 @@ import simu.model.servicePoints.MaintenanceStationServicePoint;
 
 public class OtherServicePoint extends MaintenanceStationServicePoint {
     /**
-     * Create the tire change station service point with a waiting queue.
+     * Create the other repairs service point with a waiting queue.
      *
      * @param generator   Random number generator for service time simulation
      * @param eventList   Simulator event list, needed for the insertion of service ready event
