@@ -41,9 +41,12 @@ public class Customer {
         if (needInspectionPercentage > 1 || needInspectionPercentage < 0) {
             throw new IllegalArgumentException("needInspectionPercentage cannot be more than 1 or less than 0.");
         }
+        if (inspectionFailRate > 1 || inspectionFailRate < 0) {
+            throw new IllegalArgumentException("inspectionFailRate cannot be more than 1 or less than 0.");
+        }
         id = i++;
         this.needInspection = rand.nextDouble() < needInspectionPercentage;
-        this.passedInspection = Math.random() < inspectionFailRate; //set default
+        this.passedInspection = !(Math.random() < inspectionFailRate); //set default
 
         int maintenanceNeeded = (int) maintenanceGenerator.sample();
 
