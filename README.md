@@ -9,7 +9,11 @@ Car garages manage complex operation involving multiple vehicles, each requiring
 
 
 
-
+# Contribution instructions
+1. Create a new branch.
+2. Commit changes to the new branch created.
+3. If you are done with your changes, create a pull request to the main branch, and describe your changes.
+4. Wait for everyone's approval before merging your pull request.
 
 
 
