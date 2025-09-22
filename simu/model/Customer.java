@@ -37,6 +37,7 @@ public class Customer {
      * @param inspectionFailRate percentage of customers that will fail initial inspection
      */
     public Customer(ContinuousGenerator maintenanceGenerator, double needInspectionPercentage, double inspectionFailRate) {
+        this.mt = new ArrayList<>();
         if (needInspectionPercentage > 1 || needInspectionPercentage < 0) {
             throw new IllegalArgumentException("needInspectionPercentage cannot be more than 1 or less than 0.");
         }
