@@ -23,7 +23,6 @@ public class BEvent {
         // B event code here
 
         // TODO: Replace this code with your own work, use this as a template
-        // The customer class is pretty well documented, have a look at the Customer.java file, see what it does
 
         /* There are six service points
            0. Customer service
@@ -66,6 +65,7 @@ public class BEvent {
             // Example
             case ARR_CUSTOMER_SERVICE:
                 servicePoints[0].addQueue(new Customer(generator, percentage, percentage));
+				arrivalProcess.generateNextEvent();
                 break;
 		}
     }
