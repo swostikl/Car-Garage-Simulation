@@ -116,7 +116,7 @@ public class MyEngine extends Engine {
 
 	@Override
 	protected void runEvent(Event t) {  // B phase events
-        BEvent.runBEvent();
+        BEvent.runBEvent(servicePoints, arrivalProcess);
 	}
 
 	@Override
