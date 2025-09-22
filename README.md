@@ -14,7 +14,7 @@ Car garages manage complex operation involving multiple vehicles, each requiring
 
 
 
-
+# Flowchart how the Car-Garage Simulation works
 
 ```mermaid
 flowchart LR
