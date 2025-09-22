@@ -53,4 +53,28 @@ public enum EventType implements IEventType {
      * Customer leaves inspection to exit the simulation
      */
     DEP_INSPECTION_END,
+    /**
+     * Customer leaves tire change to exit the simulation
+     */
+    DEP_TIRE_END,
+    /**
+     * Customer leaves oil change to exit the simulation
+     */
+    DEP_OIL_END,
+    /**
+     * Customer leaves other repairs to exit the simulation
+     */
+    DEP_OTHER_END,
+    /**
+     * Customer leaves oil change to be moved to maintenance
+     */
+    DEP_OIL_MAINTENANCE,
+    /**
+     * Customer leaves tire change to be moved to maintenance
+     */
+    DEP_TIRE_MAINTENANCE,
+    /**
+     * Customer leaves other repairs to be moved to maintenance
+     */
+    DEP_OTHER_MAINTENANCE,
 }
