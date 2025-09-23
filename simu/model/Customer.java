@@ -142,16 +142,26 @@ public class Customer {
         return mt.remove(0);
     }
 
-    //boolean methods
+    /**
+     * is inspection needed
+     * @return is inspection needed
+     */
     public boolean needInspection() {
         return needInspection;
-
     }
 
+    /**
+     * Misleading method name, returns if customer will pass the upcoming inspection
+     * @return will customer pass upcoming inspection
+     */
     public boolean hasPassedInspection() {
         return passedInspection;
     }
 
+    /**
+     * Misleading method name, set if customer will pass the upcoming inspection
+     * @param passed will customer pass the upcoming inspection
+     */
     public void setPassedInspection(boolean passed) {
         this.passedInspection = passed;
     }
