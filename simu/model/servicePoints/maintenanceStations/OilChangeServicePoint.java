@@ -13,10 +13,11 @@ public class OilChangeServicePoint extends MaintenanceStationServicePoint {
     /**
      * Create the oil change service point with a waiting queue.
      * <br>
-     * <b>This function is only for compatibility, will be removed soon.</b> <h1>Do not use.</h1>
+     * <b>Deprecated: This constructor is only for compatibility and will be removed soon. Do not use.</b>
      * @param generator   Random number generator for service time simulation
      * @param eventList   Simulator event list, needed for the insertion of service ready event
      * @param successRate success rate of the service in service point from 0.0 to 1.0
+     * @deprecated This constructor is deprecated and will be removed soon. Use the constructor without successRate instead.
      */
     @Deprecated
     public OilChangeServicePoint(ContinuousGenerator generator, EventList eventList, double successRate) {
