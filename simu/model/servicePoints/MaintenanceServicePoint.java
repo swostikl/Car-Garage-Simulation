@@ -26,7 +26,7 @@ public class MaintenanceServicePoint extends ServicePoint {
     public void beginService() {
         Customer nextCustomer = getQueue().peek();
         Trace.out(Trace.Level.INFO, "Starting a new service at maintenance for the customer #" + nextCustomer.getId());
-        switch (nextCustomer.getMaintenanceType()) {
+        switch (nextCustomer.pollMaintenance()) {
             case MaintenanceType.TIRE_CHANGE:
                 this.eventTypeScheduled = EventType.DEP_MAINTENANCE_TIRE;
                 break;
