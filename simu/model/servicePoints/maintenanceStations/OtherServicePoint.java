@@ -13,7 +13,7 @@ public class OtherServicePoint extends MaintenanceStationServicePoint {
     /**
      * Create the other repairs service point with a waiting queue.
      * <br>
-     * <b>This function is only for compatibility, will be removed soon.</b> <h1>Do not use.</h1>
+     * <b>This function is only for compatibility, will be removed soon. Do not use.</b>
      * @param generator   Random number generator for service time simulation
      * @param eventList   Simulator event list, needed for the insertion of service ready event
      * @param successRate success rate of the service in service point from 0.0 to 1.0
