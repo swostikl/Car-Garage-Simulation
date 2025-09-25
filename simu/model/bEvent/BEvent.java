@@ -1,12 +1,10 @@
 package simu.model.bEvent;
 
 import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.Generator;
 import eduni.distributions.Normal;
 import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Event;
-import simu.framework.IEventType;
 import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.ServicePoint;
@@ -26,8 +24,6 @@ public class BEvent {
     ) {
         // B event code here
 
-        // TODO: Replace this code with your own work, use this as a template
-
         /* There are six service points
            0. Customer service
            1. Maintenance
@@ -43,30 +39,6 @@ public class BEvent {
         Customer a;
 
 		switch ((EventType)event.getType()) {
-//      Example:
-//
-//		case ARR1:
-//			servicePoints[0].addQueue(new Customer());
-//			arrivalProcess.generateNextEvent();
-//			break;
-//
-//		case DEP1:
-//			a = servicePoints[0].removeQueue();
-//			servicePoints[1].addQueue(a);
-//			break;
-//
-//		case DEP2:
-//			a = servicePoints[1].removeQueue();
-//			servicePoints[2].addQueue(a);
-//			break;
-//
-//		case DEP3:
-//			a = servicePoints[2].removeQueue();
-//			a.setRemovalTime(Clock.getInstance().getClock());
-//		    a.reportResults();
-//			break;
-
-            // Example
             case ARR_CUSTOMER_SERVICE:
                 ContinuousGenerator maintenanceGenerator = new Normal(2, 1);
                 a = new Customer(maintenanceGenerator, 0.6, 0.1);
