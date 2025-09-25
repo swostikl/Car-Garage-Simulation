@@ -72,88 +72,54 @@ public class BEvent {
                 a = new Customer(maintenanceGenerator, 0.6, 0.1);
                 servicePoints[0].addQueue(a);
 				arrivalProcess.generateNextEvent();
-
-                if (!servicePoints[0].isOnQueue()){
-                    servicePoints[0].beginService();
-                }
                 break;
 
             case DEP_CS_MAINTENANCE:
-                a = servicePoints[1].removeQueue();
-                servicePoints[2].addQueue(a);
-                if (!servicePoints[2].isOnQueue()){
-                    servicePoints[2].beginService();
-                }
+                a = servicePoints[0].removeQueue();
+                servicePoints[1].addQueue(a);
                 break;
             case DEP_CS_INSPECTION:
                 a = servicePoints[0].removeQueue();
                 servicePoints[5].addQueue(a);
-                if (!servicePoints[5].isOnQueue()){
-                    servicePoints[5].beginService();
-                }
                 break;
             case DEP_INSPECTION_MAINTENANCE:
                 a = servicePoints[5].removeQueue();
-                if(a.hasPassedInspection()) {
-                    servicePoints[1].addQueue(a);
-                    if (!servicePoints[1].isOnQueue()){
-                        servicePoints[1].beginService();
-                    }
-                } else {
-                    servicePoints[1].addQueue(a);
-                    if (!servicePoints[1].isOnQueue()){
-                        servicePoints[1].beginService();
-                    }
-                }
+                servicePoints[1].addQueue(a);
                 break;
+
             case DEP_MAINTENANCE_TIRE:
                 a = servicePoints[1].removeQueue();
                 servicePoints[2].addQueue(a);
-                if (!servicePoints[2].isOnQueue()){
-                    servicePoints[2].beginService();
-                }
                 break;
             case DEP_MAINTENANCE_OIL:
                 a = servicePoints[1].removeQueue();
                 servicePoints[3].addQueue(a);
-                if (!servicePoints[3].isOnQueue()){
-                    servicePoints[3].beginService();
-                }
                 break;
             case DEP_MAINTENANCE_OTHER:
                 a = servicePoints[1].removeQueue();
-                servicePoints[3].addQueue(a);
-                if (!servicePoints[3].isOnQueue()){
-                    servicePoints[3].beginService();
-                }
+                servicePoints[4].addQueue(a);
                 break;
+
             case DEP_TIRE_INSPECTION:
                 a = servicePoints[2].removeQueue();
                 servicePoints[5].addQueue(a);
-                if (!servicePoints[5].isOnQueue()){
-                    servicePoints[5].beginService();
-                }
                 break;
+
             case DEP_OIL_INSPECTION:
                 a = servicePoints[3].removeQueue();
                 servicePoints[5].addQueue(a);
-                if (!servicePoints[5].isOnQueue()){
-                    servicePoints[5].beginService();
-                }
                 break;
             case DEP_OTHER_INSPECTION:
                 a = servicePoints[4].removeQueue();
                 servicePoints[5].addQueue(a);
-                if (!servicePoints[5].isOnQueue()){
-                    servicePoints[5].beginService();
-                }
                 break;
-
             case DEP_INSPECTION_END:
                 a = servicePoints[5].removeQueue();
                 a.setRemovalTime(Clock.getInstance().getClock());
                 a.reportResults();
                 break;
+
+
             case DEP_TIRE_END:
                 a = servicePoints[2].removeQueue();
                 a.setRemovalTime(Clock.getInstance().getClock());
@@ -169,6 +135,19 @@ public class BEvent {
                 a.setRemovalTime(Clock.getInstance().getClock());
                 a.reportResults();
                 break;
-		}
+
+            case DEP_OIL_MAINTENANCE:
+                a = servicePoints[3].removeQueue();
+                servicePoints[1].addQueue(a);
+                break;
+            case DEP_TIRE_MAINTENANCE:
+                a = servicePoints[2].removeQueue();
+                servicePoints[1].addQueue(a);
+                break;
+            case DEP_OTHER_MAINTENANCE:
+                a = servicePoints[4].removeQueue();
+                servicePoints[1].addQueue(a);
+                break;
+        }
     }
 }
