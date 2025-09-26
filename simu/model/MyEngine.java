@@ -88,6 +88,6 @@ public class MyEngine extends Engine {
     @Override
     protected void results() {
        System.out.println("Simulation ended at " + Clock.getInstance().getClock());
-       System.out.println("Results ... are currently missing");
+       System.out.printf("%nResults:%nCustomer throughput: %f customer(s) per hour.%n", (Customer.getTotalServed() / Clock.getInstance().getClock()) * 60);
     }
 }

@@ -49,7 +49,12 @@ public class Customer {
         this.needInspection = rand.nextDouble() < needInspectionPercentage;
         this.passedInspection = !(rand.nextDouble() < inspectionFailRate); //set default
 
-        int maintenanceNeeded = Math.max(0, (int)Math.round(maintenanceGenerator.sample()));
+        double sample;
+        do {
+            sample = maintenanceGenerator.sample();
+        } while (Math.round(sample) < 1);
+
+        int maintenanceNeeded = (int)Math.round(sample);
 
         for (int i = 0; i < maintenanceNeeded; i++) {
             mt.add(getRandomMaintenanceType());
@@ -178,6 +183,10 @@ public class Customer {
         double mean = sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
         System.out.println(" Total number of customer served : " + totalServed);
+    }
+
+    public static int getTotalServed() {
+        return totalServed;
     }
 }
 
