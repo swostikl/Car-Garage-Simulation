@@ -90,8 +90,6 @@ public class BEvent {
                 a.setRemovalTime(Clock.getInstance().getClock());
                 a.reportResults();
                 break;
-
-
             case DEP_TIRE_END:
                 a = servicePoints[2].removeQueue();
                 a.setRemovalTime(Clock.getInstance().getClock());
