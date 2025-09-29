@@ -47,7 +47,10 @@ public class StepperTestViewController {
             pm.addProcess(interrupt);
         } else {
             stepButton.setDisable(true);
-            interrupt.deregister();
+            if (interrupt != null) {
+                interrupt.deregister();
+                interrupt = null;
+            }
         }
     }
 
