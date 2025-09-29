@@ -39,14 +39,10 @@ public abstract class Engine extends Process {
             await();
 			Trace.out(Trace.Level.INFO, "\nA-phase: time is " + currentTime());
 			clock.setClock(currentTime());
-            giveUp();
 
-            await();
 			Trace.out(Trace.Level.INFO, "\nB-phase:" );
 			runBEvents();
-            giveUp();
 
-            await();
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
 			tryCEvents();
             giveUp();
