@@ -1,6 +1,7 @@
 package test;
 
 import simu.framework.Engine;
+import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.framework.Trace.Level;
 import simu.model.MyEngine;
@@ -14,8 +15,11 @@ public class Simulator {
 	public static void main(String[] args) {
 		Trace.setTraceLevel(Level.INFO);
 
-		Engine m = new MyEngine();
-		m.setSimulationTime(1000);
-		m.run();
+        ProcessManager pm = new ProcessManager();
+        Object lock = new Object();
+
+		Engine m = new MyEngine(lock, pm);
+		m.setSimulationTime(100000);
+        pm.addProcess(m);
 	}
 }

@@ -6,7 +6,7 @@ package simu.framework;
  * This is a skeleton of a three-phase simulator. You need to implement abstract methods for your
  * purpose.
  */
-public abstract class Engine {
+public abstract class Engine extends Process {
 	private double simulationTime = 0;	// time when the simulation will be stopped
 	private Clock clock;				// to simplify the code (clock.getClock() instead Clock.getInstance().getClock())
 	protected EventList eventList;		// events to be processed are stored here
@@ -14,7 +14,8 @@ public abstract class Engine {
 	/**
 	 * Service Points are created in simu.model-package's class inheriting the Engine class
 	 */
-	public Engine() {
+	public Engine(Object lock, ProcessManager pm) {
+        super(lock, pm);
 		clock = Clock.getInstance();	// to improve the speed of the simulation
 		eventList = new EventList();
 	}
@@ -30,18 +31,25 @@ public abstract class Engine {
 	/**
 	 * The starting point of the simulator. We will return when the simulation ends.
 	 */
+    @Override
 	public void run(){
 		initialize(); // creating, e.g., the first event
 
 		while (simulate()) {
+            await();
 			Trace.out(Trace.Level.INFO, "\nA-phase: time is " + currentTime());
 			clock.setClock(currentTime());
-			
+            giveUp();
+
+            await();
 			Trace.out(Trace.Level.INFO, "\nB-phase:" );
 			runBEvents();
-			
+            giveUp();
+
+            await();
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
 			tryCEvents();
+            giveUp();
 
 		}
 
