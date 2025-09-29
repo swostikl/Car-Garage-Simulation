@@ -34,6 +34,7 @@ public class StepperTestViewController {
 
         Engine m = new MyEngine(lock, pm);
         m.setSimulationTime(100000);
+        m.setName("Main Simulation");
         pm.addProcess(m);
     }
 
@@ -41,6 +42,7 @@ public class StepperTestViewController {
     void onPausePressed() {
         if (pauseButton.isSelected()) {
             interrupt = new Interrupt(lock, pm);
+            interrupt.setName("INTERRUPT SIMULATION");
             stepButton.setDisable(false);
             pm.addProcess(interrupt);
         } else {
