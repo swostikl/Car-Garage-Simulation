@@ -19,8 +19,8 @@ public abstract class Engine extends Process {
 	/**
 	 * Service Points are created in simu.model-package's class inheriting the Engine class
 	 */
-	public Engine(Object lock, ProcessManager pm, VisualizeController vc) {
-        super(lock, pm);
+	public Engine(VisualizeController vc) {
+        super();
         this.vc = vc;
 		clock = Clock.getInstance();	// to improve the speed of the simulation
 		eventList = new EventList();

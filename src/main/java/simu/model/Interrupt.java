@@ -4,8 +4,8 @@ import simu.framework.Process;
 import simu.framework.ProcessManager;
 
 public class Interrupt extends Process {
-    public Interrupt(Object lock, ProcessManager pm) {
-        super(lock, pm);
+    public Interrupt() {
+        super();
     }
 
     @Override

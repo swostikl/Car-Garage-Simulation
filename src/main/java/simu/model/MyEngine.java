@@ -36,8 +36,8 @@ public class MyEngine extends Engine {
      * service times.
      */
 
-    public MyEngine(Object lock, ProcessManager pm, VisualizeController vc) {
-        super(lock, pm,vc);
+    public MyEngine(VisualizeController vc) {
+        super(vc);
 
         // Using Normal distribution for service times (average 3 time units, standard deviation 1)
         cGenerator = new Normal(3.0, 1.0);

@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToggleButton;
 import simu.framework.Engine;
+import simu.framework.Process;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.model.Interrupt;
@@ -41,7 +42,7 @@ public class StepperTestViewController {
         Trace.setTraceLevel(Trace.Level.INFO);
         view = new VisualizeView();
         visualizeController = view.init();
-        Engine m = new MyEngine(lock, pm, visualizeController);
+        Engine m = new MyEngine(visualizeController);
         m.setSimulationTime(100000);
         m.setName("Main Simulation");
         pm.addProcess(m);
@@ -51,7 +52,7 @@ public class StepperTestViewController {
     @FXML
     void onPausePressed() {
         if (pauseButton.isSelected()) {
-            interrupt = new Interrupt(lock, pm);
+            interrupt = new Interrupt();
             interrupt.setName("INTERRUPT SIMULATION");
             stepButton.setDisable(false);
             pm.addProcess(interrupt);
@@ -71,8 +72,7 @@ public class StepperTestViewController {
         interrupt.giveUp();
     }
 
-    public void init(Object lock, ProcessManager pm) {
-        this.lock = lock;
-        this.pm = pm;
+    public void init() {
+        this.pm = new ProcessManager();
     }
 }

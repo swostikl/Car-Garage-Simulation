@@ -8,6 +8,9 @@ public class ProcessManager {
     private int currentProcessIndex;
     private Process currentProcess;
 
+    /**
+     * A cooperative multitasking process manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+     */
     public ProcessManager() {
         this.processes = new ArrayList<>();
     }
@@ -21,6 +24,7 @@ public class ProcessManager {
             this.currentProcess = p;
             currentProcessIndex = 0;
         }
+        p.setPm(this);
         p.start();
     }
 
