@@ -8,7 +8,14 @@ import javafx.scene.shape.Rectangle;
 import simu.model.Customer;
 import simu.model.ServicePoint;
 
-
+/**
+ * Controller class for visualizing the state of various service points in a
+ * simulation. Updates JavaFX UI elements such as labels and rectangles to
+ * reflect the current queue lengths and customers being served.
+ *
+ * <p>This class should be used with a corresponding FXML file that defines
+ * the UI layout, including labels and rectangles for queues and services.</p>
+ */
 
 public class VisualizeController {
 
@@ -95,6 +102,11 @@ public class VisualizeController {
      * @param servicepoint this is the service point bla blah blah
      */
 
+    /**
+     * Updates the label displaying the number of customers in the arrival queue.
+     *
+     * @param servicepoint the service point representing the arrival queue
+     */
 
     public void setArrivalLabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
@@ -102,25 +114,23 @@ public class VisualizeController {
         });
     }
 
-// think how to get id from servicepoint
-    public void setCustomerServicelabel(ServicePoint servicepoint) {
-        Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-        if (c != null) {
-            customerServicelabel.setText("Serving customer #" + c.getId());
-        } else {
-            customerServicelabel.setText("No customer currently served");
-        }
-    });
-}
 
-
+    /**
+     * Updates the label displaying the number of customers waiting for maintenance.
+     *
+     * @param servicepoint the maintenance service point
+     */
     public void setMaintenanceQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
             maintenanceQueuelabel.setText(String.format("Queue maintenance : %d", servicepoint.onQueue()));
         });
 
     }
+    /**
+     * Updates the label displaying the number of customers waiting for inspection.
+     *
+     * @param servicepoint the inspection service point
+     */
 
     public void setInspectionQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
@@ -128,6 +138,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label displaying the number of customers waiting for tire changes.
+     *
+     * @param servicepoint the tire change service point
+     */
     public void setTireChangeQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
             tireChangeQueuelabel.setText(String.format("TireChange queue : %d", servicepoint.onQueue()));
@@ -135,11 +150,22 @@ public class VisualizeController {
 
     }
 
+    /**
+     * Updates the label displaying the number of customers waiting for oil changes.
+     *
+     * @param servicepoint the oil change service point
+     */
     public void setOilChangeQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
             oilChangeQueuelabel.setText(String.format("OilChange queue : %d", servicepoint.onQueue()));
         });
     }
+
+    /**
+     * Updates the label displaying the number of customers waiting for repair work.
+     *
+     * @param servicepoint the repair work service point
+     */
 
     public void setRepairworkQueueLabel(ServicePoint servicepoint){
         Platform.runLater(()->{
