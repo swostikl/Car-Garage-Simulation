@@ -9,18 +9,18 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizeController">
     <children>
       <Group />
 
         <!-- Customer Arrival Queue -->
-        <Group layoutX="50.0" layoutY="280.0">
+        <Group layoutX="44.0" layoutY="271.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
                 <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
                 <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
-                <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
-                <Label layoutX="-14.0" layoutY="26.0" text="Arrival" textFill="#666">
+                <Rectangle fx:id="arrivalQueue" arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+                <Label layoutX="-14.0" layoutY="26.0" text="Arrival: 1" textFill="#666">
                     <font><Font size="10.0" /></font>
                 </Label>
             </children>
@@ -31,7 +31,7 @@
         <Polygon fill="#666" points="140.0,284.0,150.0,288.0,140.0,292.0" />
 
         <!-- Customer Service -->
-        <Group layoutX="150.0" layoutY="270.0">
+        <Group fx:id="customerService" layoutX="150.0" layoutY="270.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
                 <Label contentDisplay="CENTER" layoutX="15.0" layoutY="9.0" text="Customer Service" textAlignment="CENTER">
@@ -45,7 +45,7 @@
         <Polygon fill="#666" points="320.0,284.0,330.0,288.0,320.0,292.0" />
 
         <!-- Maintenance Queue -->
-        <Group layoutX="679.0" layoutY="232.0">
+        <Group fx:id="repairWorkQueue" layoutX="679.0" layoutY="232.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
                 <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
@@ -61,7 +61,7 @@
         <Line endX="343.2594299316406" endY="194.99998474121094" layoutX="-6.0" layoutY="1.0" startX="344.0" startY="271.8331298828125" stroke="#666" strokeWidth="2.0" />
 
         <!-- Tire Change Queue -->
-        <Group layoutX="679.0" layoutY="132.0">
+        <Group fx:id="tireChangeQueue" layoutX="679.0" layoutY="132.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
                 <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
@@ -71,7 +71,7 @@
         </Group>
 
         <!-- Oil Change Queue -->
-        <Group layoutX="680.0" layoutY="184.0">
+        <Group fx:id="oilChangeQueue" layoutX="680.0" layoutY="184.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
                 <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
@@ -81,7 +81,7 @@
         </Group>
 
         <!-- Repair Queue -->
-        <Group layoutX="901.0" layoutY="331.0">
+        <Group fx:id="inspectionQueue" layoutX="901.0" layoutY="331.0">
             <children>
                 <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
                 <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
@@ -95,7 +95,7 @@
 
         <!-- Customer Served -->
         <Group layoutX="1150.0" layoutY="270.0" />
-      <Group layoutX="337.0" layoutY="281.0">
+      <Group fx:id="maintenanceQueue" layoutX="337.0" layoutY="281.0">
          <children>
             <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
             <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
@@ -103,21 +103,21 @@
             <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
          </children>
       </Group>
-          <Rectangle arcWidth="5.0" fill="#ebebff" height="33.0" layoutX="496.0" layoutY="174.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="100.0" />
+          <Rectangle fx:id="maintenanceService" arcWidth="5.0" fill="#ebebff" height="33.0" layoutX="496.0" layoutY="174.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="100.0" />
           <Label contentDisplay="CENTER" layoutX="512.0" layoutY="182.0" text="Maintanance" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
          </font>
           </Label>
-          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="719.0" layoutY="123.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle fx:id="tireChangeService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="719.0" layoutY="123.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
           <Label contentDisplay="CENTER" layoutX="744.0" layoutY="131.0" text="Tire Change" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
          </font>
           </Label>
       <Line endX="706.7843017578125" endY="221.4255828857422" layoutX="-51.0" layoutY="16.0" startX="652.4651489257812" startY="193.65960693359375" stroke="#666" strokeWidth="2.0" />
-          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="171.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
-          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="223.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle fx:id="oilChangeService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="171.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle fx:id="repairWorkService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="223.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
           <Label contentDisplay="CENTER" layoutX="745.0" layoutY="231.0" text="Repair Work" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
@@ -144,7 +144,7 @@
       <Line endX="656.3280029296875" endY="256.26300048828125" layoutX="472.0" layoutY="-4.0" startX="656.3280029296875" startY="135.6595916748047" stroke="#666" strokeWidth="2.0" />
       <Group layoutX="930.0" layoutY="324.0">
          <children>
-            <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+            <Rectangle fx:id="inspectionService" arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
             <Label contentDisplay="CENTER" layoutX="35.0" layoutY="10.0" text="Inspection" textAlignment="CENTER">
                <font>
                   <Font size="12.0" />
@@ -153,7 +153,7 @@
          </children>
       </Group>
       <Line endX="715.406005859375" endY="157.7232666015625" layoutX="375.0" layoutY="144.0" startX="715.406005859375" startY="195.802978515625" stroke="#666" strokeWidth="2.0" />
-          <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" layoutX="1066.0" layoutY="260.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+          <Rectangle fx:id="customerServed" arcWidth="5.0" fill="#ebebff" height="35.0" layoutX="1066.0" layoutY="260.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
           <Label contentDisplay="CENTER" layoutX="1082.0" layoutY="268.0" prefHeight="20.0" prefWidth="102.0" text="Customer Served" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
@@ -192,6 +192,42 @@
       <Polygon fill="#666" layoutX="669.0" layoutY="99.0" points="675.0, 174.17050170898438, 682.1148681640625, 180.19564819335938, 675.0, 186.21957397460938" />
       <Polygon fill="#666" layoutX="218.0" layoutY="181.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
       <Polygon fill="#666" layoutX="-347.0" layoutY="133.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
+      <Label fx:id="customerServicelabel" layoutX="145.0" layoutY="248.0" text="Customer Arriving number" />
+      <Label fx:id="maintenanceQueuelabel" layoutX="356.0" layoutY="279.0" text="MaintenanceQueue Number" />
+      <Label fx:id="maintenancelabel" layoutX="443.0" layoutY="151.0" text="Number Of operating service" />
+      <Label fx:id="tireChangeQueuelabel" layoutX="605.0" layoutY="115.0" text="Number Queue for Tirechange">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="oilChangeQueuelabel" layoutX="620.0" layoutY="166.0" text="Number QueueOilChange ">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="repairworkQueueLabel" layoutX="631.0" layoutY="210.0" text="Number Queue Repairwork">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="inspectionQueuelabel" layoutX="742.0" layoutY="334.0" text="inspection queue number" />
+      <Label fx:id="inspectionServicelabel" layoutX="935.0" layoutY="296.0" text="processing number" />
+      <Label fx:id="customerServedlabel" layoutX="1139.0" layoutY="297.0" text="Number of CustomerServed" />
+      <Label fx:id="tireChangeServicelabel" layoutX="717.0" layoutY="112.0" text="Tire change processing number">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="oilChangeServicelabel" layoutX="724.0" layoutY="161.0" text="oilchange on process number">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
+      <Label fx:id="repairWorklabel" layoutX="733.0" layoutY="209.0" text="Repair work process number">
+         <font>
+            <Font size="8.0" />
+         </font>
+      </Label>
 
     </children>
 </AnchorPane>
