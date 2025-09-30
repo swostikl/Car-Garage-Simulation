@@ -1,5 +1,6 @@
 package simu.model.bEvent;
 
+import controller.VisualizeController;
 import eduni.distributions.ContinuousGenerator;
 import eduni.distributions.Normal;
 import simu.framework.ArrivalProcess;
@@ -20,7 +21,8 @@ public class BEvent {
             // pass something here if needed
             ServicePoint[] servicePoints,
             ArrivalProcess arrivalProcess,
-            Event event
+            Event event,
+            VisualizeController vc
     ) {
         // B event code here
 

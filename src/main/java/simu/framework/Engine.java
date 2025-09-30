@@ -1,5 +1,8 @@
 package simu.framework;
 
+import controller.VisualizeController;
+import simu.model.ServicePoint;
+
 /**
  * Engine implement three-phase simulator. See <a href="https://www.jstor.org/stable/2584330">Three-Phase Simulator</a>
  *
@@ -7,15 +10,18 @@ package simu.framework;
  * purpose.
  */
 public abstract class Engine extends Process {
+    protected ServicePoint[] servicePoints;
 	private double simulationTime = 0;	// time when the simulation will be stopped
 	private Clock clock;				// to simplify the code (clock.getClock() instead Clock.getInstance().getClock())
 	protected EventList eventList;		// events to be processed are stored here
+    protected VisualizeController vc;
 
 	/**
 	 * Service Points are created in simu.model-package's class inheriting the Engine class
 	 */
-	public Engine(Object lock, ProcessManager pm) {
+	public Engine(Object lock, ProcessManager pm, VisualizeController vc) {
         super(lock, pm);
+        this.vc = vc;
 		clock = Clock.getInstance();	// to improve the speed of the simulation
 		eventList = new EventList();
 	}
@@ -44,6 +50,12 @@ public abstract class Engine extends Process {
 			runBEvents();
 
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
+
+            vc.setArrivalLabel(servicePoints[0]);
+            vc.setMaintenanceQueuelabel(servicePoints[1]);
+            vc.setInspectionQueuelabel(servicePoints[5]);
+
+
 			tryCEvents();
             giveUp();
 		}

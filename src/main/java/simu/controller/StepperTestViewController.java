@@ -39,13 +39,13 @@ public class StepperTestViewController {
     @FXML
     void onPressRun(ActionEvent event) throws IOException {
         Trace.setTraceLevel(Trace.Level.INFO);
-
-        Engine m = new MyEngine(lock, pm);
+        view = new VisualizeView();
+        visualizeController = view.init();
+        Engine m = new MyEngine(lock, pm, visualizeController);
         m.setSimulationTime(100000);
         m.setName("Main Simulation");
         pm.addProcess(m);
-        view = new VisualizeView();
-        visualizeController = view.init();
+
     }
 
     @FXML
@@ -55,18 +55,14 @@ public class StepperTestViewController {
             interrupt.setName("INTERRUPT SIMULATION");
             stepButton.setDisable(false);
             pm.addProcess(interrupt);
-//            Platform.runLater(() -> {
-//                visualizeController.tireChangeServicelabel.setText("0");
-//            });
+
         } else {
             stepButton.setDisable(true);
             if (interrupt != null) {
                 interrupt.deregister();
                 interrupt = null;
             }
-//            Platform.runLater(() -> {
-//                visualizeController.tireChangeServicelabel.setText("I AM STARTING");
-//            });
+
         }
     }
 

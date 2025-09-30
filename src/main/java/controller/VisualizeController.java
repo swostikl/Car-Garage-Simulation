@@ -1,11 +1,16 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
+import simu.model.ServicePoint;
 
 public class VisualizeController {
+
+    @FXML
+    private Label arrivalLabel;
 
     @FXML
     private Rectangle arrivalQueue;
@@ -80,6 +85,40 @@ public class VisualizeController {
     private Rectangle tireChangeService;
 
     @FXML
-    public Label tireChangeServicelabel;
+    private Label tireChangeServicelabel;
+
+    /**
+     * This does this does that
+     * @param servicepoint this is the service point bla blah blah
+     */
+    public void setArrivalLabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            arrivalLabel.setText(String.format("Queue: %d", servicepoint.onQueue()));
+        });
+    }
+
+// think how to get id from servicepoint
+    public void setCustomerServicelabel(ServicePoint servicepoint){
+        Platform.runLater(()-> {
+            customerServedlabel.setText(String.format("Customer arriving : %d",servicepoint.isOnQueue()));
+        });
+    }
+
+    public void setMaintenanceQueuelabel(ServicePoint servicepoint){
+        Platform.runLater(()->{
+            maintenanceQueuelabel.setText(String.format("At maintenance : %d", servicepoint.onQueue()));
+        });
+
+    }
+
+    public void setInspectionQueuelabel(ServicePoint servicepoint){
+        Platform.runLater(()->{
+            inspectionQueuelabel.setText(String.format("At inspection : %d", servicepoint.onQueue()));
+        });
+    }
+
+
+
+
 
 }

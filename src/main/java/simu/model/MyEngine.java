@@ -1,5 +1,6 @@
 package simu.model;
 
+import controller.VisualizeController;
 import eduni.distributions.*;
 import simu.framework.*;
 import simu.model.bEvent.BEvent;
@@ -23,11 +24,11 @@ import java.util.Random;
  */
 public class MyEngine extends Engine {
     private ArrivalProcess arrivalProcess;
-    private ServicePoint[] servicePoints;
     public static final boolean TEXTDEMO = true;
     public static final boolean FIXEDARRIVALTIMES = false;
     public static final boolean FXIEDSERVICETIMES = false;
     public ContinuousGenerator cGenerator;
+
 
     /**
      * Service Points and random number generator with different distributions are created here.
@@ -35,8 +36,9 @@ public class MyEngine extends Engine {
      * service times.
      */
 
-    public MyEngine(Object lock, ProcessManager pm) {
-        super(lock, pm);
+    public MyEngine(Object lock, ProcessManager pm, VisualizeController vc) {
+        super(lock, pm,vc);
+
         // Using Normal distribution for service times (average 3 time units, standard deviation 1)
         cGenerator = new Normal(3.0, 1.0);
 
@@ -74,7 +76,7 @@ public class MyEngine extends Engine {
 
     @Override
     protected void runEvent(Event t) {  // B phase events
-        BEvent.runBEvent(servicePoints, arrivalProcess, t);
+        BEvent.runBEvent(servicePoints, arrivalProcess, t, vc);
     }
 
     @Override

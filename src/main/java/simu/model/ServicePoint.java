@@ -69,7 +69,7 @@ public abstract class ServicePoint {
 	 */
 	public void beginService() {		// Begins a new service, customer is on the queue during the service
 		Trace.out(Trace.Level.INFO, "Starting a new service for the customer #" + queue.peek().getId());
-		
+		///  think
 		reserved = true;
 		double serviceTime = generator.sample();
 		eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
@@ -95,5 +95,13 @@ public abstract class ServicePoint {
 
     protected LinkedList<Customer> getQueue() {
         return queue;
+    }
+
+    /**
+     * Get the number of customers in the queue
+     * @return numbers of customer in the queue
+     */
+    public int onQueue() {
+        return queue.size();
     }
 }
