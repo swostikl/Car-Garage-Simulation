@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <Group />
 
@@ -33,7 +33,7 @@
         <!-- Customer Service -->
         <Group layoutX="150.0" layoutY="270.0">
             <children>
-                <Rectangle arcWidth="5.0" fill="#e6f3ff" height="35.0" stroke="#4a90e2" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
                 <Label contentDisplay="CENTER" layoutX="15.0" layoutY="9.0" text="Customer Service" textAlignment="CENTER">
                     <font><Font size="12.0" /></font>
                 </Label>
@@ -103,21 +103,21 @@
             <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
          </children>
       </Group>
-          <Rectangle arcWidth="5.0" fill="#fff0f0" height="33.0" layoutX="496.0" layoutY="174.0" stroke="#e74c3c" strokeType="INSIDE" strokeWidth="1.5" width="100.0" />
+          <Rectangle arcWidth="5.0" fill="#ebebff" height="33.0" layoutX="496.0" layoutY="174.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="100.0" />
           <Label contentDisplay="CENTER" layoutX="512.0" layoutY="182.0" text="Maintanance" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
          </font>
           </Label>
-          <Rectangle arcWidth="5.0" fill="#f8f0ff" height="32.0" layoutX="719.0" layoutY="123.0" stroke="#9c27b0" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="719.0" layoutY="123.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
           <Label contentDisplay="CENTER" layoutX="744.0" layoutY="131.0" text="Tire Change" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
          </font>
           </Label>
       <Line endX="706.7843017578125" endY="221.4255828857422" layoutX="-51.0" layoutY="16.0" startX="652.4651489257812" startY="193.65960693359375" stroke="#666" strokeWidth="2.0" />
-          <Rectangle arcWidth="5.0" fill="#fff8e6" height="32.0" layoutX="720.0" layoutY="171.0" stroke="#ffa000" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
-          <Rectangle arcWidth="5.0" fill="#f0f0f0" height="32.0" layoutX="720.0" layoutY="223.0" stroke="#616161" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="171.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="223.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
           <Label contentDisplay="CENTER" layoutX="745.0" layoutY="231.0" text="Repair Work" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
@@ -144,7 +144,7 @@
       <Line endX="656.3280029296875" endY="256.26300048828125" layoutX="472.0" layoutY="-4.0" startX="656.3280029296875" startY="135.6595916748047" stroke="#666" strokeWidth="2.0" />
       <Group layoutX="930.0" layoutY="324.0">
          <children>
-            <Rectangle arcWidth="5.0" fill="#fcffe9" height="35.0" stroke="#aeac28" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+            <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
             <Label contentDisplay="CENTER" layoutX="35.0" layoutY="10.0" text="Inspection" textAlignment="CENTER">
                <font>
                   <Font size="12.0" />
@@ -153,7 +153,7 @@
          </children>
       </Group>
       <Line endX="715.406005859375" endY="157.7232666015625" layoutX="375.0" layoutY="144.0" startX="715.406005859375" startY="195.802978515625" stroke="#666" strokeWidth="2.0" />
-          <Rectangle arcWidth="5.0" fill="#e8f5e8" height="35.0" layoutX="1066.0" layoutY="260.0" stroke="#4caf50" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+          <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" layoutX="1066.0" layoutY="260.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
           <Label contentDisplay="CENTER" layoutX="1082.0" layoutY="268.0" prefHeight="20.0" prefWidth="102.0" text="Customer Served" textAlignment="CENTER">
               <font>
             <Font size="12.0" />
