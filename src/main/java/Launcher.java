@@ -3,7 +3,12 @@ import simu.view.StepperTestView;
 import simu.view.VisualizeTestView;
 
 public class Launcher {
-    public static void main(String[] args) {
+
+    void launchApp() {
         Application.launch(VisualizeTestView.class);
+    }
+
+    public static void main(String[] args) {
+        new Launcher().launchApp();
     }
 }

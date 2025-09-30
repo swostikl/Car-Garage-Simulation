@@ -46,7 +46,6 @@ public abstract class Engine extends Process {
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
 			tryCEvents();
             giveUp();
-
 		}
 
 		results();
