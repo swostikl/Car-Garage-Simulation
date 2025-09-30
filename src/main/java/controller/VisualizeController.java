@@ -80,8 +80,6 @@ public class VisualizeController {
     private Rectangle tireChangeService;
 
     @FXML
-    private Label tireChangeServicelabel;
-
-
+    public Label tireChangeServicelabel;
 
 }
