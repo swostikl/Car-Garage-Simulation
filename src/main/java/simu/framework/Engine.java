@@ -51,9 +51,14 @@ public abstract class Engine extends Process {
 
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
 
+            // later put this code in one function so that call
+
             vc.setArrivalLabel(servicePoints[0]);
             vc.setMaintenanceQueuelabel(servicePoints[1]);
             vc.setInspectionQueuelabel(servicePoints[5]);
+            vc.setTireChangeQueuelabel(servicePoints[2]);
+            vc.setOilChangeQueuelabel(servicePoints[3]);
+            vc.setRepairworkQueueLabel(servicePoints[4]);
 
 
 			tryCEvents();

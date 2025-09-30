@@ -9,6 +9,7 @@ import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.ServicePoint;
 
+
 public class CustomerServicePoint extends ServicePoint {
 
     /**

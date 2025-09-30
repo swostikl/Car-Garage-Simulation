@@ -5,7 +5,10 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
+import simu.model.Customer;
 import simu.model.ServicePoint;
+
+
 
 public class VisualizeController {
 
@@ -91,6 +94,8 @@ public class VisualizeController {
      * This does this does that
      * @param servicepoint this is the service point bla blah blah
      */
+
+
     public void setArrivalLabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             arrivalLabel.setText(String.format("Queue: %d", servicepoint.onQueue()));
@@ -98,27 +103,49 @@ public class VisualizeController {
     }
 
 // think how to get id from servicepoint
-    public void setCustomerServicelabel(ServicePoint servicepoint){
-        Platform.runLater(()-> {
-            customerServedlabel.setText(String.format("Customer arriving : %d",servicepoint.isOnQueue()));
-        });
-    }
+    public void setCustomerServicelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+        if (c != null) {
+            customerServicelabel.setText("Serving customer #" + c.getId());
+        } else {
+            customerServicelabel.setText("No customer currently served");
+        }
+    });
+}
+
 
     public void setMaintenanceQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
-            maintenanceQueuelabel.setText(String.format("At maintenance : %d", servicepoint.onQueue()));
+            maintenanceQueuelabel.setText(String.format("Queue maintenance : %d", servicepoint.onQueue()));
         });
 
     }
 
     public void setInspectionQueuelabel(ServicePoint servicepoint){
         Platform.runLater(()->{
-            inspectionQueuelabel.setText(String.format("At inspection : %d", servicepoint.onQueue()));
+            inspectionQueuelabel.setText(String.format("inspection queue : %d", servicepoint.onQueue()));
         });
     }
 
+    public void setTireChangeQueuelabel(ServicePoint servicepoint){
+        Platform.runLater(()->{
+            tireChangeQueuelabel.setText(String.format("TireChange queue : %d", servicepoint.onQueue()));
+        });
 
+    }
 
+    public void setOilChangeQueuelabel(ServicePoint servicepoint){
+        Platform.runLater(()->{
+            oilChangeQueuelabel.setText(String.format("OilChange queue : %d", servicepoint.onQueue()));
+        });
+    }
+
+    public void setRepairworkQueueLabel(ServicePoint servicepoint){
+        Platform.runLater(()->{
+            repairworkQueueLabel.setText(String.format("RepairWork queue : %d", servicepoint.onQueue()));
+        });
+    }
 
 
 }

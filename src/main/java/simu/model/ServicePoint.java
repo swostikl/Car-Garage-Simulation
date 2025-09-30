@@ -28,6 +28,9 @@ public abstract class ServicePoint {
     protected double serviceTime;
     protected int customerServed;
 
+    protected Customer currentCustomer; //to Check who is being served currently
+    protected ServicePointType type;
+
 
 	/**
 	 * Create the service point with a waiting queue.
@@ -68,8 +71,9 @@ public abstract class ServicePoint {
 	 * Inserts a new event to the event list when the service should be ready.
 	 */
 	public void beginService() {		// Begins a new service, customer is on the queue during the service
-		Trace.out(Trace.Level.INFO, "Starting a new service for the customer #" + queue.peek().getId());
-		///  think
+		currentCustomer = queue.peek(); // track active customer
+        Trace.out(Trace.Level.INFO, "Starting a new service for the customer #" + queue.peek().getId());
+
 		reserved = true;
 		double serviceTime = generator.sample();
 		eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
@@ -104,4 +108,13 @@ public abstract class ServicePoint {
     public int onQueue() {
         return queue.size();
     }
+
+    /**
+     * Getter for controller display
+     * @return number of customers srvice
+     */
+    public Customer getCurrentCustomer(){
+        return currentCustomer;
+    }
+
 }
