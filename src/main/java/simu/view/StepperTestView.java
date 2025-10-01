@@ -19,7 +19,7 @@ public class StepperTestView extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/stepper_test.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
-        controller.init(new Object(), new ProcessManager());
+        controller.init();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);

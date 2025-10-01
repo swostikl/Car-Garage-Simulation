@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Ellipse?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.shape.Polygon?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.VisualizeController">
+    <children>
+      <Group />
+
+        <!-- Customer Arrival Queue -->
+        <Group layoutX="44.0" layoutY="271.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+                <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Rectangle fx:id="arrivalQueue" arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+                <Label fx:id="arrivalLabel" layoutX="-14.0" layoutY="26.0" text="Arrival: 1" textFill="#666" />
+            </children>
+        </Group>
+
+        <!-- Arrow from Arrival to Customer Service -->
+        <Line endX="140.0" endY="288.0" startX="70.0" startY="288.0" stroke="#666" strokeWidth="2.0" />
+        <Polygon fill="#666" points="140.0,284.0,150.0,288.0,140.0,292.0" />
+
+        <!-- Customer Service -->
+        <Group fx:id="customerService" layoutX="150.0" layoutY="270.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+                <Label contentDisplay="CENTER" layoutX="15.0" layoutY="9.0" text="Customer Service" textAlignment="CENTER">
+                    <font><Font size="12.0" /></font>
+                </Label>
+            </children>
+        </Group>
+
+        <!-- Arrow from Customer Service to Decision -->
+        <Line endX="320.0" endY="288.0" startX="270.0" startY="288.0" stroke="#666" strokeWidth="2.0" />
+        <Polygon fill="#666" points="320.0,284.0,330.0,288.0,320.0,292.0" />
+
+        <!-- Maintenance Queue -->
+        <Group fx:id="repairWorkQueue" layoutX="679.0" layoutY="232.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+                <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+            </children>
+        </Group>
+
+        <!-- Inspection Queue -->
+        <Group layoutX="500.0" layoutY="176.0" />
+
+    
+        <Line endX="343.2594299316406" endY="194.99998474121094" layoutX="-6.0" layoutY="1.0" startX="344.0" startY="271.8331298828125" stroke="#666" strokeWidth="2.0" />
+
+        <!-- Tire Change Queue -->
+        <Group fx:id="tireChangeQueue" layoutX="679.0" layoutY="132.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+                <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+            </children>
+        </Group>
+
+        <!-- Oil Change Queue -->
+        <Group fx:id="oilChangeQueue" layoutX="680.0" layoutY="184.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+                <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+            </children>
+        </Group>
+
+        <!-- Repair Queue -->
+        <Group fx:id="inspectionQueue" layoutX="901.0" layoutY="331.0">
+            <children>
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+                <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+                <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+            </children>
+        </Group>
+
+        <!-- Arrow from Inspection to Decision -->
+        <Line endX="705.0" endY="167.0" layoutX="-51.0" layoutY="-20.0" startX="652.4651489257812" startY="193.65960693359375" stroke="#666" strokeWidth="2.0" />
+
+        <!-- Customer Served -->
+        <Group layoutX="1150.0" layoutY="270.0" />
+      <Group fx:id="maintenanceQueue" layoutX="337.0" layoutY="281.0">
+         <children>
+            <Rectangle arcWidth="5.0" fill="#ebebff" height="15.0" layoutX="-7.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" width="14.0" />
+            <Ellipse fill="#ebebff" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+            <Ellipse fill="#ebebff" layoutY="15.0" radiusX="7.0" radiusY="3.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.5" />
+            <Rectangle arcWidth="5.0" fill="#ebebff" height="4.0" layoutX="-6.5" layoutY="11.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="0.0" width="13.0" />
+         </children>
+      </Group>
+          <Rectangle fx:id="maintenanceService" arcWidth="5.0" fill="#ebebff" height="33.0" layoutX="496.0" layoutY="174.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="100.0" />
+          <Label contentDisplay="CENTER" layoutX="512.0" layoutY="182.0" text="Maintanance" textAlignment="CENTER">
+              <font>
+            <Font size="12.0" />
+         </font>
+          </Label>
+          <Rectangle fx:id="tireChangeService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="719.0" layoutY="123.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Label contentDisplay="CENTER" layoutX="744.0" layoutY="131.0" text="Tire Change" textAlignment="CENTER">
+              <font>
+            <Font size="12.0" />
+         </font>
+          </Label>
+      <Line endX="706.7843017578125" endY="221.4255828857422" layoutX="-51.0" layoutY="16.0" startX="652.4651489257812" startY="193.65960693359375" stroke="#666" strokeWidth="2.0" />
+          <Rectangle fx:id="oilChangeService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="171.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Rectangle fx:id="repairWorkService" arcWidth="5.0" fill="#ebebff" height="32.0" layoutX="720.0" layoutY="223.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="107.0" />
+          <Label contentDisplay="CENTER" layoutX="745.0" layoutY="231.0" text="Repair Work" textAlignment="CENTER">
+              <font>
+            <Font size="12.0" />
+         </font>
+          </Label>
+          <Label contentDisplay="CENTER" layoutX="741.0" layoutY="181.0" text="Oil Change" textAlignment="CENTER">
+              <font>
+            <Font size="12.0" />
+         </font>
+          </Label>
+      <Line endX="795.6419067382812" endY="358.0" layoutX="-83.0" layoutY="-218.0" startX="773.8724365234375" startY="358.0" stroke="#666" strokeWidth="2.0" />
+      <Line endX="794.3244018554688" endY="358.0" layoutX="-82.0" layoutY="-167.0" startX="774.2219848632812" startY="358.0" stroke="#666" strokeWidth="2.0" />
+      <Line endX="792.0" endY="358.0" layoutX="-82.0" layoutY="-119.0" startX="773.2219848632812" startY="358.0" stroke="#666" strokeWidth="2.0" />
+      <Polygon fill="#666" layoutX="-90.0" layoutY="-218.0" points="800.0,354.0,810.0,358.0,800.0,362.0" />
+      <Polygon fill="#666" layoutX="-90.0" layoutY="-167.0" points="800.0,354.0,810.0,358.0,800.0,362.0" />
+      <Polygon fill="#666" layoutX="-92.0" layoutY="-119.0" points="800.0,354.0,810.0,358.0,800.0,362.0" />
+      <Line endX="719.913818359375" endY="193.6595916748047" layoutX="174.0" layoutY="43.0" startX="656.7976684570312" startY="193.6595916748047" stroke="#666" strokeWidth="2.0" />
+      <Line endX="656.3280029296875" endY="283.4456481933594" layoutX="239.0" layoutY="37.0" startX="656.3280029296875" startY="201.07382202148438" stroke="#666" strokeWidth="2.0" />
+      <Line endX="722.3280029296875" endY="193.65960693359375" layoutX="177.0" layoutY="1.0" startX="654.5123901367188" startY="193.65960693359375" stroke="#666" strokeWidth="2.0" />
+      <Line endX="724.3280029296875" endY="193.6595916748047" layoutX="182.0" layoutY="-55.0" startX="649.5123901367188" startY="193.6595916748047" stroke="#666" strokeWidth="2.0" />
+      <Line endX="656.3280029296875" endY="274.4456481933594" layoutX="245.0" layoutY="46.0" startX="655.3280029296875" startY="149.65960693359375" stroke="#666" strokeWidth="2.0" />
+      <Line endX="656.3280029296875" endY="264.07843017578125" layoutX="251.0" layoutY="57.0" startX="656.3280029296875" startY="82.65959167480469" stroke="#666" strokeWidth="2.0" />
+      <Line endX="933.3280029296875" endY="193.6595916748047" layoutX="194.0" layoutY="-63.0" startX="637.5123901367188" startY="193.6595916748047" stroke="#666" strokeWidth="2.0" />
+      <Line endX="656.3280029296875" endY="256.26300048828125" layoutX="472.0" layoutY="-4.0" startX="656.3280029296875" startY="135.6595916748047" stroke="#666" strokeWidth="2.0" />
+      <Group layoutX="930.0" layoutY="324.0">
+         <children>
+            <Rectangle fx:id="inspectionService" arcWidth="5.0" fill="#ebebff" height="35.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+            <Label contentDisplay="CENTER" layoutX="35.0" layoutY="10.0" text="Inspection" textAlignment="CENTER">
+               <font>
+                  <Font size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Line endX="715.406005859375" endY="157.7232666015625" layoutX="375.0" layoutY="144.0" startX="715.406005859375" startY="195.802978515625" stroke="#666" strokeWidth="2.0" />
+          <Rectangle fx:id="customerServed" arcWidth="5.0" fill="#ebebff" height="35.0" layoutX="1066.0" layoutY="260.0" stroke="#9270bc" strokeType="INSIDE" strokeWidth="1.5" width="120.0" />
+          <Label contentDisplay="CENTER" layoutX="1082.0" layoutY="268.0" prefHeight="20.0" prefWidth="102.0" text="Customer Served" textAlignment="CENTER">
+              <font>
+            <Font size="12.0" />
+         </font>
+          </Label>
+      <Line endX="541.3064575195312" endY="358.0501403808594" layoutX="249.0" layoutY="47.0" startX="541.3064575195312" startY="210.68194580078125" stroke="#666" strokeWidth="2.0" />
+      <Line endX="987.3829345703125" endY="197.9444580078125" layoutX="140.0" layoutY="208.0" startX="649.3064575195312" startY="198.05014038085938" stroke="#666" strokeWidth="2.0" />
+      <Line endX="754.3829345703125" endY="147.7232666015625" layoutX="374.0" layoutY="154.0" startX="754.3829345703125" startY="250.9444580078125" stroke="#666" strokeWidth="2.0" />
+      <Line endX="683.4783935546875" endY="195.802978515625" layoutX="406.0" layoutY="146.0" startX="647.2418212890625" startY="195.802978515625" stroke="#666" strokeWidth="2.0" />
+      <Line endX="901.3280029296875" endY="200.0" layoutX="188.0" layoutY="-21.0" startX="643.5123901367188" startY="200.0" stroke="#666" strokeWidth="2.0" />
+      <Line endX="656.3280029296875" endY="307.6575927734375" layoutX="434.0" layoutY="-55.0" startX="656.3280029296875" startY="235.0" stroke="#666" strokeWidth="2.0" />
+      <Line endX="711.5444946289062" endY="194.5" layoutX="215.0" layoutY="147.0" startX="698.247802734375" startY="194.5" stroke="#666" strokeWidth="2.0" />
+      <Line endX="541.3064575195312" endY="280.9444580078125" layoutX="448.0" layoutY="164.0" startX="541.3064575195312" startY="200.13079833984375" stroke="#666" strokeWidth="2.0" />
+      <Line endX="981.3064575195312" endY="198.9444580078125" layoutX="7.0" layoutY="247.0" startX="330.38165283203125" startY="198.9444580078125" stroke="#666" strokeWidth="2.0" />
+      <Line endX="543.0" endY="292.1872863769531" layoutX="358.0" layoutY="130.0" startX="543.0" startY="222.48733520507812" stroke="#666" strokeWidth="2.0" />
+      <Line endX="931.0" endY="199.18728637695312" layoutX="-31.0" layoutY="224.0" startX="250.96746826171875" startY="199.187255859375" stroke="#666" strokeWidth="2.0" />
+      <Line endX="535.9674682617188" endY="289.187255859375" layoutX="-317.0" layoutY="133.0" startX="535.9674682617188" startY="175.2939453125" stroke="#666" strokeWidth="2.0" />
+      <Line endX="536.3816528320312" endY="308.9444580078125" layoutX="-200.0" layoutY="136.0" startX="535.836181640625" startY="175.0191650390625" stroke="#666" strokeWidth="2.0" />
+      <Line endX="730.481689453125" endY="199.99996948242188" layoutX="496.0" layoutY="79.0" startX="697.244140625" startY="200.0" stroke="#666" strokeWidth="2.0" />
+      <Label layoutX="1231.0" layoutY="270.0" prefHeight="19.0" prefWidth="77.0" text="Customer Exit" />
+      <Line endX="730.481689453125" endY="199.99996948242188" layoutX="615.0" layoutY="79.0" startX="697.244140625" startY="200.0" stroke="#666" strokeWidth="2.0" />
+      <Polygon fill="#666" layoutX="-22.0" layoutY="-33.0" points="672.3483276367188, 170.14430236816406, 686.9287109375, 175.54446411132812, 678.4141845703125, 187.42478942871094" />
+      <Polygon fill="#666" layoutX="-21.0" layoutY="59.0" points="675.0, 169.5696563720703, 684.9287109375, 181.28713989257812, 672.1591186523438, 185.70889282226562" />
+      <Line endX="320.0" endY="288.0" layoutX="161.0" layoutY="-93.0" startX="177.25942993164062" startY="288.0" stroke="#666" strokeWidth="2.0" />
+      <Polygon fill="#666" layoutX="-194.0" layoutY="16.0" points="675.0, 169.5696563720703, 687.2311401367188, 178.16720581054688, 675.0, 187.61402893066406" />
+      <Line endX="312.0" endY="288.0" layoutX="346.0" layoutY="-97.0" startX="255.999755859375" startY="288.0" stroke="#666" strokeWidth="2.0" />
+      <Polygon fill="#666" layoutX="-18.0" layoutY="12.0" points="675.0, 169.5696563720703, 687.2311401367188, 178.16720581054688, 675.0, 187.61402893066406" />
+      <Polygon fill="#666" layoutX="410.0" layoutY="76.0" points="672.49560546875, 169.5696563720703, 687.8575439453125, 169.5696563720703, 680.3280029296875, 179.6575927734375" />
+      <Polygon fill="#666" layoutX="448.0" layoutY="76.0" points="672.49560546875, 169.5696563720703, 687.8575439453125, 169.5696563720703, 680.3280029296875, 179.6575927734375" />
+      <Polygon fill="#666" layoutX="94.0" layoutY="-47.0" points="803.8297119140625, 366.6161804199219, 801.3280029296875, 371.4456481933594, 798.5810546875, 366.6161804199219" />
+      <Polygon fill="#666" layoutX="100.0" layoutY="-47.0" points="803.8297119140625, 366.6161804199219, 801.3280029296875, 371.4456481933594, 798.5810546875, 366.6161804199219" />
+      <Polygon fill="#666" layoutX="106.0" layoutY="-47.0" points="803.8297119140625, 366.6161804199219, 801.3280029296875, 371.4456481933594, 798.5810546875, 366.6161804199219" />
+      <Polygon fill="#666" layoutX="247.0" layoutY="162.0" points="675.0, 174.17050170898438, 683.0, 179.5, 675.0, 186.21957397460938" />
+      <Polygon fill="#666" layoutX="407.0" layoutY="128.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
+      <Polygon fill="#666" layoutX="445.0" layoutY="127.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
+      <Polygon fill="#666" layoutX="669.0" layoutY="99.0" points="675.0, 174.17050170898438, 682.1148681640625, 180.19564819335938, 675.0, 186.21957397460938" />
+      <Polygon fill="#666" layoutX="218.0" layoutY="181.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
+      <Polygon fill="#666" layoutX="-347.0" layoutY="133.0" points="674.6475830078125, 178.0191650390625, 683.260009765625, 169.09530639648438, 691.0247802734375, 178.0191650390625" />
+      <Label fx:id="customerServicelabel" layoutX="145.0" layoutY="248.0" text="Customer Arriving number" />
+      <Label fx:id="maintenanceQueuelabel" layoutX="356.0" layoutY="279.0" text="MaintenanceQueue Number" />
+      <Label fx:id="maintenancelabel" layoutX="443.0" layoutY="151.0" text="Number Of operating service" />
+      <Label fx:id="tireChangeQueuelabel" layoutX="567.0" layoutY="113.0" text="Number Queue for Tirechange" />
+      <Label fx:id="oilChangeQueuelabel" layoutX="602.0" layoutY="200.0" text="Number QueueOilChange " />
+      <Label fx:id="repairworkQueueLabel" layoutX="576.0" layoutY="248.0" text="Number Queue Repairwork" />
+      <Label fx:id="inspectionQueuelabel" contentDisplay="RIGHT" layoutX="800.0" layoutY="369.0" text="inspection queue number" />
+      <Label fx:id="inspectionServicelabel" layoutX="920.0" layoutY="306.0" text="processing number" />
+      <Label fx:id="customerServedlabel" layoutX="1139.0" layoutY="297.0" text="Number of CustomerServed" />
+      <Label fx:id="tireChangeServicelabel" layoutX="722.0" layoutY="104.0" text="Tire change processing number" />
+      <Label fx:id="oilChangeServicelabel" layoutX="723.0" layoutY="153.0" text="oilchange on process number" />
+      <Label fx:id="repairWorklabel" layoutX="724.0" layoutY="258.0" text="Repair work process number" />
+
+    </children>
+</AnchorPane>

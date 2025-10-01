@@ -9,6 +9,7 @@ import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.ServicePoint;
 
+
 public class CustomerServicePoint extends ServicePoint {
 
     /**
@@ -30,5 +31,6 @@ public class CustomerServicePoint extends ServicePoint {
         double serviceTime = generator.sample();
         eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
         this.serviceTime += serviceTime;
+        currentCustomer = nextCustomer;
     }
 }

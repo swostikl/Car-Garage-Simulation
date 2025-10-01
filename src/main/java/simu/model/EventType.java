@@ -2,8 +2,6 @@ package simu.model;
 
 import simu.framework.IEventType;
 
-// TODO: This must be adapted to the actual simulator
-
 /**
  * Event types are defined by the requirements of the simulation model
  *

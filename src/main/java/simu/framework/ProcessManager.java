@@ -8,10 +8,17 @@ public class ProcessManager {
     private int currentProcessIndex;
     private Process currentProcess;
 
+    /**
+     * A cooperative multitasking process manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+     */
     public ProcessManager() {
         this.processes = new ArrayList<>();
     }
 
+    /**
+     * Add a process to the process manager and start it.
+     * @param p Process
+     */
     synchronized public void addProcess(Process p) {
         if (processes.contains(p)) {
             return;
@@ -21,9 +28,13 @@ public class ProcessManager {
             this.currentProcess = p;
             currentProcessIndex = 0;
         }
+        p.setPm(this);
         p.start();
     }
 
+    /**
+     * <b>DO NOT USE</b>, call {@code deregister()} on the {@code Process} instead
+     */
     synchronized public void removeProcess(Process p) {
         if (processes.contains(p)) {
             p.interrupt();
@@ -41,6 +52,9 @@ public class ProcessManager {
         }
     }
 
+    /**
+     * <b>DO NOT USE</b>, call {@code giveUp()} on the {@code Process} instead
+     */
     public synchronized void yield() {
         if ((currentProcessIndex + 1) >= processes.size()) {
             currentProcessIndex = 0;
@@ -50,10 +64,15 @@ public class ProcessManager {
         currentProcess = processes.get(currentProcessIndex);
     }
 
+    /**
+     * Get process currently running
+     * @return {@code Process} process currently running
+     */
     public Process getCurrentProcess() {
         return currentProcess;
     }
 
+    @Deprecated
     public ArrayList<Process> getProcesses() {
         return processes;
     }

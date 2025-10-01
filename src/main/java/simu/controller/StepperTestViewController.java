@@ -1,5 +1,7 @@
 package simu.controller;
 
+import controller.VisualizeController;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,6 +12,9 @@ import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.model.Interrupt;
 import simu.model.MyEngine;
+import simu.view.VisualizeView;
+
+import java.io.IOException;
 
 public class StepperTestViewController {
 
@@ -28,29 +33,37 @@ public class StepperTestViewController {
     @FXML
     private Button stepButton;
 
-    @FXML
-    void onPressRun(ActionEvent event) {
-        Trace.setTraceLevel(Trace.Level.INFO);
+    private VisualizeView view;
 
-        Engine m = new MyEngine(lock, pm);
+    private VisualizeController visualizeController;
+
+    @FXML
+    void onPressRun(ActionEvent event) throws IOException {
+        Trace.setTraceLevel(Trace.Level.INFO);
+        view = new VisualizeView();
+        visualizeController = view.init();
+        Engine m = new MyEngine(visualizeController);
         m.setSimulationTime(100000);
         m.setName("Main Simulation");
         pm.addProcess(m);
+
     }
 
     @FXML
     void onPausePressed() {
         if (pauseButton.isSelected()) {
-            interrupt = new Interrupt(lock, pm);
+            interrupt = new Interrupt();
             interrupt.setName("INTERRUPT SIMULATION");
             stepButton.setDisable(false);
             pm.addProcess(interrupt);
+
         } else {
             stepButton.setDisable(true);
             if (interrupt != null) {
                 interrupt.deregister();
                 interrupt = null;
             }
+
         }
     }
 
@@ -59,8 +72,7 @@ public class StepperTestViewController {
         interrupt.giveUp();
     }
 
-    public void init(Object lock, ProcessManager pm) {
-        this.lock = lock;
-        this.pm = pm;
+    public void init() {
+        this.pm = new ProcessManager();
     }
 }
