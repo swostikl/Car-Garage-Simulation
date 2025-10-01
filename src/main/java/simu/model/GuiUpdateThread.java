@@ -32,5 +32,8 @@ public class GuiUpdateThread extends Thread {
 
         // total served
         vc.setCustomerServedlabel(Customer.getTotalServed());
+
+        // set color
+        vc.setCustomerServiceOccupied(servicePoints[0].reserved);
     }
 }
