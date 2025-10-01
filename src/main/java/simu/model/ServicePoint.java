@@ -29,7 +29,7 @@ public abstract class ServicePoint {
     protected int customerServed;
 
     protected Customer currentCustomer; //to Check who is being served currently
-    protected ServicePointType type;
+
 
 
 	/**
@@ -116,5 +116,6 @@ public abstract class ServicePoint {
     public Customer getCurrentCustomer(){
         return currentCustomer;
     }
+
 
 }

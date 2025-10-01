@@ -195,9 +195,9 @@
       <Label fx:id="maintenancelabel" layoutX="443.0" layoutY="151.0" text="Number Of operating service" />
       <Label fx:id="tireChangeQueuelabel" layoutX="567.0" layoutY="113.0" text="Number Queue for Tirechange" />
       <Label fx:id="oilChangeQueuelabel" layoutX="602.0" layoutY="200.0" text="Number QueueOilChange " />
-      <Label fx:id="repairworkQueueLabel" layoutX="545.0" layoutY="252.0" text="Number Queue Repairwork" />
+      <Label fx:id="repairworkQueueLabel" layoutX="576.0" layoutY="248.0" text="Number Queue Repairwork" />
       <Label fx:id="inspectionQueuelabel" contentDisplay="RIGHT" layoutX="800.0" layoutY="369.0" text="inspection queue number" />
-      <Label fx:id="inspectionServicelabel" layoutX="935.0" layoutY="296.0" text="processing number" />
+      <Label fx:id="inspectionServicelabel" layoutX="920.0" layoutY="306.0" text="processing number" />
       <Label fx:id="customerServedlabel" layoutX="1139.0" layoutY="297.0" text="Number of CustomerServed" />
       <Label fx:id="tireChangeServicelabel" layoutX="722.0" layoutY="104.0" text="Tire change processing number" />
       <Label fx:id="oilChangeServicelabel" layoutX="723.0" layoutY="153.0" text="oilchange on process number" />

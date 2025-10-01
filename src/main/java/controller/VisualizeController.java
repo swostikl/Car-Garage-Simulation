@@ -120,20 +120,21 @@ public class VisualizeController {
      *
      * @param servicepoint the maintenance service point
      */
-    public void setMaintenanceQueuelabel(ServicePoint servicepoint){
-        Platform.runLater(()->{
+    public void setMaintenanceQueuelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
             maintenanceQueuelabel.setText(String.format("Queue maintenance : %d", servicepoint.onQueue()));
         });
 
     }
+
     /**
      * Updates the label displaying the number of customers waiting for inspection.
      *
      * @param servicepoint the inspection service point
      */
 
-    public void setInspectionQueuelabel(ServicePoint servicepoint){
-        Platform.runLater(()->{
+    public void setInspectionQueuelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
             inspectionQueuelabel.setText(String.format("inspection queue : %d", servicepoint.onQueue()));
         });
     }
@@ -143,8 +144,8 @@ public class VisualizeController {
      *
      * @param servicepoint the tire change service point
      */
-    public void setTireChangeQueuelabel(ServicePoint servicepoint){
-        Platform.runLater(()->{
+    public void setTireChangeQueuelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
             tireChangeQueuelabel.setText(String.format("TireChange queue : %d", servicepoint.onQueue()));
         });
 
@@ -155,8 +156,8 @@ public class VisualizeController {
      *
      * @param servicepoint the oil change service point
      */
-    public void setOilChangeQueuelabel(ServicePoint servicepoint){
-        Platform.runLater(()->{
+    public void setOilChangeQueuelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
             oilChangeQueuelabel.setText(String.format("OilChange queue : %d", servicepoint.onQueue()));
         });
     }
@@ -167,11 +168,107 @@ public class VisualizeController {
      * @param servicepoint the repair work service point
      */
 
-    public void setRepairworkQueueLabel(ServicePoint servicepoint){
-        Platform.runLater(()->{
+    public void setRepairworkQueueLabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
             repairworkQueueLabel.setText(String.format("RepairWork queue : %d", servicepoint.onQueue()));
         });
     }
 
+    // at process in customerService
+    public void setCustomerServicelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            // Get the customer currently in service
+            Customer c = servicepoint.getCurrentCustomer();
+
+            if (c != null) {
+                customerServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                customerServicelabel.setText("Serving: 0");
+            }
+
+        });
+    }
+
+    // at process in mainenanceService
+    public void setMaintenancelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                maintenancelabel.setText("Customer No.Serving: #" + c.getId());
+            } else {
+                maintenancelabel.setText("Serving: 0");
+            }
+        });
+
+
+    }
+
+    // at process in tireChangeService
+
+    public void setTireChangeServicelabel(ServicePoint servicepoint) {
+
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                tireChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                tireChangeServicelabel.setText("Serving: 0");
+            }
+        });
+    }
+
+    // at processs in oilChangeService
+
+    public void setOilChangeServicelabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                oilChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                oilChangeServicelabel.setText("Serving: 0");
+            }
+        });
+    }
+
+        // at process in repairWorkService
+
+    public void setRepairWorklabel(ServicePoint servicepoint) {
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                repairWorklabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                repairWorklabel.setText("Serving: 0");
+            }
+        });
+    }
+
+    // at process in inspectionService
+    public void setInspectionServicelabel (ServicePoint servicepoint) {
+
+        Platform.runLater(() -> {
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                inspectionServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                inspectionServicelabel.setText("Serving: 0");
+            }
+        });
+    }
+
+    //at process in customerServed
+
+    public void setCustomerServedlabel(int i) {
+        Platform.runLater(()->{
+            int c = Customer.getTotalServed();
+            customerServedlabel.setText("Customer served : " + c);
+        });
+
+    }
 
 }
+
+
+
+
+

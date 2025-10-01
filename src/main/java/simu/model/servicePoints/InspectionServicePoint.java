@@ -29,5 +29,6 @@ public class InspectionServicePoint extends ServicePoint {
         double serviceTime = generator.sample();
         eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
         this.serviceTime += serviceTime;
+        currentCustomer = nextCustomer;
     }
 }

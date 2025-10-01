@@ -52,5 +52,6 @@ public class OilChangeServicePoint extends MaintenanceStationServicePoint {
         double serviceTime = generator.sample();
         eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
         this.serviceTime += serviceTime;
+        currentCustomer = nextCustomer; //eta
     }
 }
