@@ -11,6 +11,7 @@ import simu.framework.Engine;
 import simu.framework.Process;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
+import simu.model.DelayProcess; // Import your new DelayProcess
 import simu.model.Interrupt;
 import simu.model.MyEngine;
 import simu.view.VisualizeView;
@@ -21,6 +22,7 @@ public class StepperTestViewController {
     private ProcessManager pm;
     private Object lock;
     private Interrupt interrupt;
+    private DelayProcess delayProcess;
     private boolean hasRun = false;
 
     @FXML
@@ -48,7 +50,6 @@ public class StepperTestViewController {
     @FXML
     void onPressRun(ActionEvent event) throws IOException {
         if (!hasRun) {
-            // Change button state
             runButton.setText("Running");
             runButton.setDisable(true);
             hasRun = true;
@@ -62,7 +63,9 @@ public class StepperTestViewController {
             m.setName("Main Simulation");
             pm.addProcess(m);
 
-
+            // Create and add delay process for timing control
+            delayProcess = new DelayProcess(currentDelay);
+            pm.addProcess(delayProcess);
         }
     }
 
@@ -91,18 +94,20 @@ public class StepperTestViewController {
         }
     }
 
- @FXML
+    @FXML
     void onDecreaseSpeed() {
-        // "-" button decreases delay (increases speed)
-        currentDelay = Math.max(currentDelay - 100, 100); // Min 100ms
+        // Decrease delay = faster simulation
+        currentDelay = Math.max(currentDelay - 100, 100);
         updateDelayLabel();
+        updateSimulationDelay();
     }
 
     @FXML
     void onIncreaseSpeed() {
-        // "+" button increases delay (decreases speed)
-        currentDelay = Math.min(currentDelay + 100, 2000); // Max 2000ms
+        // Increase delay = slower simulation
+        currentDelay = Math.min(currentDelay + 100, 2000);
         updateDelayLabel();
+        updateSimulationDelay();
     }
 
     private void updateDelayLabel() {
@@ -111,8 +116,14 @@ public class StepperTestViewController {
         }
     }
 
+    private void updateSimulationDelay() {
+        // Update the DelayProcess with new timing
+        if (delayProcess != null) {
+            delayProcess.setDelay(currentDelay);
+        }
+    }
+
     public void init() {
         this.pm = new ProcessManager();
     }
 }
-
