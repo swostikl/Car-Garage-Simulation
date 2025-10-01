@@ -177,10 +177,7 @@ public class VisualizeController {
     // at process in customerService
     public void setCustomerServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            // Get the customer currently in service
-            Customer c = servicepoint.getCurrentCustomer();
-            customerServicelabel.setText("Customer No. Serving: #" + c.getId());
-
+            customerServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
 
         });
     }
@@ -188,8 +185,7 @@ public class VisualizeController {
     // at process in mainenanceService
     public void setMaintenancelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-            maintenancelabel.setText("Customer No.Serving: #" + c.getId());
+            maintenancelabel.setText("Customer No.Serving: #" + servicepoint.getCurrentCustomerId());
 
         });
 
@@ -201,18 +197,21 @@ public class VisualizeController {
     public void setTireChangeServicelabel(ServicePoint servicepoint) {
 
         Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-            tireChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            tireChangeServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
 
         });
     }
 
     // at processs in oilChangeService
 
+    /**
+     *
+     * @param servicepoint
+     */
+
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-            oilChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            oilChangeServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
 
         });
     }
@@ -221,8 +220,7 @@ public class VisualizeController {
 
     public void setRepairWorklabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-            repairWorklabel.setText("Customer No. Serving: #" + c.getId());
+            repairWorklabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
 
         });
     }
@@ -231,8 +229,7 @@ public class VisualizeController {
     public void setInspectionServicelabel (ServicePoint servicepoint) {
 
         Platform.runLater(() -> {
-            Customer c = servicepoint.getCurrentCustomer();
-            inspectionServicelabel.setText("Customer No. Serving: #" + c.getId());
+            inspectionServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
         });
     }
 
