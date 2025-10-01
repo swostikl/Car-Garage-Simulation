@@ -2,6 +2,7 @@ package simu.framework;
 
 import controller.VisualizeController;
 import simu.model.Customer;
+import simu.model.GuiUpdateThread;
 import simu.model.ServicePoint;
 
 /**
@@ -53,26 +54,7 @@ public abstract class Engine extends Process {
 			Trace.out(Trace.Level.INFO, "\nC-phase:" );
 
             // Queue labels
-            Thread t = new Thread(() -> {
-                vc.setArrivalLabel(servicePoints[0]);          // Customer Service queue
-                vc.setMaintenanceQueuelabel(servicePoints[1]); // Maintenance queue
-                vc.setTireChangeQueuelabel(servicePoints[2]);  // Tire Change queue
-                vc.setOilChangeQueuelabel(servicePoints[3]);   // Oil Change queue
-                vc.setRepairworkQueueLabel(servicePoints[4]);  // Other Repairs queue
-                vc.setInspectionQueuelabel(servicePoints[5]);  // Inspection queue
-
-                // Service labels
-                vc.setCustomerServicelabel(servicePoints[0]);
-                vc.setMaintenancelabel(servicePoints[1]);
-                vc.setTireChangeServicelabel(servicePoints[2]);
-                vc.setOilChangeServicelabel(servicePoints[3]);
-                vc.setRepairWorklabel(servicePoints[4]);
-                vc.setInspectionServicelabel(servicePoints[5]);
-
-
-                // total served
-                vc.setCustomerServedlabel(Customer.getTotalServed());
-            });
+            Thread t = new GuiUpdateThread(vc, servicePoints);
             t.start();
 
 
