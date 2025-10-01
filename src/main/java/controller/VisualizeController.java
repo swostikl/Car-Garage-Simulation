@@ -179,12 +179,8 @@ public class VisualizeController {
         Platform.runLater(() -> {
             // Get the customer currently in service
             Customer c = servicepoint.getCurrentCustomer();
+            customerServicelabel.setText("Customer No. Serving: #" + c.getId());
 
-            if (c != null) {
-                customerServicelabel.setText("Customer No. Serving: #" + c.getId());
-            } else {
-                customerServicelabel.setText("Serving: 0");
-            }
 
         });
     }
@@ -193,11 +189,8 @@ public class VisualizeController {
     public void setMaintenancelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
-            if (c != null) {
-                maintenancelabel.setText("Customer No.Serving: #" + c.getId());
-            } else {
-                maintenancelabel.setText("Serving: 0");
-            }
+            maintenancelabel.setText("Customer No.Serving: #" + c.getId());
+
         });
 
 
@@ -209,11 +202,8 @@ public class VisualizeController {
 
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
-            if (c != null) {
-                tireChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
-            } else {
-                tireChangeServicelabel.setText("Serving: 0");
-            }
+            tireChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+
         });
     }
 
@@ -222,11 +212,8 @@ public class VisualizeController {
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
-            if (c != null) {
-                oilChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
-            } else {
-                oilChangeServicelabel.setText("Serving: 0");
-            }
+            oilChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+
         });
     }
 
@@ -235,11 +222,8 @@ public class VisualizeController {
     public void setRepairWorklabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
-            if (c != null) {
-                repairWorklabel.setText("Customer No. Serving: #" + c.getId());
-            } else {
-                repairWorklabel.setText("Serving: 0");
-            }
+            repairWorklabel.setText("Customer No. Serving: #" + c.getId());
+
         });
     }
 
@@ -248,11 +232,7 @@ public class VisualizeController {
 
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
-            if (c != null) {
-                inspectionServicelabel.setText("Customer No. Serving: #" + c.getId());
-            } else {
-                inspectionServicelabel.setText("Serving: 0");
-            }
+            inspectionServicelabel.setText("Customer No. Serving: #" + c.getId());
         });
     }
 
