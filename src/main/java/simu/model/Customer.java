@@ -119,9 +119,7 @@ public class Customer {
     /**
      * Report the measured variables of the customer. In this case to the diagnostic output.
      */
-//    public MaintenanceType[] getMaintenanceType() {
-//        return mt.toArray(new MaintenanceType[0]);
-//    }
+
 
     public void addMaintenanceType(MaintenanceType mt) {
         this.mt.add(mt);
