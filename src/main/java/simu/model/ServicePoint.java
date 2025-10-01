@@ -61,6 +61,7 @@ public abstract class ServicePoint {
 	 */
 	public Customer removeQueue() {		// Remove serviced customer
 		reserved = false;
+        currentCustomer = null;
         customerServed++;
 		return queue.poll();
 	}
