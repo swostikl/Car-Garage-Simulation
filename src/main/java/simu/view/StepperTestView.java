@@ -26,3 +26,4 @@ public class StepperTestView extends Application {
         stage.show();
     }
 }
+

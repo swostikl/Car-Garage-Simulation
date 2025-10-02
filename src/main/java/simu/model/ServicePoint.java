@@ -23,7 +23,7 @@ public abstract class ServicePoint {
 	protected ContinuousGenerator generator;
 	protected EventList eventList;
 	protected EventType eventTypeScheduled;
-	//Queuestrategy strategy; // option: ordering of the customer
+	//QueueStrategy strategy; // option: ordering of the customer
 	protected boolean reserved = false;
     protected double serviceTime;
     protected int customerServed;
@@ -61,6 +61,7 @@ public abstract class ServicePoint {
 	 */
 	public Customer removeQueue() {		// Remove serviced customer
 		reserved = false;
+        currentCustomer = null; //eta
         customerServed++;
 		return queue.poll();
 	}
@@ -116,6 +117,15 @@ public abstract class ServicePoint {
     public Customer getCurrentCustomer(){
         return currentCustomer;
     }
+
+    /**
+     * Safe getter for current customer ID.
+     * Returns 0 if no customer is currently being served.
+     *
+     * @return current customer ID or 0 if null
+     */
+
+
 
 
 }
