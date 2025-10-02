@@ -105,17 +105,9 @@
                   <Insets top="20.0" />
                </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER" spacing="10.0">
-               <children>
-                  <Label text="Delay" />
-                  <Button fx:id="slowSpeed" mnemonicParsing="false" onAction="#onDecreaseSpeed" text="-" />
-                  <Label fx:id="delayLabel" text="500ms" />
-                  <Button fx:id="increaseSpeed" mnemonicParsing="false" onAction="#onIncreaseSpeed" text="+" />
-               </children>
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-            </HBox>
+
+            <!-- REMOVED: Delay control section - this belongs only in stepper.fxml -->
+
             <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
                   <HBox alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
