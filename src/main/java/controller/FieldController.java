@@ -16,7 +16,7 @@ public class FieldController {
     }
 
     public void setArrivalTime(double mean, double variance) {
-        myEngine.setArrivalContinuousGenerator(new Normal(10, 10));
+        myEngine.setArrivalContinuousGenerator(new Normal(mean, variance));
     }
 
     /**
