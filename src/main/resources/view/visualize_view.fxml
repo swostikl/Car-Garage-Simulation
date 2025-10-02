@@ -55,7 +55,7 @@
         <!-- Inspection Queue -->
         <Group layoutX="500.0" layoutY="176.0" />
 
-    
+
         <Line endX="343.2594299316406" endY="194.99998474121094" layoutX="-6.0" layoutY="1.0" startX="344.0" startY="271.8331298828125" stroke="#666" strokeWidth="2.0" />
 
         <!-- Tire Change Queue -->

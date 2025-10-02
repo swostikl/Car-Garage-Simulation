@@ -1,5 +1,4 @@
 package controller;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -15,107 +14,47 @@ import simu.model.ServicePoint;
  * simulation. Updates JavaFX UI elements such as labels and rectangles to
  * reflect the current queue lengths and customers being served.
  *
- * <p>This class should be used with a corresponding FXML file that defines
- * the UI layout, including labels and rectangles for queues and services.</p>
+ * This class should be used with a corresponding FXML file that defines
+ * the UI layout, including labels and rectangles for queues and services.
  */
-
 public class VisualizeController {
-
-    @FXML
-    private Label arrivalLabel;
-
-    @FXML
-    private Rectangle arrivalQueue;
-
-    @FXML
-    private Rectangle customerServed;
-
-    @FXML
-    private Label customerServedlabel;
-
-    @FXML
-    private Group customerService;
-
-    @FXML
-    private Label customerServicelabel;
-
-    @FXML
-    private Group inspectionQueue;
-
-    @FXML
-    private Label inspectionQueuelabel;
-
-    @FXML
-    private Rectangle inspectionService;
-
-    @FXML
-    private Label inspectionServicelabel;
-
-    @FXML
-    private Group maintenanceQueue;
-
-    @FXML
-    private Label maintenanceQueuelabel;
-
-    @FXML
-    private Rectangle maintenanceService;
-
-    @FXML
-    private Label maintenancelabel;
-
-    @FXML
-    private Group oilChangeQueue;
-
-    @FXML
-    private Label oilChangeQueuelabel;
-
-    @FXML
-    private Rectangle oilChangeService;
-
-    @FXML
-    private Label oilChangeServicelabel;
-
-    @FXML
-    private Group repairWorkQueue;
-
-    @FXML
-    private Rectangle repairWorkService;
-
-    @FXML
-    private Label repairWorklabel;
-
-    @FXML
-    private Label repairworkQueueLabel;
-
-    @FXML
-    private Group tireChangeQueue;
-
-    @FXML
-    private Label tireChangeQueuelabel;
-
-    @FXML
-    private Rectangle tireChangeService;
-
-    @FXML
-    private Label tireChangeServicelabel;
-
-    /**
-     * This does this does that
-     * @param servicepoint this is the service point bla blah blah
-     */
+    @FXML private Label arrivalLabel;
+    @FXML private Rectangle arrivalQueue;
+    @FXML private Rectangle customerServed;
+    @FXML private Label customerServedlabel;
+    @FXML private Group customerService;
+    @FXML private Label customerServicelabel;
+    @FXML private Group inspectionQueue;
+    @FXML private Label inspectionQueuelabel;
+    @FXML private Rectangle inspectionService;
+    @FXML private Label inspectionServicelabel;
+    @FXML private Group maintenanceQueue;
+    @FXML private Label maintenanceQueuelabel;
+    @FXML private Rectangle maintenanceService;
+    @FXML private Label maintenancelabel;
+    @FXML private Group oilChangeQueue;
+    @FXML private Label oilChangeQueuelabel;
+    @FXML private Rectangle oilChangeService;
+    @FXML private Label oilChangeServicelabel;
+    @FXML private Group repairWorkQueue;
+    @FXML private Rectangle repairWorkService;
+    @FXML private Label repairWorklabel;
+    @FXML private Label repairworkQueueLabel;
+    @FXML private Group tireChangeQueue;
+    @FXML private Label tireChangeQueuelabel;
+    @FXML private Rectangle tireChangeService;
+    @FXML private Label tireChangeServicelabel;
 
     /**
      * Updates the label displaying the number of customers in the arrival queue.
      *
      * @param servicepoint the service point representing the arrival queue
      */
-
     public void setArrivalLabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             arrivalLabel.setText(String.format("Queue: %d", servicepoint.onQueue()));
         });
     }
-
 
     /**
      * Updates the label displaying the number of customers waiting for maintenance.
@@ -126,7 +65,6 @@ public class VisualizeController {
         Platform.runLater(() -> {
             maintenanceQueuelabel.setText(String.format("Queue maintenance : %d", servicepoint.onQueue()));
         });
-
     }
 
     /**
@@ -134,7 +72,6 @@ public class VisualizeController {
      *
      * @param servicepoint the inspection service point
      */
-
     public void setInspectionQueuelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             inspectionQueuelabel.setText(String.format("inspection queue : %d", servicepoint.onQueue()));
@@ -150,7 +87,6 @@ public class VisualizeController {
         Platform.runLater(() -> {
             tireChangeQueuelabel.setText(String.format("TireChange queue : %d", servicepoint.onQueue()));
         });
-
     }
 
     /**
@@ -169,42 +105,47 @@ public class VisualizeController {
      *
      * @param servicepoint the repair work service point
      */
-
     public void setRepairworkQueueLabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             repairworkQueueLabel.setText(String.format("RepairWork queue : %d", servicepoint.onQueue()));
         });
     }
 
-    // at process in customerService
+
     public void setCustomerServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            customerServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
-
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                customerServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                customerServicelabel.setText("Customer No. Serving: None");
+            }
         });
     }
 
-    // at process in mainenanceService
+
     public void setMaintenancelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            maintenancelabel.setText("Customer No.Serving: #" + servicepoint.getCurrentCustomerId());
-
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                maintenancelabel.setText("Customer No.Serving: #" + c.getId());
+            } else {
+                maintenancelabel.setText("Customer No.Serving: None");
+            }
         });
-
-
     }
-
-    // at process in tireChangeService
 
     public void setTireChangeServicelabel(ServicePoint servicepoint) {
-
         Platform.runLater(() -> {
-            tireChangeServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
-
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                tireChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                tireChangeServicelabel.setText("Customer No. Serving: None");
+            }
         });
     }
 
-    // at processs in oilChangeService
 
     /**
      *
@@ -213,36 +154,44 @@ public class VisualizeController {
 
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            oilChangeServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
-
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                oilChangeServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                oilChangeServicelabel.setText("Customer No. Serving: None");
+            }
         });
     }
-
-        // at process in repairWorkService
 
     public void setRepairWorklabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
-            repairWorklabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
-
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                repairWorklabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                repairWorklabel.setText("Customer No. Serving: None");
+            }
         });
     }
 
-    // at process in inspectionService
+
     public void setInspectionServicelabel (ServicePoint servicepoint) {
-
         Platform.runLater(() -> {
-            inspectionServicelabel.setText("Customer No. Serving: #" + servicepoint.getCurrentCustomerId());
+            Customer c = servicepoint.getCurrentCustomer();
+            if (c != null) {
+                inspectionServicelabel.setText("Customer No. Serving: #" + c.getId());
+            } else {
+                inspectionServicelabel.setText("Customer No. Serving: None");
+            }
         });
     }
 
-    //at process in customerServed
 
     public void setCustomerServedlabel(int i) {
         Platform.runLater(()->{
             int c = Customer.getTotalServed();
             customerServedlabel.setText("Customer served : " + c);
         });
-
     }
 
     public void setCustomerServiceOccupied(boolean b) {
@@ -259,7 +208,6 @@ public class VisualizeController {
 
         });
     }
-
 }
 
 

@@ -1,7 +1,6 @@
 import javafx.application.Application;
 import simu.view.StepperTestView;
-import simu.view.VisualizeTestView;
-import simu.view.VisualizeView;
+
 
 public class Launcher {
 
@@ -13,3 +12,4 @@ public class Launcher {
         new Launcher().launchApp();
     }
 }
+
