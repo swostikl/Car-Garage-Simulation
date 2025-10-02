@@ -124,9 +124,7 @@ public abstract class ServicePoint {
      *
      * @return current customer ID or 0 if null
      */
-    public int getCurrentCustomerId() {
-        return (currentCustomer != null) ? currentCustomer.getId() : 0; //eta
-    }
+
 
 
 
