@@ -22,7 +22,9 @@ public class BEvent {
             ServicePoint[] servicePoints,
             ArrivalProcess arrivalProcess,
             Event event,
-            VisualizeController vc
+            VisualizeController vc,
+            ContinuousGenerator maintenanceGenerator,
+            double inspectionFailRate
     ) {
         // B event code here
 
@@ -42,8 +44,8 @@ public class BEvent {
 
 		switch ((EventType)event.getType()) {
             case ARR_CUSTOMER_SERVICE:
-                ContinuousGenerator maintenanceGenerator = new Normal(2, 1);
-                a = new Customer(maintenanceGenerator, 0.6, 0.1);
+                maintenanceGenerator = new Normal(2, 1);
+                a = new Customer(maintenanceGenerator, 0.6, inspectionFailRate);
                 servicePoints[0].addQueue(a);
 				arrivalProcess.generateNextEvent();
                 break;

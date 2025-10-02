@@ -26,6 +26,11 @@ public class MyEngine extends Engine {
     public static final boolean FIXEDARRIVALTIMES = false;
     public static final boolean FXIEDSERVICETIMES = false;
     public ContinuousGenerator cGenerator;
+    private ContinuousGenerator arrivalContinuousGenerator;
+    private ContinuousGenerator serviceContinuousGenerator;
+    private double inspectionFailRate;
+
+
 
 
     /**
@@ -64,7 +69,7 @@ public class MyEngine extends Engine {
         servicePoints[5] = new InspectionServicePoint(cGenerator, eventList);
 
         // Create arrival process (customers arriving at the system)
-        arrivalProcess = new ArrivalProcess(cGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
+        arrivalProcess = new ArrivalProcess(arrivalContinuousGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
     }
 
     @Override
@@ -74,7 +79,7 @@ public class MyEngine extends Engine {
 
     @Override
     protected void runEvent(Event t) {  // B phase events
-        BEvent.runBEvent(servicePoints, arrivalProcess, t, vc);
+        BEvent.runBEvent(servicePoints, arrivalProcess, t, vc, serviceContinuousGenerator, inspectionFailRate);
     }
 
     @Override
@@ -84,6 +89,18 @@ public class MyEngine extends Engine {
              p.beginService();
           }
        }
+    }
+
+    public void setArrivalContinuousGenerator(ContinuousGenerator arrivalContinuousGenerator) {
+        this.arrivalContinuousGenerator = arrivalContinuousGenerator;
+    }
+
+    public void setServiceContinuousGenerator(ContinuousGenerator serviceContinuousGenerator) {
+        this.serviceContinuousGenerator = serviceContinuousGenerator;
+    }
+
+    public void setInspectionFailRate(double inspectionFailRate) {
+        this.inspectionFailRate = inspectionFailRate;
     }
 
     @Override
