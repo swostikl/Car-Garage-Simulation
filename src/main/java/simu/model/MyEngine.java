@@ -1,6 +1,6 @@
 package simu.model;
 
-import controller.VisualizeController;
+import simu.controller.VisualizeController;
 import eduni.distributions.*;
 import simu.framework.*;
 import simu.model.bEvent.BEvent;
@@ -10,8 +10,6 @@ import simu.model.servicePoints.MaintenanceServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OilChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
-
-import java.util.Random;
 
 /**
  * Main simulator engine.

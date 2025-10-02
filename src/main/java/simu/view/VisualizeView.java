@@ -1,7 +1,6 @@
 package simu.view;
 
-import controller.VisualizeController;
-import javafx.application.Application;
+import simu.controller.VisualizeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;

@@ -1,11 +1,11 @@
 import javafx.application.Application;
-import simu.view.StepperTestView;
+import simu.view.StepperView;
 
 
 public class Launcher {
 
     void launchApp() {
-        Application.launch(StepperTestView.class);
+        Application.launch(StepperView.class);
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,6 @@
 package simu.model.bEvent;
 
-import controller.VisualizeController;
+import simu.controller.VisualizeController;
 import eduni.distributions.ContinuousGenerator;
 import eduni.distributions.Normal;
 import simu.framework.ArrivalProcess;

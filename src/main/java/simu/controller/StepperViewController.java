@@ -1,14 +1,11 @@
 package simu.controller;
 
-import controller.VisualizeController;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import simu.framework.Engine;
-import simu.framework.Process;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.model.DelayProcess; // Import your new DelayProcess
@@ -17,7 +14,7 @@ import simu.model.MyEngine;
 import simu.view.VisualizeView;
 import java.io.IOException;
 
-public class StepperTestViewController {
+public class StepperViewController {
 
     private ProcessManager pm;
     private Object lock;
