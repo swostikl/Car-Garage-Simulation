@@ -3,6 +3,8 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import simu.model.Customer;
 import simu.model.ServicePoint;
@@ -145,6 +147,11 @@ public class VisualizeController {
     }
 
 
+    /**
+     *
+     * @param servicepoint
+     */
+
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -184,6 +191,21 @@ public class VisualizeController {
         Platform.runLater(()->{
             int c = Customer.getTotalServed();
             customerServedlabel.setText("Customer served : " + c);
+        });
+    }
+
+    public void setCustomerServiceOccupied(boolean b) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) customerService.getChildren().getFirst();
+                Label l = (Label) customerService.getChildren().get(1);
+                r.setFill(Color.web(b ? "#fc5d68": "#ebebff"));
+                r.setStroke(Color.web(b ? "#f7202f" : "#9270bc"));
+                l.setTextFill(b ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         });
     }
 }
