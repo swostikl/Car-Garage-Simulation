@@ -162,17 +162,20 @@ public class StepperViewController {
     @FXML
     private Label delayLabel;
 
-    private int currentDelay = 500;
+    private int currentDelay;
 
     @FXML
     void onPausePressed() {
         if (pauseButton.isSelected()) {
+            delayProcess.deregister();
             pauseButton.setText("Resume");
             interrupt = new Interrupt();
             interrupt.setName("INTERRUPT SIMULATION");
             stepButton.setDisable(false);
             pm.addProcess(interrupt);
         } else {
+            delayProcess = new DelayProcess(currentDelay);
+            pm.addProcess(delayProcess);
             pauseButton.setText("Pause");
             stepButton.setDisable(true);
             if (interrupt != null) {
@@ -204,9 +207,11 @@ public class StepperViewController {
     }
 
     private void updateDelayLabel() {
-        if (delayLabel != null) {
-            delayLabel.setText(currentDelay + "ms");
-        }
+        Platform.runLater(() -> {
+            if (delayLabel != null) {
+                delayLabel.setText(currentDelay + "ms");
+            }
+        });
     }
 
     private void updateDelayProcess() {
@@ -215,24 +220,28 @@ public class StepperViewController {
         }
     }
 
-    public void init() {
-        this.pm = new ProcessManager();
-    }
-
-    public void startSimulation(VisualizeController visualizeController) {
-        this.visualizeController = visualizeController;
-
-        Trace.setTraceLevel(Trace.Level.INFO);
-
-
-        Engine m = new MyEngine(visualizeController);
-        m.setSimulationTime(100000);
-        m.setName("Main Simulation");
-        pm.addProcess(m);
-
+    public void init(ProcessManager pm, int currentDelay) {
+        this.pm = pm;
+        this.currentDelay = currentDelay;
+        updateDelayLabel();
         delayProcess = new DelayProcess(currentDelay);
         pm.addProcess(delayProcess);
-
-        System.out.println("Simulation engine and delay process added to ProcessManager");
     }
+
+//    public void startSimulation(VisualizeController visualizeController) {
+//        this.visualizeController = visualizeController;
+//
+//        Trace.setTraceLevel(Trace.Level.INFO);
+//
+//
+//        Engine m = new MyEngine(visualizeController);
+//        m.setSimulationTime(100000);
+//        m.setName("Main Simulation");
+//        pm.addProcess(m);
+//
+//        delayProcess = new DelayProcess(currentDelay);
+//        pm.addProcess(delayProcess);
+//
+//        System.out.println("Simulation engine and delay process added to ProcessManager");
+//    }
 }

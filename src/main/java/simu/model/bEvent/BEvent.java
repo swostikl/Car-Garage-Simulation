@@ -44,7 +44,6 @@ public class BEvent {
 
 		switch ((EventType)event.getType()) {
             case ARR_CUSTOMER_SERVICE:
-                maintenanceGenerator = new Normal(2, 1);
                 a = new Customer(maintenanceGenerator, 0.6, inspectionFailRate);
                 servicePoints[0].addQueue(a);
 				arrivalProcess.generateNextEvent();

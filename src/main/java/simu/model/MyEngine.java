@@ -39,8 +39,11 @@ public class MyEngine extends Engine {
      * service times.
      */
 
-    public MyEngine(VisualizeController vc) {
+    public MyEngine(VisualizeController vc, ContinuousGenerator arrivalContinuousGenerator) {
         super(vc);
+
+        // set arrivalContinuousGenerator
+        this.arrivalContinuousGenerator = arrivalContinuousGenerator;
 
         // Using Normal distribution for service times (average 3 time units, standard deviation 1)
         cGenerator = new Normal(3.0, 1.0);
@@ -73,7 +76,7 @@ public class MyEngine extends Engine {
     }
 
     @Override
-    protected void initialize() {  // First arrival in the system
+    protected void initialize() {// First arrival in the system
        arrivalProcess.generateNextEvent();
     }
 

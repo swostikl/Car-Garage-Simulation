@@ -58,7 +58,6 @@ public class StepperView {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/stepper.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
-        controller.init();
 
         Scene scene = new Scene(root);
         stage.setScene(scene);
