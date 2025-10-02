@@ -208,6 +208,10 @@ public class VisualizeController {
 
         });
     }
+
+    public Label getArrivalLabel() {
+        return arrivalLabel;
+    }
 }
 
 
