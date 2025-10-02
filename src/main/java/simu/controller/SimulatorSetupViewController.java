@@ -389,7 +389,7 @@ public class SimulatorSetupViewController {
             });
             return doubleVal;
         }
-        Trace.out(Trace.Level.INFO, "is blank");
+        Trace.out(Trace.Level.INFO, "Field '" + (textField.getId() != null ? textField.getId() : "unknown") + "' is blank, throwing ZeroValueException");
         Platform.runLater(() -> {
             textField.getStyleClass().add("invalid");
         });
