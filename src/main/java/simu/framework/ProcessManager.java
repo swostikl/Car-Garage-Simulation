@@ -72,6 +72,23 @@ public class ProcessManager {
         return currentProcess;
     }
 
+    /**
+     * Check if there are no processes in the process manager
+     * @return true if there are no processes, false otherwise
+     */
+    public boolean hasNoProcesses() {
+        return processes.isEmpty();
+    }
+
+    /**
+     * Check if the process manager contains the given process
+     * @param p Process to check
+     * @return true if the process manager contains the process, false otherwise
+     */
+    public boolean containProcess(Process p) {
+        return processes.contains(p);
+    }
+
     @Deprecated
     public ArrayList<Process> getProcesses() {
         return processes;

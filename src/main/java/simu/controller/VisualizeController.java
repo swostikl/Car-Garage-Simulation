@@ -110,7 +110,6 @@ public class VisualizeController {
         });
     }
 
-
     public void setCustomerServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -121,7 +120,6 @@ public class VisualizeController {
             }
         });
     }
-
 
     public void setMaintenancelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
@@ -145,12 +143,6 @@ public class VisualizeController {
         });
     }
 
-
-    /**
-     *
-     * @param servicepoint
-     */
-
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -173,7 +165,6 @@ public class VisualizeController {
         });
     }
 
-
     public void setInspectionServicelabel (ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -184,7 +175,6 @@ public class VisualizeController {
             }
         });
     }
-
 
     public void setCustomerServedlabel(int i) {
         Platform.runLater(()->{
@@ -206,6 +196,7 @@ public class VisualizeController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         });
     }
 
@@ -275,9 +266,4 @@ public class VisualizeController {
     }
 
 }
-
-
-
-
-
 

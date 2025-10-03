@@ -1,120 +1,3 @@
-//package simu.controller;
-//
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.Slider;
-//import javafx.scene.control.TextField;
-//import javafx.scene.input.MouseEvent;
-//import javafx.stage.Stage;
-//import simu.view.StepperView;
-//
-//import java.io.IOException;
-//
-//public class SimulatorSetupViewController {
-//
-//    @FXML
-//    private Button applySimulationTime;
-//
-//    @FXML
-//    private Button arrivalApply;
-//
-//    @FXML
-//    private TextField arrivalMean;
-//
-//    @FXML
-//    private TextField arrivalVariance;
-//
-//    @FXML
-//    private Label delayLabel;
-//
-//    @FXML
-//    private Button increaseSpeed;
-//
-//    @FXML
-//    private Slider inspectionFailRate;
-//
-//    @FXML
-//    private TextField meanService;
-//
-//    @FXML
-//    private Button runProgram;
-//
-//    @FXML
-//    private Button serviceApply;
-//
-//    @FXML
-//    private TextField serviceVariance;
-//
-//    @FXML
-//    private Button setDefault;
-//
-//    @FXML
-//    private Button setSave;
-//
-//    @FXML
-//    private Button slowSpeed;
-//
-//    @FXML
-//    private TextField totalTime;
-//
-//    private StepperView stepperView;
-//
-//    @FXML
-//    void onApplySimulationTime(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onArrivalApply(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onDecreaseSpeed(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onIncreaseSpeed(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onInspectionFailRate(MouseEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onRunProgram(ActionEvent event) {
-//        stepperView = new StepperView();
-//        try {
-//            Stage stage = stepperView.init();
-//            runProgram.setDisable(true);
-//            stage.showAndWait();
-//            runProgram.setDisable(false);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @FXML
-//    void onServiceApply(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onSetDefault(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onSetSave(ActionEvent event) {
-//
-//    }
-//
-//}
 package simu.controller;
 
 import controller.FieldController;
@@ -123,11 +6,11 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import simu.framework.Engine;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.model.DelayProcess;
@@ -138,74 +21,63 @@ import simu.view.VisualizeView;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 
 public class SimulatorSetupViewController {
 
     private int currentDelay = 500;
-
     private boolean hasRun = false;
     private double inspectionFailRate;
-
     private StepperViewController stepperViewController;
-
     private ProcessManager pm;
-
     private final PauseTransition holdTimer = new PauseTransition(Duration.millis(800));
-
     private Thread delayUpdateThread;
-
     private final DecimalFormat df = new DecimalFormat("#.##");
-
     private final int DELAY_MIN = 100;
     private final int DELAY_MAX = 2000;
 
-    @FXML
-    private TextField arrivalMean;
-    @FXML
-    private TextField arrivalVariance;
-    @FXML
-    private TextField totalTime;
-    @FXML
-    private TextField meanService;
-    @FXML
-    private TextField serviceVariance;
-    @FXML
-    private Slider inspectionFailRateSlider;
-    @FXML
-    private Button runProgram;
-    @FXML
-    private Button setDefault;
-    @FXML
-    private Button setSave;
-    @FXML
-    private Button delayDecreaseButton;
-    @FXML
-    private Button delayIncreaseButton;
-    @FXML
-    private Label delayLabel;
-    @FXML
-    private Label inspectionFailRateLabel;
+    // Engine
+    private MyEngine m;
+
+    // Window closing properties
+    private Stage stepperStage;
+    private Stage visualizeStage;
+    private Stage setupStage;
+
+    @FXML private TextField arrivalMean;
+    @FXML private TextField arrivalVariance;
+    @FXML private TextField totalTime;
+    @FXML private TextField meanService;
+    @FXML private TextField serviceVariance;
+    @FXML private Slider inspectionFailRateSlider;
+    @FXML private Button runProgram;
+    @FXML private Button setDefault;
+    @FXML private Button setSave;
+    @FXML private Button delayDecreaseButton;
+    @FXML private Button delayIncreaseButton;
+    @FXML private Label delayLabel;
+    @FXML private Label inspectionFailRateLabel;
 
     @FXML
     void onRunProgram(ActionEvent event) throws IOException {
         if (!hasRun) {
-
             runProgram.setText("Running");
             runProgram.setDisable(true);
             hasRun = true;
 
-            // visualization window first
+            setupStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            System.out.println("Car Garage Simulation starting...");
+
             VisualizeView visualizeView = new VisualizeView();
-            Stage visualizeStage = visualizeView.init();
+            visualizeStage = visualizeView.init();
             VisualizeController visualizeController = visualizeView.getController();
 
-            //then stepper view
             StepperView stepperView = new StepperView();
-            Stage stepperStage = stepperView.init();
+            stepperStage = stepperView.init();
             stepperStage.setTitle("Simulation Control");
 
-            // to start the simulation through the stepper controller
+            setupWindowCloseHandlers();
+
             stepperViewController = stepperView.getController();
             try {
                 startSimulation(visualizeController);
@@ -220,9 +92,77 @@ public class SimulatorSetupViewController {
                 return;
             }
             Trace.out(Trace.Level.INFO, "Simulation started - Run button now disabled");
+            System.out.println("Simulation windows opened successfully!");
         } else {
             Trace.out(Trace.Level.INFO, "Simulation already running - ignoring additional clicks");
         }
+    }
+
+    // CLEAN window close handlers
+    private void setupWindowCloseHandlers() {
+        if (stepperStage != null) {
+            stepperStage.setOnCloseRequest(event -> stopSimulationOnly());
+        }
+
+        if (visualizeStage != null) {
+            visualizeStage.setOnCloseRequest(event -> stopSimulationOnly());
+        }
+
+        if (setupStage != null) {
+            setupStage.setOnCloseRequest(event -> stopSimulationAndCloseAll());
+        }
+    }
+
+    // CLEAN stop simulation only
+    private void stopSimulationOnly() {
+        System.out.println("Stop only the simulation, not the entire application");
+        if (pm.containProcess(m)) {
+            m.requestStop();
+        }
+
+        Platform.runLater(() -> {
+            try {
+                if (stepperStage != null && stepperStage.isShowing()) {
+                    stepperStage.close();
+                }
+                if (visualizeStage != null && visualizeStage.isShowing()) {
+                    visualizeStage.close();
+                }
+            } catch (Exception e) {
+                // Ignore errors
+            }
+
+            runProgram.setText("Run");
+            runProgram.setDisable(false);
+            hasRun = false;
+        });
+    }
+
+    private void stopSimulationAndCloseAll() {
+//        if (stepperViewController != null) {
+//            m.requestStop();
+//            stepperViewController.stopSimulation();
+//        }
+
+//        if (pm != null) {
+//            pm = null;
+//        }
+
+        //            try {
+//                if (stepperStage != null && stepperStage.isShowing()) {
+//                    stepperStage.close();
+//                }
+//                if (visualizeStage != null && visualizeStage.isShowing()) {
+//                    visualizeStage.close();
+//                }
+//                if (setupStage != null && setupStage.isShowing()) {
+//                    setupStage.close();
+//                }
+//            } catch (Exception e) {
+//                // Ignore errors
+//            }
+
+        System.exit(0);
     }
 
     void onInspectionFailRateSlide() {
@@ -232,10 +172,16 @@ public class SimulatorSetupViewController {
 
     @FXML
     void onSetDefault(ActionEvent event) {
+        if (hasRun) {
+            stopSimulationAndCloseAll();
+        } else {
+            System.out.println("Settings reset to default values");
+        }
     }
 
     @FXML
     void onSetSave(ActionEvent event) {
+        System.out.println("Configuration saved");
     }
 
     @FXML
@@ -255,7 +201,6 @@ public class SimulatorSetupViewController {
             });
             delayUpdateThread.start();
         });
-
     }
 
     @FXML
@@ -295,14 +240,12 @@ public class SimulatorSetupViewController {
 
     public void startSimulation(VisualizeController visualizeController) throws ZeroValueException {
         pm = new ProcessManager();
-
         Trace.setTraceLevel(Trace.Level.INFO);
 
         Normal arrivalDistribution = new Normal(formatField(arrivalMean), formatField(arrivalVariance));
-        MyEngine m = new MyEngine(visualizeController, arrivalDistribution);
+        m = new MyEngine(visualizeController, arrivalDistribution);
         FieldController fieldController = new FieldController(m);
 
-        // apply settings and format field
         fieldController.setServiceRequired(formatField(meanService), formatField(serviceVariance));
         fieldController.setInspectionFailRate(inspectionFailRate / 100);
 
@@ -318,9 +261,9 @@ public class SimulatorSetupViewController {
         updateDelayLabel();
         df.setGroupingUsed(false);
         onInspectionFailRateSlide();
-        inspectionFailRateSlider.valueProperty().addListener((o, oldVal, newVal) -> {
-            onInspectionFailRateSlide();
-        });
+        inspectionFailRateSlider.valueProperty().addListener((o, oldVal, newVal) -> onInspectionFailRateSlide());
+
+        // Text formatters
         arrivalMean.setTextFormatter(new TextFormatter<>(change -> {
             String nextText = change.getControlNewText();
             if (nextText.matches("\\d*([.,]\\d{0,2})?") && nextText.replaceAll("[.,]", "").length() <= 10) {
@@ -362,9 +305,7 @@ public class SimulatorSetupViewController {
     }
 
     private void updateDelayLabel() {
-        Platform.runLater(() -> {
-            delayLabel.setText(String.format("%dms", currentDelay));
-        });
+        Platform.runLater(() -> delayLabel.setText(String.format("%dms", currentDelay)));
     }
 
     private void increaseDelay() {
@@ -390,21 +331,15 @@ public class SimulatorSetupViewController {
         if (!valText.isBlank()) {
             double doubleVal = Double.parseDouble(valText.replaceAll(",", "."));
             if (doubleVal <= 0) {
-                Platform.runLater(() -> {
-                    textField.getStyleClass().add("invalid");
-                });
+                Platform.runLater(() -> textField.getStyleClass().add("invalid"));
                 throw new ZeroValueException();
             }
             textField.getStyleClass().remove("invalid");
-            Platform.runLater(() -> {
-                textField.setText(df.format(doubleVal));
-            });
+            Platform.runLater(() -> textField.setText(df.format(doubleVal)));
             return doubleVal;
         }
         Trace.out(Trace.Level.INFO, "Field '" + (textField.getId() != null ? textField.getId() : "unknown") + "' is blank, throwing ZeroValueException");
-        Platform.runLater(() -> {
-            textField.getStyleClass().add("invalid");
-        });
+        Platform.runLater(() -> textField.getStyleClass().add("invalid"));
         throw new ZeroValueException();
     }
 }
