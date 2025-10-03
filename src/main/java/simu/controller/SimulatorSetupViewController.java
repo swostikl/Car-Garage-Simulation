@@ -9,16 +9,22 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
+import simu.model.DataStore;
 import simu.model.DelayProcess;
+import simu.model.Exceptions.CannotLoadFileException;
+import simu.model.Exceptions.NoFileSetException;
 import simu.model.Exceptions.ZeroValueException;
 import simu.model.MyEngine;
+import simu.model.SimulationSettings;
 import simu.view.StepperView;
 import simu.view.VisualizeView;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
@@ -161,7 +167,7 @@ public class SimulatorSetupViewController {
 //            } catch (Exception e) {
 //                // Ignore errors
 //            }
-
+        Platform.exit();
         System.exit(0);
     }
 
@@ -341,5 +347,112 @@ public class SimulatorSetupViewController {
         Trace.out(Trace.Level.INFO, "Field '" + (textField.getId() != null ? textField.getId() : "unknown") + "' is blank, throwing ZeroValueException");
         Platform.runLater(() -> textField.getStyleClass().add("invalid"));
         throw new ZeroValueException();
+    }
+
+    public void setFromSimulationSettings(SimulationSettings settings) {
+        arrivalMean.setText(settings.getArrivalTimeMean());
+        arrivalVariance.setText(settings.getArrivalTimeVariance());
+        totalTime.setText(settings.getTotalSimulationTime());
+        meanService.setText(settings.getServiceRequiredMean());
+        serviceVariance.setText(settings.getServiceRequiredVariance());
+        inspectionFailRate = settings.getInspectionFailRate();
+        inspectionFailRateSlider.setValue(inspectionFailRate);
+        onInspectionFailRateSlide();
+    }
+
+    // when user click load Object from file
+    public void handleOpen(Stage viewStage) {
+        if (hasRun) {
+            stopSimulationAndCloseAll();
+        }
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Simulation File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Simulation Files", "*.simuc"));
+        File selectedFile = fileChooser.showOpenDialog(viewStage);
+        try {
+            DataStore.loadFromFile(selectedFile);
+        } catch (CannotLoadFileException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to load file. Please ensure it's a valid simulation file.");
+            alert.showAndWait();
+            return;
+        }
+        setFromSimulationSettings(DataStore.getInstance().getSimulationSettings());
+//        disableAllFields();
+    }
+
+    // when user click saveAs Object to file
+    public void handleSaveAs(Stage viewStage) {
+        if (hasRun) {
+            stopSimulationAndCloseAll();
+        }
+        DataStore.getInstance().setSimulationSettings(new SimulationSettings(
+                arrivalMean.getText(),
+                arrivalVariance.getText(),
+                totalTime.getText(),
+                meanService.getText(),
+                serviceVariance.getText(),
+                inspectionFailRate
+        ));
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Simulation File");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Simulation Files", "*.simuc"));
+        File selectedFile = fileChooser.showSaveDialog(viewStage);
+        if (selectedFile != null) {
+            DataStore.getInstance().saveToFileAs(selectedFile);
+//            disableAllFields();
+        }
+    }
+
+    // when user click save Object to file
+    public void handleSave(Stage viewStage) {
+        if (hasRun) {
+            stopSimulationAndCloseAll();
+        }
+        DataStore.getInstance().setSimulationSettings(new SimulationSettings(
+                arrivalMean.getText(),
+                arrivalVariance.getText(),
+                totalTime.getText(),
+                meanService.getText(),
+                serviceVariance.getText(),
+                inspectionFailRate
+        ));
+        try {
+            DataStore.getInstance().saveToFile();
+//            disableAllFields();
+        } catch (NoFileSetException e) {
+            handleSaveAs(viewStage);
+        }
+    }
+
+    public void handleNew() {
+        if (hasRun) {
+            stopSimulationAndCloseAll();
+        }
+        DataStore.clearInstance();
+        clearAndEnableAllFields();
+    }
+
+    private void disableAllFields() {
+        arrivalMean.setDisable(true);
+        arrivalVariance.setDisable(true);
+        totalTime.setDisable(true);
+        meanService.setDisable(true);
+        serviceVariance.setDisable(true);
+        inspectionFailRateSlider.setDisable(true);
+    }
+
+    private void clearAndEnableAllFields() {
+        arrivalMean.clear();
+        arrivalVariance.clear();
+        totalTime.clear();
+        meanService.clear();
+        serviceVariance.clear();
+        inspectionFailRateSlider.setValue(0);
+        inspectionFailRateSlider.setDisable(false);
+        arrivalMean.setDisable(false);
+        arrivalVariance.setDisable(false);
+        totalTime.setDisable(false);
+        meanService.setDisable(false);
+        serviceVariance.setDisable(false);
     }
 }
