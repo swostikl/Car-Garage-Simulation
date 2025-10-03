@@ -82,5 +82,9 @@ public class ResultView {
         return currentStage;
     }
 
+    public static void clearTableView() {
+        instance = null;
+    }
+
 
 }

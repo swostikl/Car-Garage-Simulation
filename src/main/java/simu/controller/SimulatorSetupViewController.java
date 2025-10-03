@@ -424,7 +424,7 @@ public class SimulatorSetupViewController {
             stopSimulationAndCloseAll();
         }
         DataStore.clearInstance();
-        ResultView.getInstance().getController().clearTableView();
+        ResultView.clearTableView();
         clearAndEnableAllFields();
     }
 
