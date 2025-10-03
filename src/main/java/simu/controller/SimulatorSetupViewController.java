@@ -157,6 +157,9 @@ public class SimulatorSetupViewController {
 
     private final DecimalFormat df = new DecimalFormat("#.##");
 
+    private final int DELAY_MIN = 100;
+    private final int DELAY_MAX = 2000;
+
     @FXML
     private TextField arrivalMean;
     @FXML
@@ -365,12 +368,20 @@ public class SimulatorSetupViewController {
     }
 
     private void increaseDelay() {
-        currentDelay = Math.min(currentDelay + 100, 2000);
+        currentDelay = Math.min(currentDelay + 100, DELAY_MAX);
+        if (currentDelay == DELAY_MAX) {
+            delayIncreaseButton.setDisable(true);
+        }
+        delayDecreaseButton.setDisable(false);
         updateDelayLabel();
     }
 
     private void decreaseDelay() {
-        currentDelay = Math.max(currentDelay - 100, 100);
+        currentDelay = Math.max(currentDelay - 100, DELAY_MIN);
+        if (currentDelay == DELAY_MIN) {
+            delayDecreaseButton.setDisable(true);
+        }
+        delayIncreaseButton.setDisable(false);
         updateDelayLabel();
     }
 
