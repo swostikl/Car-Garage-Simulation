@@ -1,6 +1,6 @@
 package simu.model;
 
-import controller.VisualizeController;
+import simu.controller.VisualizeController;
 
 public class GuiUpdateThread extends Thread {
 
