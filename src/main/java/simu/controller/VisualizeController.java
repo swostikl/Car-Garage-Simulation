@@ -1,10 +1,9 @@
-package controller;
+package simu.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import simu.model.Customer;
 import simu.model.ServicePoint;

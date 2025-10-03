@@ -1,7 +1,6 @@
 package simu.view;
 
-import controller.VisualizeController;
-import javafx.application.Application;
+import simu.controller.VisualizeController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -16,7 +15,7 @@ public class VisualizeView {
 
     private VisualizeController controller;
 
-    public VisualizeController init() throws IOException {
+    public Stage init() throws IOException {
         Stage stage = new Stage();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/visualize_view.fxml"));
         Parent root = loader.load();
@@ -53,6 +52,11 @@ public class VisualizeView {
 
         stage.setScene(scene);
         stage.show();
+        return stage;
+    }
+
+
+    public VisualizeController getController() {
         return controller;
     }
 }
