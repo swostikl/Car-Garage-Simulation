@@ -1,120 +1,3 @@
-//package simu.controller;
-//
-//import javafx.event.ActionEvent;
-//import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
-//import javafx.scene.control.Label;
-//import javafx.scene.control.Slider;
-//import javafx.scene.control.TextField;
-//import javafx.scene.input.MouseEvent;
-//import javafx.stage.Stage;
-//import simu.view.StepperView;
-//
-//import java.io.IOException;
-//
-//public class SimulatorSetupViewController {
-//
-//    @FXML
-//    private Button applySimulationTime;
-//
-//    @FXML
-//    private Button arrivalApply;
-//
-//    @FXML
-//    private TextField arrivalMean;
-//
-//    @FXML
-//    private TextField arrivalVariance;
-//
-//    @FXML
-//    private Label delayLabel;
-//
-//    @FXML
-//    private Button increaseSpeed;
-//
-//    @FXML
-//    private Slider inspectionFailRate;
-//
-//    @FXML
-//    private TextField meanService;
-//
-//    @FXML
-//    private Button runProgram;
-//
-//    @FXML
-//    private Button serviceApply;
-//
-//    @FXML
-//    private TextField serviceVariance;
-//
-//    @FXML
-//    private Button setDefault;
-//
-//    @FXML
-//    private Button setSave;
-//
-//    @FXML
-//    private Button slowSpeed;
-//
-//    @FXML
-//    private TextField totalTime;
-//
-//    private StepperView stepperView;
-//
-//    @FXML
-//    void onApplySimulationTime(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onArrivalApply(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onDecreaseSpeed(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onIncreaseSpeed(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onInspectionFailRate(MouseEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onRunProgram(ActionEvent event) {
-//        stepperView = new StepperView();
-//        try {
-//            Stage stage = stepperView.init();
-//            runProgram.setDisable(true);
-//            stage.showAndWait();
-//            runProgram.setDisable(false);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    @FXML
-//    void onServiceApply(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onSetDefault(ActionEvent event) {
-//
-//    }
-//
-//    @FXML
-//    void onSetSave(ActionEvent event) {
-//
-//    }
-//
-//}
 package simu.controller;
 
 import controller.FieldController;
@@ -123,6 +6,7 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -160,6 +44,11 @@ public class SimulatorSetupViewController {
     private final int DELAY_MIN = 100;
     private final int DELAY_MAX = 2000;
 
+    // Window closing properties
+    private Stage stepperStage;
+    private Stage visualizeStage;
+    private Stage setupStage;
+
     @FXML
     private TextField arrivalMean;
     @FXML
@@ -195,15 +84,23 @@ public class SimulatorSetupViewController {
             runProgram.setDisable(true);
             hasRun = true;
 
+            // Get setup window reference
+            setupStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            System.out.println("Car Garage Simulation starting...");
+
             // visualization window first
             VisualizeView visualizeView = new VisualizeView();
-            Stage visualizeStage = visualizeView.init();
+            visualizeStage = visualizeView.init();
             VisualizeController visualizeController = visualizeView.getController();
 
             //then stepper view
             StepperView stepperView = new StepperView();
-            Stage stepperStage = stepperView.init();
+            stepperStage = stepperView.init();
             stepperStage.setTitle("Simulation Control");
+
+            // Set up window close handlers
+            setupWindowCloseHandlers();
 
             // to start the simulation through the stepper controller
             stepperViewController = stepperView.getController();
@@ -220,9 +117,67 @@ public class SimulatorSetupViewController {
                 return;
             }
             Trace.out(Trace.Level.INFO, "Simulation started - Run button now disabled");
+            System.out.println("Simulation windows opened successfully!");
         } else {
-            Trace.out(Trace.Level.INFO, "Simulation already running - ignoring additional clicks");
+            Trace.out(Trace.Level.INFO, "Simulation already running ");
         }
+    }
+
+    // Window closing handlers
+    private void setupWindowCloseHandlers() {
+        if (stepperStage != null) {
+            stepperStage.setOnCloseRequest(event -> {
+                System.out.println("Stepper control window closed");
+                stopSimulationAndCloseAll();
+            });
+        }
+
+        if (visualizeStage != null) {
+            visualizeStage.setOnCloseRequest(event -> {
+                System.out.println("Simulation visualization window closed");
+                stopSimulationAndCloseAll();
+            });
+        }
+
+        if (setupStage != null) {
+            setupStage.setOnCloseRequest(event -> {
+                System.out.println("Setup window closed");
+                stopSimulationAndCloseAll();
+            });
+        }
+    }
+
+    private void stopSimulationAndCloseAll() {
+        System.out.println("Stopping simulation and closing all windows...");
+
+        // Stop simulation components
+        if (stepperViewController != null) {
+            stepperViewController.stopSimulation();
+        }
+
+        if (pm != null) {
+            pm = null; // This stops all processes
+        }
+
+        // Close all windows
+        Platform.runLater(() -> {
+            try {
+                if (stepperStage != null && stepperStage.isShowing()) {
+                    stepperStage.close();
+                }
+                if (visualizeStage != null && visualizeStage.isShowing()) {
+                    visualizeStage.close();
+                }
+                if (setupStage != null && setupStage.isShowing()) {
+                    setupStage.close();
+                }
+            } catch (Exception e) {
+                System.out.println("Error closing windows: " + e.getMessage());
+            }
+
+            System.out.println("All simulation windows closed. Application exiting...");
+            Platform.exit();
+        });
     }
 
     void onInspectionFailRateSlide() {
@@ -232,10 +187,18 @@ public class SimulatorSetupViewController {
 
     @FXML
     void onSetDefault(ActionEvent event) {
+        if (hasRun) {
+            // If simulation is running, stop it
+            stopSimulationAndCloseAll();
+        } else {
+            System.out.println("Settings reset to default values");
+            // Add your default value logic here
+        }
     }
 
     @FXML
     void onSetSave(ActionEvent event) {
+        System.out.println("Configuration saved");
     }
 
     @FXML

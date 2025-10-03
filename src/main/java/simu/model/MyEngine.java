@@ -30,9 +30,6 @@ public class MyEngine extends Engine {
     private ContinuousGenerator serviceContinuousGenerator;
     private double inspectionFailRate;
 
-
-
-
     /**
      * Service Points and random number generator with different distributions are created here.
      * We use exponent distribution for customer arrival times and normal distribution for the
@@ -45,8 +42,14 @@ public class MyEngine extends Engine {
         // set arrivalContinuousGenerator
         this.arrivalContinuousGenerator = arrivalContinuousGenerator;
 
-        // Using Normal distribution for service times (average 3 time units, standard deviation 1)
-        cGenerator = new Normal(3.0, 1.0);
+        // Using Normal distribution for service times - FIXED to prevent negative values
+        // Using realistic car service times that won't generate negative service times
+        ContinuousGenerator customerServiceTime = new Normal(20, 16);      // ~15-25 min range
+        ContinuousGenerator inspectionServiceTime = new Normal(45, 100);   // ~30-60 min range
+        ContinuousGenerator tireChangeServiceTime = new Normal(60, 225);   // ~45-75 min range
+        ContinuousGenerator oilChangeServiceTime = new Normal(30, 25);     // ~20-40 min range
+        ContinuousGenerator repairWorkServiceTime = new Normal(90, 400);   // ~60-120 min range
+        ContinuousGenerator maintenanceServiceTime = new Normal(40, 100);  // ~25-55 min range
 
         // Create service points array
         servicePoints = new ServicePoint[6];
@@ -64,12 +67,12 @@ public class MyEngine extends Engine {
          */
 
         // Create all service points in the correct order
-        servicePoints[0] = new CustomerServicePoint(cGenerator, eventList);
-        servicePoints[1] = new MaintenanceServicePoint(cGenerator, eventList);
-        servicePoints[2] = new TireChangeServicePoint(cGenerator, eventList);
-        servicePoints[3] = new OilChangeServicePoint(cGenerator, eventList);
-        servicePoints[4] = new OtherServicePoint(cGenerator, eventList);
-        servicePoints[5] = new InspectionServicePoint(cGenerator, eventList);
+        servicePoints[0] = new CustomerServicePoint(customerServiceTime, eventList);
+        servicePoints[1] = new MaintenanceServicePoint(maintenanceServiceTime, eventList);
+        servicePoints[2] = new TireChangeServicePoint(tireChangeServiceTime, eventList);
+        servicePoints[3] = new OilChangeServicePoint(oilChangeServiceTime, eventList);
+        servicePoints[4] = new OtherServicePoint(repairWorkServiceTime, eventList);
+        servicePoints[5] = new InspectionServicePoint(inspectionServiceTime, eventList);
 
         // Create arrival process (customers arriving at the system)
         arrivalProcess = new ArrivalProcess(arrivalContinuousGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
