@@ -15,7 +15,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import simu.controller.SimulatorSetupViewController;
-import simu.model.DataStore;
 
 import java.io.IOException;
 
