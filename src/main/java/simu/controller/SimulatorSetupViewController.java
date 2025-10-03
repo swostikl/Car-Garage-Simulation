@@ -56,8 +56,6 @@ public class SimulatorSetupViewController {
     @FXML private TextField serviceVariance;
     @FXML private Slider inspectionFailRateSlider;
     @FXML private Button runProgram;
-    @FXML private Button setDefault;
-    @FXML private Button setSave;
     @FXML private Button delayDecreaseButton;
     @FXML private Button delayIncreaseButton;
     @FXML private Label delayLabel;
@@ -183,11 +181,6 @@ public class SimulatorSetupViewController {
         } else {
             System.out.println("Settings reset to default values");
         }
-    }
-
-    @FXML
-    void onSetSave(ActionEvent event) {
-        System.out.println("Configuration saved");
     }
 
     @FXML
