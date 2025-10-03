@@ -21,6 +21,7 @@ import simu.model.Exceptions.NoFileSetException;
 import simu.model.Exceptions.ZeroValueException;
 import simu.model.MyEngine;
 import simu.model.SimulationSettings;
+import simu.view.ResultView;
 import simu.view.StepperView;
 import simu.view.VisualizeView;
 
@@ -235,6 +236,11 @@ public class SimulatorSetupViewController {
             delayUpdateThread.interrupt();
         }
         holdTimer.stop();
+    }
+
+    @FXML
+    void onShowResults(ActionEvent event) {
+        ResultView.getInstance();
     }
 
     public void startSimulation(VisualizeController visualizeController) throws ZeroValueException {

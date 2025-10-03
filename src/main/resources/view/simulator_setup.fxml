@@ -132,6 +132,11 @@
                         <Button fx:id="runProgram" defaultButton="true" mnemonicParsing="false" onAction="#onRunProgram" text="Run" />
                      </children>
                   </HBox>
+                  <HBox alignment="BOTTOM_LEFT" layoutX="-17.0" layoutY="-27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onShowResults" text="Show Results" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </children>
