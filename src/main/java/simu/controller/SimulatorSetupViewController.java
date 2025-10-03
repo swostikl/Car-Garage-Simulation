@@ -364,6 +364,9 @@ public class SimulatorSetupViewController {
         fileChooser.setTitle("Open Simulation File");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Simulation Files", "*.simuc"));
         File selectedFile = fileChooser.showOpenDialog(viewStage);
+        if (selectedFile == null) {
+            return;
+        }
         try {
             DataStore.loadFromFile(selectedFile);
         } catch (CannotLoadFileException e) {
