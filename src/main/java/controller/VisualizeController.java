@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import simu.model.Customer;
 import simu.model.ServicePoint;
@@ -194,21 +193,89 @@ public class VisualizeController {
         });
     }
 
-    public void setCustomerServiceOccupied(boolean b) {
+
+
+    public void setCustomerServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
                 Rectangle r = (Rectangle) customerService.getChildren().getFirst();
                 Label l = (Label) customerService.getChildren().get(1);
-                r.setFill(Color.web(b ? "#fc5d68": "#ebebff"));
-                r.setStroke(Color.web(b ? "#f7202f" : "#9270bc"));
-                l.setTextFill(b ? Color.WHITE : Color.BLACK);
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff")); // red if busy, blue if free
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                l.setTextFill(occupied ? Color.WHITE : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         });
     }
+
+    public void setMaintenanceServiceOccupied(boolean occupied) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) maintenanceService;
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                maintenancelabel.setTextFill(occupied ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setTireChangeServiceOccupied(boolean occupied) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) tireChangeService;
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                tireChangeServicelabel.setTextFill(occupied ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setOilChangeServiceOccupied(boolean occupied) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) oilChangeService;
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                oilChangeServicelabel.setTextFill(occupied ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setRepairWorkServiceOccupied(boolean occupied) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) repairWorkService;
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                repairWorklabel.setTextFill(occupied ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public void setInspectionServiceOccupied(boolean occupied) {
+        Platform.runLater(() -> {
+            try {
+                Rectangle r = (Rectangle) inspectionService;
+                r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
+                r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                inspectionServicelabel.setTextFill(occupied ? Color.WHITE : Color.BLACK);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
 }
+
 
 
 
