@@ -36,13 +36,16 @@ public class DataStore implements Serializable {
      * @param file File to load the DataStore from
      */
     public static void loadFromFile(File file) throws CannotLoadFileException {
+        if (file == null) {
+            throw new CannotLoadFileException();
+        }
         try (FileInputStream fis = new FileInputStream(file);
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             Object loadedObject = ois.readObject();
             instance = new DataStore((DataStore) loadedObject);
             System.out.println("Data loaded from file: " + file.getAbsolutePath());
             currentFile = file;
-        } catch (IOException | ClassNotFoundException | NullPointerException e) {
+        } catch (IOException | ClassNotFoundException e) {
 //            e.printStackTrace();
             throw new CannotLoadFileException();
         }
