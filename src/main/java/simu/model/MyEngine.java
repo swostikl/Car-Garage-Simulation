@@ -30,6 +30,10 @@ public class MyEngine extends Engine {
     private ContinuousGenerator serviceContinuousGenerator;
     private double inspectionFailRate;
 
+
+    private static volatile boolean stopSimulation = false;
+    private double mySimulationTime;
+
     /**
      * Service Points and random number generator with different distributions are created here.
      * We use exponent distribution for customer arrival times and normal distribution for the
@@ -42,14 +46,13 @@ public class MyEngine extends Engine {
         // set arrivalContinuousGenerator
         this.arrivalContinuousGenerator = arrivalContinuousGenerator;
 
-        // Using Normal distribution for service times - FIXED to prevent negative values
-        // Using realistic car service times that won't generate negative service times
-        ContinuousGenerator customerServiceTime = new Normal(20, 16);      // ~15-25 min range
-        ContinuousGenerator inspectionServiceTime = new Normal(45, 100);   // ~30-60 min range
-        ContinuousGenerator tireChangeServiceTime = new Normal(60, 225);   // ~45-75 min range
-        ContinuousGenerator oilChangeServiceTime = new Normal(30, 25);     // ~20-40 min range
-        ContinuousGenerator repairWorkServiceTime = new Normal(90, 400);   // ~60-120 min range
-        ContinuousGenerator maintenanceServiceTime = new Normal(40, 100);  // ~25-55 min range
+
+        ContinuousGenerator customerServiceTime = new Normal(20, 16);
+        ContinuousGenerator inspectionServiceTime = new Normal(45, 100);
+        ContinuousGenerator tireChangeServiceTime = new Normal(60, 225);
+        ContinuousGenerator oilChangeServiceTime = new Normal(30, 25);
+        ContinuousGenerator repairWorkServiceTime = new Normal(90, 400);
+        ContinuousGenerator maintenanceServiceTime = new Normal(40, 100);
 
         // Create service points array
         servicePoints = new ServicePoint[6];
@@ -78,6 +81,18 @@ public class MyEngine extends Engine {
         arrivalProcess = new ArrivalProcess(arrivalContinuousGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
     }
 
+    //  Store simulation time locally
+    @Override
+    public void setSimulationTime(double simulationTime) {
+        super.setSimulationTime(simulationTime);
+        this.mySimulationTime = simulationTime;
+    }
+
+    // Method to request stop
+    public static void requestStop() {
+        stopSimulation = true;
+    }
+
     @Override
     protected void initialize() {// First arrival in the system
        arrivalProcess.generateNextEvent();
@@ -85,6 +100,12 @@ public class MyEngine extends Engine {
 
     @Override
     protected void runEvent(Event t) {  // B phase events
+        // ADDITION: Check for stop condition
+        if (stopSimulation) {
+            super.setSimulationTime(Clock.getInstance().getClock());
+            return;
+        }
+
         BEvent.runBEvent(servicePoints, arrivalProcess, t, vc, serviceContinuousGenerator, inspectionFailRate);
     }
 
@@ -111,7 +132,28 @@ public class MyEngine extends Engine {
 
     @Override
     protected void results() {
-       System.out.println("Simulation ended at " + Clock.getInstance().getClock());
-       System.out.printf("%nResults:%nCustomer throughput: %f customer(s) per hour.%n", (Customer.getTotalServed() / Clock.getInstance().getClock()) * 60);
+        double currentTime = Clock.getInstance().getClock();
+
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("SIMULATION RESULTS");
+        System.out.println("=".repeat(50));
+
+        if (stopSimulation) {
+            System.out.println("Status: STOPPED BY USER");
+            if (mySimulationTime > 0) {
+                System.out.printf("Completed: %.1f%% (%.0f / %.0f minutes)%n",
+                    (currentTime / mySimulationTime) * 100, currentTime, mySimulationTime);
+            }
+        } else {
+            System.out.println("Status: COMPLETED SUCCESSFULLY");
+        }
+
+        System.out.printf("Simulation ended at: %.2f minutes%n", currentTime);
+        System.out.printf("Customer throughput: %.6f customer(s) per hour%n",
+            (Customer.getTotalServed() / currentTime) * 60);
+        System.out.printf("Total customers served: %d%n", Customer.getTotalServed());
+        System.out.println("=".repeat(50) + "\n");
+
+        stopSimulation = false;
     }
 }
