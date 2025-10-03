@@ -295,7 +295,8 @@ public class SimulatorSetupViewController {
 
         Trace.setTraceLevel(Trace.Level.INFO);
 
-        MyEngine m = new MyEngine(visualizeController, new Normal(formatField(arrivalMean), formatField(arrivalVariance)));
+        Normal arrivalDistribution = new Normal(formatField(arrivalMean), formatField(arrivalVariance));
+        MyEngine m = new MyEngine(visualizeController, arrivalDistribution);
         FieldController fieldController = new FieldController(m);
 
         // apply settings and format field
