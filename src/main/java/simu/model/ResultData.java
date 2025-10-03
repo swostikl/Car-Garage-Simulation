@@ -26,11 +26,11 @@ public class ResultData implements Serializable {
     private double customerThroughput;
 
     private DecimalFormat df = new DecimalFormat("#.##");
-    private DecimalFormat customerThroughtputFormat = new DecimalFormat("#.#######");
+    private DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
 
     public ResultData(double tireChangeServiceUtilizationRate, double customerServiceUtilizationRate, double maintenanceServiceUtilizationRate, double oilChangeServiceUtilizationRate, double repairServiceUtilizationRate, double inspectionServiceUtilizationRate, double customerThroughput) {
         df.setGroupingUsed(false);
-        customerThroughtputFormat.setGroupingUsed(false);
+        customerThroughputFormat.setGroupingUsed(false);
         this.tireChangeServiceUtilizationRate = tireChangeServiceUtilizationRate;
         this.customerServiceUtilizationRate = customerServiceUtilizationRate;
         this.maintenanceServiceUtilizationRate = maintenanceServiceUtilizationRate;
@@ -60,6 +60,6 @@ public class ResultData implements Serializable {
         return df.format(inspectionServiceUtilizationRate * 100) + " %";
     }
     public String getCustomerThroughput() {
-        return customerThroughtputFormat.format(customerThroughput) + " c/h";
+        return customerThroughputFormat.format(customerThroughput) + " c/h";
     }
 }
