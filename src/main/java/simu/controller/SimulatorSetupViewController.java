@@ -241,7 +241,7 @@ public class SimulatorSetupViewController {
         holdTimer.playFromStart();
         holdTimer.setOnFinished(e -> {
             delayUpdateThread = new Thread(() -> {
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     try {
                         decreaseDelay();
                         Thread.sleep(200);
@@ -269,7 +269,7 @@ public class SimulatorSetupViewController {
         holdTimer.playFromStart();
         holdTimer.setOnFinished(e -> {
             delayUpdateThread = new Thread(() -> {
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     try {
                         increaseDelay();
                         Thread.sleep(200);
