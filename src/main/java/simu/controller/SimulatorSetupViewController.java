@@ -35,6 +35,9 @@ public class SimulatorSetupViewController {
     private final int DELAY_MIN = 100;
     private final int DELAY_MAX = 2000;
 
+    // Engine
+    private MyEngine m;
+
     // Window closing properties
     private Stage stepperStage;
     private Stage visualizeStage;
@@ -112,7 +115,10 @@ public class SimulatorSetupViewController {
 
     // CLEAN stop simulation only
     private void stopSimulationOnly() {
-        MyEngine.requestStop();
+        System.out.println("Stop only the simulation, not the entire application");
+        if (pm.containProcess(m)) {
+            m.requestStop();
+        }
 
         Platform.runLater(() -> {
             try {
@@ -133,31 +139,30 @@ public class SimulatorSetupViewController {
     }
 
     private void stopSimulationAndCloseAll() {
-        if (stepperViewController != null) {
-            stepperViewController.stopSimulation();
-        }
+//        if (stepperViewController != null) {
+//            m.requestStop();
+//            stepperViewController.stopSimulation();
+//        }
 
-        if (pm != null) {
-            pm = null;
-        }
+//        if (pm != null) {
+//            pm = null;
+//        }
 
-        Platform.runLater(() -> {
-            try {
-                if (stepperStage != null && stepperStage.isShowing()) {
-                    stepperStage.close();
-                }
-                if (visualizeStage != null && visualizeStage.isShowing()) {
-                    visualizeStage.close();
-                }
-                if (setupStage != null && setupStage.isShowing()) {
-                    setupStage.close();
-                }
-            } catch (Exception e) {
-                // Ignore errors
-            }
+        //            try {
+//                if (stepperStage != null && stepperStage.isShowing()) {
+//                    stepperStage.close();
+//                }
+//                if (visualizeStage != null && visualizeStage.isShowing()) {
+//                    visualizeStage.close();
+//                }
+//                if (setupStage != null && setupStage.isShowing()) {
+//                    setupStage.close();
+//                }
+//            } catch (Exception e) {
+//                // Ignore errors
+//            }
 
-            Platform.exit();
-        });
+        System.exit(0);
     }
 
     void onInspectionFailRateSlide() {
@@ -238,7 +243,7 @@ public class SimulatorSetupViewController {
         Trace.setTraceLevel(Trace.Level.INFO);
 
         Normal arrivalDistribution = new Normal(formatField(arrivalMean), formatField(arrivalVariance));
-        MyEngine m = new MyEngine(visualizeController, arrivalDistribution);
+        m = new MyEngine(visualizeController, arrivalDistribution);
         FieldController fieldController = new FieldController(m);
 
         fieldController.setServiceRequired(formatField(meanService), formatField(serviceVariance));

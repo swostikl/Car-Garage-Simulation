@@ -100,7 +100,6 @@ public class StepperViewController {
 
     //  stop method for window closing
     public void stopSimulation() {
-        MyEngine.requestStop();
 
         if (delayProcess != null) {
             delayProcess.deregister();

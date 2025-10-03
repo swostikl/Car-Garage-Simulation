@@ -89,13 +89,19 @@ public class MyEngine extends Engine {
     }
 
     // Method to request stop
-    public static void requestStop() {
+    public void requestStop() {
+        System.out.println("Trying to stop simulation...");
         stopSimulation = true;
+        super.setSimulationTime(Clock.getInstance().getClock());
+        while (!getPm().getCurrentProcess().equals(this)) {
+            getPm().getCurrentProcess().deregister();
+        }
     }
 
     @Override
     protected void initialize() {// First arrival in the system
-       arrivalProcess.generateNextEvent();
+        Customer.resetTotalServed();     // Reset customer count for potential next run
+        arrivalProcess.generateNextEvent();
     }
 
     @Override
@@ -154,6 +160,9 @@ public class MyEngine extends Engine {
         System.out.printf("Total customers served: %d%n", Customer.getTotalServed());
         System.out.println("=".repeat(50) + "\n");
 
+        Clock.getInstance().setClock(0); // Reset clock for potential next run
+
         stopSimulation = false;
+        deregister();
     }
 }
