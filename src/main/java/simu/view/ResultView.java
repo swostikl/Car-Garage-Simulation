@@ -1,7 +1,5 @@
 package simu.view;
 
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,8 +9,6 @@ import simu.model.DataStore;
 import simu.model.ResultData;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ResultView {
 
@@ -20,21 +16,6 @@ public class ResultView {
     private static ResultView instance;
 
     private Stage currentStage;
-
-//
-//    public Stage initialize(List<ResultData> results) throws IOException {
-//        this.resultDataList = results;
-//        Stage stage = new Stage();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/result_view.fxml"));
-//        Parent parent = loader.load();
-//        controller = loader.getController();
-//        controller.init(resultDataList);
-//        stage.setTitle("Simulation Results");
-//
-//        Scene scene = new Scene(parent);
-//        stage.setScene(scene);
-//        return stage;
-//    }
 
     private ResultView() {
         Stage stage = new Stage();
