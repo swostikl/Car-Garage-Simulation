@@ -1,5 +1,6 @@
 package simu.model;
 
+import javafx.application.Platform;
 import simu.controller.VisualizeController;
 import eduni.distributions.*;
 import simu.framework.*;
@@ -10,6 +11,7 @@ import simu.model.servicePoints.MaintenanceServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OilChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
+import simu.view.ResultView;
 
 /**
  * Main simulator engine.
@@ -159,6 +161,30 @@ public class MyEngine extends Engine {
             (Customer.getTotalServed() / currentTime) * 60);
         System.out.printf("Total customers served: %d%n", Customer.getTotalServed());
         System.out.println("=".repeat(50) + "\n");
+
+        /* There are six service points
+           0. Customer service
+           1. Maintenance
+           2. Tire Change
+           3. Oil Change
+           4. Other repairs
+           5. Inspection
+
+           Each service point has its own class
+           Service points should be added to the array in this order
+         */
+
+        Platform.runLater(() -> {
+            ResultView.getInstance().addResult(new ResultData(
+                    servicePoints[2].serviceTime / currentTime,
+                    servicePoints[0].serviceTime / currentTime,
+                    servicePoints[1].serviceTime / currentTime,
+                    servicePoints[3].serviceTime / currentTime,
+                    servicePoints[4].serviceTime / currentTime,
+                    servicePoints[5].serviceTime / currentTime,
+                    ((Customer.getTotalServed() / currentTime) * 60)
+            ));
+        });
 
         Clock.getInstance().setClock(0); // Reset clock for potential next run
 

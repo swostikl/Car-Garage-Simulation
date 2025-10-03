@@ -127,15 +127,14 @@
 
             <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="BOTTOM_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Button fx:id="setDefault" mnemonicParsing="false" onAction="#onSetDefault" text="Reset to default" />
-                        <Button fx:id="setSave" mnemonicParsing="false" onAction="#onSetSave" text="Save" />
-                     </children>
-                  </HBox>
                   <HBox alignment="BOTTOM_RIGHT" layoutX="360.0" layoutY="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="10.0" AnchorPane.bottomAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Button fx:id="runProgram" defaultButton="true" mnemonicParsing="false" onAction="#onRunProgram" text="Run" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="BOTTOM_LEFT" layoutX="-17.0" layoutY="-27.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#onShowResults" text="Show Results" />
                      </children>
                   </HBox>
                </children>
