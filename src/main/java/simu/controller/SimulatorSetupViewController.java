@@ -112,10 +112,6 @@ public class SimulatorSetupViewController {
         if (visualizeStage != null) {
             visualizeStage.setOnCloseRequest(event -> stopSimulationOnly());
         }
-
-        if (setupStage != null) {
-            setupStage.setOnCloseRequest(event -> stopSimulationAndCloseAll());
-        }
     }
 
     // CLEAN stop simulation only
@@ -428,6 +424,7 @@ public class SimulatorSetupViewController {
             stopSimulationAndCloseAll();
         }
         DataStore.clearInstance();
+        ResultView.getInstance().getController().clearTableView();
         clearAndEnableAllFields();
     }
 

@@ -81,4 +81,6 @@ public class ResultView {
     private Stage getCurrentStage() {
         return currentStage;
     }
+
+
 }

@@ -31,8 +31,6 @@ public class ResultViewController {
     @FXML
     private TableColumn<ResultData, String> tireChangeColumn;
 
-    private TableColumn<ResultData, String>[] columns;
-
     /*
     Data in ResultData class
     private double customerServiceUtilizationRate;
@@ -67,16 +65,6 @@ public class ResultViewController {
                 new PropertyValueFactory<>("inspectionServiceUtilizationRate")
         );
 
-        // add to columns
-        columns = new TableColumn[]{
-                cThroughputColumn,
-                checkInColumn,
-                maintenanceColumn,
-                tireChangeColumn,
-                oilChangeColumn,
-                repairColumn,
-                inspectionColumn
-        };
 
         for (ResultData resultData : results) {
             addResult(resultData);
@@ -85,6 +73,12 @@ public class ResultViewController {
 
     public void addResult(ResultData resultData) {
         cThroughputColumn.getTableView().getItems().add(resultData);
+    }
+
+    public void clearTableView() {
+        Platform.runLater(() -> {
+            cThroughputColumn.getTableView().getItems().clear();
+        });
     }
 
 }
