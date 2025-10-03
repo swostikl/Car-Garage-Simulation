@@ -5,10 +5,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.layout.VBox;
@@ -84,7 +81,7 @@ public class SetupView extends Application {
         alert.setContentText("Any unsaved data will be lost.");
         alert.showAndWait().ifPresent(response -> {
             // Close only if user confirms
-            if (response.getText().equals("OK")) {
+            if (response == ButtonType.OK) {
                 Platform.exit();
                 System.exit(0);
             }
