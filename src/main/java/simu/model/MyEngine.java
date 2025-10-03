@@ -31,7 +31,8 @@ public class MyEngine extends Engine {
     private double inspectionFailRate;
 
 
-
+    private static volatile boolean stopSimulation = false;
+    private double mySimulationTime;
 
     /**
      * Service Points and random number generator with different distributions are created here.
@@ -45,8 +46,13 @@ public class MyEngine extends Engine {
         // set arrivalContinuousGenerator
         this.arrivalContinuousGenerator = arrivalContinuousGenerator;
 
-        // Using Normal distribution for service times (average 3 time units, standard deviation 1)
-        cGenerator = new Normal(3.0, 1.0);
+
+        ContinuousGenerator customerServiceTime = new Normal(20, 16);
+        ContinuousGenerator inspectionServiceTime = new Normal(45, 100);
+        ContinuousGenerator tireChangeServiceTime = new Normal(60, 225);
+        ContinuousGenerator oilChangeServiceTime = new Normal(30, 25);
+        ContinuousGenerator repairWorkServiceTime = new Normal(90, 400);
+        ContinuousGenerator maintenanceServiceTime = new Normal(40, 100);
 
         // Create service points array
         servicePoints = new ServicePoint[6];
@@ -64,24 +70,48 @@ public class MyEngine extends Engine {
          */
 
         // Create all service points in the correct order
-        servicePoints[0] = new CustomerServicePoint(cGenerator, eventList);
-        servicePoints[1] = new MaintenanceServicePoint(cGenerator, eventList);
-        servicePoints[2] = new TireChangeServicePoint(cGenerator, eventList);
-        servicePoints[3] = new OilChangeServicePoint(cGenerator, eventList);
-        servicePoints[4] = new OtherServicePoint(cGenerator, eventList);
-        servicePoints[5] = new InspectionServicePoint(cGenerator, eventList);
+        servicePoints[0] = new CustomerServicePoint(customerServiceTime, eventList);
+        servicePoints[1] = new MaintenanceServicePoint(maintenanceServiceTime, eventList);
+        servicePoints[2] = new TireChangeServicePoint(tireChangeServiceTime, eventList);
+        servicePoints[3] = new OilChangeServicePoint(oilChangeServiceTime, eventList);
+        servicePoints[4] = new OtherServicePoint(repairWorkServiceTime, eventList);
+        servicePoints[5] = new InspectionServicePoint(inspectionServiceTime, eventList);
 
         // Create arrival process (customers arriving at the system)
         arrivalProcess = new ArrivalProcess(arrivalContinuousGenerator, eventList, EventType.ARR_CUSTOMER_SERVICE);
     }
 
+    //  Store simulation time locally
+    @Override
+    public void setSimulationTime(double simulationTime) {
+        super.setSimulationTime(simulationTime);
+        this.mySimulationTime = simulationTime;
+    }
+
+    // Method to request stop
+    public void requestStop() {
+        System.out.println("Trying to stop simulation...");
+        stopSimulation = true;
+        super.setSimulationTime(Clock.getInstance().getClock());
+        while (!getPm().getCurrentProcess().equals(this)) {
+            getPm().getCurrentProcess().deregister();
+        }
+    }
+
     @Override
     protected void initialize() {// First arrival in the system
-       arrivalProcess.generateNextEvent();
+        Customer.resetTotalServed();     // Reset customer count for potential next run
+        arrivalProcess.generateNextEvent();
     }
 
     @Override
     protected void runEvent(Event t) {  // B phase events
+        // ADDITION: Check for stop condition
+        if (stopSimulation) {
+            super.setSimulationTime(Clock.getInstance().getClock());
+            return;
+        }
+
         BEvent.runBEvent(servicePoints, arrivalProcess, t, vc, serviceContinuousGenerator, inspectionFailRate);
     }
 
@@ -108,7 +138,31 @@ public class MyEngine extends Engine {
 
     @Override
     protected void results() {
-       System.out.println("Simulation ended at " + Clock.getInstance().getClock());
-       System.out.printf("%nResults:%nCustomer throughput: %f customer(s) per hour.%n", (Customer.getTotalServed() / Clock.getInstance().getClock()) * 60);
+        double currentTime = Clock.getInstance().getClock();
+
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("SIMULATION RESULTS");
+        System.out.println("=".repeat(50));
+
+        if (stopSimulation) {
+            System.out.println("Status: STOPPED BY USER");
+            if (mySimulationTime > 0) {
+                System.out.printf("Completed: %.1f%% (%.0f / %.0f minutes)%n",
+                    (currentTime / mySimulationTime) * 100, currentTime, mySimulationTime);
+            }
+        } else {
+            System.out.println("Status: COMPLETED SUCCESSFULLY");
+        }
+
+        System.out.printf("Simulation ended at: %.2f minutes%n", currentTime);
+        System.out.printf("Customer throughput: %.6f customer(s) per hour%n",
+            (Customer.getTotalServed() / currentTime) * 60);
+        System.out.printf("Total customers served: %d%n", Customer.getTotalServed());
+        System.out.println("=".repeat(50) + "\n");
+
+        Clock.getInstance().setClock(0); // Reset clock for potential next run
+
+        stopSimulation = false;
+        deregister();
     }
 }

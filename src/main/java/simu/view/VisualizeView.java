@@ -55,7 +55,6 @@ public class VisualizeView {
         return stage;
     }
 
-
     public VisualizeController getController() {
         return controller;
     }
