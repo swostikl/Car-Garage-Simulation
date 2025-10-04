@@ -186,5 +186,13 @@ public class Customer {
     public static int getTotalServed() {
         return totalServed;
     }
+
+    /** Reset the total served counter and sum for a new simulation run
+     */
+    public static void resetTotalServed() {
+        totalServed = 0;
+        sum = 0;
+        i = 1;
+    }
 }
 

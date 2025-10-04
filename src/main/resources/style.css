@@ -1,0 +1,4 @@
+.invalid {
+    /*css from stackoverflow*/
+    -fx-effect: dropshadow(three-pass-box, tomato, 3, 0.8, 0, 0);
+}

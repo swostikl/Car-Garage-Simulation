@@ -1,6 +1,6 @@
 package simu.model.bEvent;
 
-import controller.VisualizeController;
+import simu.controller.VisualizeController;
 import eduni.distributions.ContinuousGenerator;
 import eduni.distributions.Normal;
 import simu.framework.ArrivalProcess;
@@ -22,7 +22,9 @@ public class BEvent {
             ServicePoint[] servicePoints,
             ArrivalProcess arrivalProcess,
             Event event,
-            VisualizeController vc
+            VisualizeController vc,
+            ContinuousGenerator maintenanceGenerator,
+            double inspectionFailRate
     ) {
         // B event code here
 
@@ -42,8 +44,7 @@ public class BEvent {
 
 		switch ((EventType)event.getType()) {
             case ARR_CUSTOMER_SERVICE:
-                ContinuousGenerator maintenanceGenerator = new Normal(2, 1);
-                a = new Customer(maintenanceGenerator, 0.6, 0.1);
+                a = new Customer(maintenanceGenerator, 0.6, inspectionFailRate);
                 servicePoints[0].addQueue(a);
 				arrivalProcess.generateNextEvent();
                 break;
