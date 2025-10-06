@@ -16,6 +16,11 @@ import simu.controller.SimulatorSetupViewController;
 import java.io.IOException;
 
 public class SetupView extends Application {
+
+    // create menubar
+    private MenuBar menuBar;
+
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/simulator_setup.fxml"));
@@ -23,8 +28,7 @@ public class SetupView extends Application {
         SimulatorSetupViewController controller = loader.getController();
         controller.init();
 
-        // create menubar
-        MenuBar menuBar = new MenuBar();
+        menuBar = controller.getMenuBar();
 
         Menu fileMenu = new Menu("File");
         MenuItem newItem = new MenuItem("New");
@@ -59,12 +63,17 @@ public class SetupView extends Application {
         fileMenu.getItems().addAll(newItem, openItem, saveItem, saveAsItem);
         menuBar.getMenus().addAll(fileMenu);
 
-        VBox vBox = new VBox(menuBar, parent);
 
 
-        Scene scene = new Scene(vBox);
 
-        scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        Scene scene = new Scene(parent);
+
+        try {
+            scene.getStylesheets().add(getClass().getResource("/style.css").toExternalForm());
+        } catch (NullPointerException e) {
+            System.err.println("/style.css not found");
+            System.exit(2);
+        }
 
         stage.setOnCloseRequest(SetupView::closeApp);
 

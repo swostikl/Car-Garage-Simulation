@@ -61,6 +61,7 @@ public class SimulatorSetupViewController {
     @FXML private Button delayIncreaseButton;
     @FXML private Label delayLabel;
     @FXML private Label inspectionFailRateLabel;
+    @FXML private MenuBar menuBar;
 
     @FXML
     void onRunProgram(ActionEvent event) throws IOException {
@@ -453,5 +454,9 @@ public class SimulatorSetupViewController {
         totalTime.setDisable(false);
         meanService.setDisable(false);
         serviceVariance.setDisable(false);
+    }
+
+    public MenuBar getMenuBar() {
+        return menuBar;
     }
 }
