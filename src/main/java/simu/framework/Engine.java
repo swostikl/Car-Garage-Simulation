@@ -62,7 +62,6 @@ public abstract class Engine extends Process {
 		}
 
 		results();
-        deregister();
 	}
 
 	/**
