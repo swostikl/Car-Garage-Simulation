@@ -191,6 +191,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) customerService.getChildren().getFirst();
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff")); // red if busy, blue if free
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                l.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -204,6 +205,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) maintenanceService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                maintenancelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -216,6 +218,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) tireChangeService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                tireChangeServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -228,6 +231,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) oilChangeService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                oilChangeServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -240,6 +244,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) repairWorkService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                repairWorklabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -252,6 +257,7 @@ public class VisualizeController {
                 Rectangle r = (Rectangle) inspectionService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
+                inspectionServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
