@@ -1,17 +1,19 @@
 package simu.view;
 
+import de.jangassen.MenuToolkit;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import simu.controller.SimulatorSetupViewController;
+import simu.model.PlatformInfo;
 
 import java.io.IOException;
 
@@ -23,13 +25,18 @@ public class SetupView extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        MenuToolkit tk = MenuToolkit.toolkit();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/simulator_setup.fxml"));
         stage.setTitle("Setup");
         Parent parent = loader.load();
         SimulatorSetupViewController controller = loader.getController();
         controller.init();
 
-        menuBar = controller.getMenuBar();
+        if (!PlatformInfo.getInstance().getIsMac()) {
+            menuBar = controller.getMenuBar();
+        } else {
+            menuBar = new MenuBar();
+        }
 
         Menu fileMenu = new Menu("File");
         MenuItem newItem = new MenuItem("New");
@@ -61,8 +68,23 @@ public class SetupView extends Application {
         });
 
         // add items to menu
-        fileMenu.getItems().addAll(newItem, openItem, saveItem, saveAsItem);
-        menuBar.getMenus().addAll(fileMenu);
+        fileMenu.getItems().addAll(newItem, openItem, new SeparatorMenuItem(), saveItem, saveAsItem);
+        if (PlatformInfo.getInstance().getIsMac()) {
+
+            // create Mac about menu
+            Stage aboutView = new AboutView().aboutView();
+            Menu aboutMenu = tk.createDefaultApplicationMenu("Car Garage Simulator", aboutView);
+            aboutMenu.getItems().removeLast();
+            MenuItem quitMenu = tk.createQuitMenuItem("Car Garage Simulator");
+            quitMenu.setOnAction(event -> closeApp());
+            aboutMenu.getItems().add(quitMenu);
+
+            // add to menu bar
+            menuBar.getMenus().addAll(aboutMenu, fileMenu);
+        } else {
+            menuBar.getMenus().add(fileMenu);
+        }
+
 
 
 
@@ -76,14 +98,21 @@ public class SetupView extends Application {
             System.exit(2);
         }
 
-        stage.setOnCloseRequest(SetupView::closeApp);
+        stage.setOnCloseRequest(SetupView::closeAppRequest);
 
         stage.setScene(scene);
+        if (PlatformInfo.getInstance().getIsMac()) {
+            tk.setMenuBar(stage, menuBar);
+        }
         stage.show();
     }
 
-    public static void closeApp(WindowEvent event) {
+    public static void closeAppRequest(WindowEvent event) {
         event.consume();
+        closeApp();
+    }
+
+    public static void closeApp() {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Quit Confirmation");
         alert.setHeaderText("Do you really want to quit the app?");
