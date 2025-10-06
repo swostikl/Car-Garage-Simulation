@@ -31,12 +31,12 @@ public class ResultData implements Serializable {
     public ResultData(double tireChangeServiceUtilizationRate, double customerServiceUtilizationRate, double maintenanceServiceUtilizationRate, double oilChangeServiceUtilizationRate, double repairServiceUtilizationRate, double inspectionServiceUtilizationRate, double customerThroughput) {
         df.setGroupingUsed(false);
         customerThroughputFormat.setGroupingUsed(false);
-        this.tireChangeServiceUtilizationRate = tireChangeServiceUtilizationRate;
-        this.customerServiceUtilizationRate = customerServiceUtilizationRate;
-        this.maintenanceServiceUtilizationRate = maintenanceServiceUtilizationRate;
-        this.oilChangeServiceUtilizationRate = oilChangeServiceUtilizationRate;
-        this.repairServiceUtilizationRate = repairServiceUtilizationRate;
-        this.inspectionServiceUtilizationRate = inspectionServiceUtilizationRate;
+        this.tireChangeServiceUtilizationRate = Math.min(1.0, tireChangeServiceUtilizationRate);
+        this.customerServiceUtilizationRate = Math.min(1.0, customerServiceUtilizationRate);
+        this.maintenanceServiceUtilizationRate = Math.min(1.0, maintenanceServiceUtilizationRate);
+        this.oilChangeServiceUtilizationRate = Math.min(1.0, oilChangeServiceUtilizationRate);
+        this.repairServiceUtilizationRate = Math.min(1.0, repairServiceUtilizationRate);
+        this.inspectionServiceUtilizationRate = Math.min(1.0, inspectionServiceUtilizationRate);
         this.customerThroughput = customerThroughput;
     }
 
