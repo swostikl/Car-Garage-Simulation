@@ -73,9 +73,9 @@ public class SetupView extends Application {
 
             // create Mac about menu
             Stage aboutView = new AboutView().aboutView();
-            Menu aboutMenu = tk.createDefaultApplicationMenu("Car Garage Simulator", aboutView);
+            Menu aboutMenu = tk.createDefaultApplicationMenu("Car Garage Simulation", aboutView);
             aboutMenu.getItems().removeLast();
-            MenuItem quitMenu = tk.createQuitMenuItem("Car Garage Simulator");
+            MenuItem quitMenu = tk.createQuitMenuItem("Car Garage Simulation");
             quitMenu.setOnAction(event -> closeApp());
             aboutMenu.getItems().add(quitMenu);
 
