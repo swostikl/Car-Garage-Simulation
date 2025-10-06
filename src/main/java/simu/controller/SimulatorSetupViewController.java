@@ -331,6 +331,9 @@ public class SimulatorSetupViewController {
     private double formatField(TextField textField) throws ZeroValueException {
         String valText = textField.getText();
         if (!valText.isBlank()) {
+            if (valText.equals(".") || valText.equals(",")) {
+                throw new ZeroValueException();
+            }
             double doubleVal = Double.parseDouble(valText.replaceAll(",", "."));
             if (doubleVal <= 0) {
                 Platform.runLater(() -> textField.getStyleClass().add("invalid"));
