@@ -19,6 +19,7 @@ public class ResultView {
 
     private ResultView() {
         Stage stage = new Stage();
+        stage.setTitle("Results");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/result_view.fxml"));
         try {
             Parent parent = loader.load();

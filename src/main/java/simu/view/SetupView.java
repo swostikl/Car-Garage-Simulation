@@ -24,6 +24,7 @@ public class SetupView extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/simulator_setup.fxml"));
+        stage.setTitle("Setup");
         Parent parent = loader.load();
         SimulatorSetupViewController controller = loader.getController();
         controller.init();

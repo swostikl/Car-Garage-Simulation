@@ -21,6 +21,8 @@ public class StepperView {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.setTitle("Simulation Control");
+        stage.setAlwaysOnTop(true);
+        stage.setResizable(false);
         stage.show();
 
         return stage;

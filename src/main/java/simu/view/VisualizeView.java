@@ -17,6 +17,7 @@ public class VisualizeView {
 
     public Stage init() throws IOException {
         Stage stage = new Stage();
+        stage.setTitle("Simulation");
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/visualize_view.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
