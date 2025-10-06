@@ -1,4 +1,4 @@
-package controller;
+package simu.controller;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
