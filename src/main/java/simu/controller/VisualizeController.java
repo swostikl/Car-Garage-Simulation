@@ -189,9 +189,10 @@ public class VisualizeController {
         Platform.runLater(() -> {
             try {
                 Rectangle r = (Rectangle) customerService.getChildren().getFirst();
+//                Label l = (Label) customerService.getChildren().get(1);
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff")); // red if busy, blue if free
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
-                l.setTextFill(occupied ? Color.RED : Color.BLACK);
+                customerServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
             } catch (Exception e) {
                 e.printStackTrace();
             }
