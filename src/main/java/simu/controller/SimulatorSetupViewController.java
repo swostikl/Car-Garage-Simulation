@@ -15,7 +15,6 @@ import javafx.util.Duration;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
 import simu.model.DataStore;
-import simu.model.DelayProcess;
 import simu.model.Exceptions.CannotLoadFileException;
 import simu.model.Exceptions.NoFileSetException;
 import simu.model.Exceptions.ZeroValueException;
@@ -141,28 +140,6 @@ public class SimulatorSetupViewController {
     }
 
     private void stopSimulationAndCloseAll() {
-//        if (stepperViewController != null) {
-//            m.requestStop();
-//            stepperViewController.stopSimulation();
-//        }
-
-//        if (pm != null) {
-//            pm = null;
-//        }
-
-        //            try {
-//                if (stepperStage != null && stepperStage.isShowing()) {
-//                    stepperStage.close();
-//                }
-//                if (visualizeStage != null && visualizeStage.isShowing()) {
-//                    visualizeStage.close();
-//                }
-//                if (setupStage != null && setupStage.isShowing()) {
-//                    setupStage.close();
-//                }
-//            } catch (Exception e) {
-//                // Ignore errors
-//            }
         Platform.exit();
         System.exit(0);
     }
@@ -379,7 +356,7 @@ public class SimulatorSetupViewController {
             return;
         }
         setFromSimulationSettings(DataStore.getInstance().getSimulationSettings());
-//        disableAllFields();
+        disableAllFields();
     }
 
     // when user click saveAs Object to file
@@ -401,7 +378,7 @@ public class SimulatorSetupViewController {
         File selectedFile = fileChooser.showSaveDialog(viewStage);
         if (selectedFile != null) {
             DataStore.getInstance().saveToFileAs(selectedFile);
-//            disableAllFields();
+            disableAllFields();
         }
     }
 
@@ -420,7 +397,7 @@ public class SimulatorSetupViewController {
         ));
         try {
             DataStore.getInstance().saveToFile();
-//            disableAllFields();
+            disableAllFields();
         } catch (NoFileSetException e) {
             handleSaveAs(viewStage);
         }
