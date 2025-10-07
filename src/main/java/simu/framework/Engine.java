@@ -1,7 +1,6 @@
 package simu.framework;
 
-import controller.VisualizeController;
-import simu.model.Customer;
+import simu.controller.VisualizeController;
 import simu.model.GuiUpdateThread;
 import simu.model.ServicePoint;
 
@@ -63,7 +62,6 @@ public abstract class Engine extends Process {
 		}
 
 		results();
-        deregister();
 	}
 
 	/**

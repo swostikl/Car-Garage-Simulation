@@ -1,6 +1,6 @@
 package simu.model;
 
-import controller.VisualizeController;
+import simu.controller.VisualizeController;
 
 public class GuiUpdateThread extends Thread {
 
@@ -33,8 +33,13 @@ public class GuiUpdateThread extends Thread {
         // total served
         vc.setCustomerServedlabel(Customer.getTotalServed());
 
-        // set color
-        vc.setCustomerServiceOccupied(servicePoints[0].reserved);
+        // Occupied / Free colors
+        vc.setCustomerServiceOccupied(servicePoints[0].isReserved());
+        vc.setMaintenanceServiceOccupied(servicePoints[1].isReserved());
+        vc.setTireChangeServiceOccupied(servicePoints[2].isReserved());
+        vc.setOilChangeServiceOccupied(servicePoints[3].isReserved());
+        vc.setRepairWorkServiceOccupied(servicePoints[4].isReserved());
+        vc.setInspectionServiceOccupied(servicePoints[5].isReserved());
 
     }
 }
