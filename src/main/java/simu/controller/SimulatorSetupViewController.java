@@ -357,6 +357,8 @@ public class SimulatorSetupViewController {
         }
         setFromSimulationSettings(DataStore.getInstance().getSimulationSettings());
         disableAllFields();
+        ResultView.getInstance().getCurrentStage().close();
+        ResultView.clearTableView();
     }
 
     // when user click saveAs Object to file
@@ -408,6 +410,7 @@ public class SimulatorSetupViewController {
             stopSimulationAndCloseAll();
         }
         DataStore.clearInstance();
+        ResultView.getInstance().getCurrentStage().close();
         ResultView.clearTableView();
         clearAndEnableAllFields();
     }

@@ -60,7 +60,7 @@ public class ResultView {
         return instance;
     }
 
-    private Stage getCurrentStage() {
+    public Stage getCurrentStage() {
         return currentStage;
     }
 
