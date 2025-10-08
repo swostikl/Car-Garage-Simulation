@@ -60,12 +60,18 @@ public class ResultView {
         return instance;
     }
 
-    public Stage getCurrentStage() {
+    private Stage getCurrentStage() {
         return currentStage;
     }
 
     public static void clearTableView() {
         instance = null;
+    }
+
+    public void closeStage() {
+        if (getCurrentStage() != null) {
+            getCurrentStage().close();
+        }
     }
 
 

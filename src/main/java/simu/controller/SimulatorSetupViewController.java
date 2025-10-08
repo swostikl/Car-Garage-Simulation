@@ -357,7 +357,7 @@ public class SimulatorSetupViewController {
         }
         setFromSimulationSettings(DataStore.getInstance().getSimulationSettings());
         disableAllFields();
-        ResultView.getInstance().getCurrentStage().close();
+        ResultView.getInstance().closeStage();
         ResultView.clearTableView();
     }
 
@@ -410,7 +410,7 @@ public class SimulatorSetupViewController {
             stopSimulationAndCloseAll();
         }
         DataStore.clearInstance();
-        ResultView.getInstance().getCurrentStage().close();
+        ResultView.getInstance().closeStage();
         ResultView.clearTableView();
         clearAndEnableAllFields();
     }
