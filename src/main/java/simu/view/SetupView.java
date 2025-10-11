@@ -7,7 +7,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
@@ -22,6 +21,24 @@ public class SetupView extends Application {
     // create menubar
     private MenuBar menuBar;
 
+    public static void closeAppRequest(WindowEvent event) {
+        event.consume();
+        closeApp();
+    }
+
+    public static void closeApp() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Quit Confirmation");
+        alert.setHeaderText("Do you really want to quit the app?");
+        alert.setContentText("Any unsaved data will be lost.");
+        alert.showAndWait().ifPresent(response -> {
+            // Close only if user confirms
+            if (response == ButtonType.OK) {
+                Platform.exit();
+                System.exit(0);
+            }
+        });
+    }
 
     @Override
     public void start(Stage stage) throws IOException {
@@ -86,9 +103,6 @@ public class SetupView extends Application {
         }
 
 
-
-
-
         Scene scene = new Scene(parent);
 
         try {
@@ -105,24 +119,5 @@ public class SetupView extends Application {
             tk.setMenuBar(stage, menuBar);
         }
         stage.show();
-    }
-
-    public static void closeAppRequest(WindowEvent event) {
-        event.consume();
-        closeApp();
-    }
-
-    public static void closeApp() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Quit Confirmation");
-        alert.setHeaderText("Do you really want to quit the app?");
-        alert.setContentText("Any unsaved data will be lost.");
-        alert.showAndWait().ifPresent(response -> {
-            // Close only if user confirms
-            if (response == ButtonType.OK) {
-                Platform.exit();
-                System.exit(0);
-            }
-        });
     }
 }

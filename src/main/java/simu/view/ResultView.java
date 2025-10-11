@@ -12,10 +12,9 @@ import java.io.IOException;
 
 public class ResultView {
 
-    private ResultViewController controller;
     private static ResultView instance;
-
-    private Stage currentStage;
+    private final ResultViewController controller;
+    private final Stage currentStage;
 
     private ResultView() {
         Stage stage = new Stage();
@@ -36,17 +35,6 @@ public class ResultView {
         }
     }
 
-    public void addResult(ResultData data) {
-        DataStore.getInstance().addResult(data);
-        if (controller != null) {
-            controller.addResult(data);
-        }
-    }
-
-    public ResultViewController getController() {
-        return controller;
-    }
-
     public static ResultView getInstance() {
         if (instance == null) {
             instance = new ResultView();
@@ -60,12 +48,23 @@ public class ResultView {
         return instance;
     }
 
-    private Stage getCurrentStage() {
-        return currentStage;
-    }
-
     public static void clearTableView() {
         instance = null;
+    }
+
+    public void addResult(ResultData data) {
+        DataStore.getInstance().addResult(data);
+        if (controller != null) {
+            controller.addResult(data);
+        }
+    }
+
+    public ResultViewController getController() {
+        return controller;
+    }
+
+    private Stage getCurrentStage() {
+        return currentStage;
     }
 
     public void closeStage() {

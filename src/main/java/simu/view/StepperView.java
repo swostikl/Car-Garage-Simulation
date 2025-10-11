@@ -5,6 +5,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import simu.controller.StepperViewController;
+
 import java.io.IOException;
 
 public class StepperView {
