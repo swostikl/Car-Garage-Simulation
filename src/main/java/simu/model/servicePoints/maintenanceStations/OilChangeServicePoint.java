@@ -14,6 +14,7 @@ public class OilChangeServicePoint extends MaintenanceStationServicePoint {
      * Create the oil change service point with a waiting queue.
      * <br>
      * <b>Deprecated: This constructor is only for compatibility and will be removed soon. Do not use.</b>
+     *
      * @param generator   Random number generator for service time simulation
      * @param eventList   Simulator event list, needed for the insertion of service ready event
      * @param successRate success rate of the service in service point from 0.0 to 1.0
@@ -27,8 +28,8 @@ public class OilChangeServicePoint extends MaintenanceStationServicePoint {
     /**
      * Create the oil change service point with a waiting queue.
      *
-     * @param generator   Random number generator for service time simulation
-     * @param eventList   Simulator event list, needed for the insertion of service ready event
+     * @param generator Random number generator for service time simulation
+     * @param eventList Simulator event list, needed for the insertion of service ready event
      */
     public OilChangeServicePoint(ContinuousGenerator generator, EventList eventList) {
         super(generator, eventList);
@@ -50,7 +51,7 @@ public class OilChangeServicePoint extends MaintenanceStationServicePoint {
         }
         reserved = true;
         double serviceTime = generator.sample();
-        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
         this.serviceTime += serviceTime;
         currentCustomer = nextCustomer;
     }

@@ -1,4 +1,5 @@
 package simu.controller;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Group;
@@ -12,37 +13,63 @@ import simu.model.ServicePoint;
  * Controller class for visualizing the state of various service points in a
  * simulation. Updates JavaFX UI elements such as labels and rectangles to
  * reflect the current queue lengths and customers being served.
- *
+ * <p>
  * This class should be used with a corresponding FXML file that defines
  * the UI layout, including labels and rectangles for queues and services.
  */
 public class VisualizeController {
-    @FXML private Label arrivalLabel;
-    @FXML private Rectangle arrivalQueue;
-    @FXML private Rectangle customerServed;
-    @FXML private Label customerServedlabel;
-    @FXML private Group customerService;
-    @FXML private Label customerServicelabel;
-    @FXML private Group inspectionQueue;
-    @FXML private Label inspectionQueuelabel;
-    @FXML private Rectangle inspectionService;
-    @FXML private Label inspectionServicelabel;
-    @FXML private Group maintenanceQueue;
-    @FXML private Label maintenanceQueuelabel;
-    @FXML private Rectangle maintenanceService;
-    @FXML private Label maintenancelabel;
-    @FXML private Group oilChangeQueue;
-    @FXML private Label oilChangeQueuelabel;
-    @FXML private Rectangle oilChangeService;
-    @FXML private Label oilChangeServicelabel;
-    @FXML private Group repairWorkQueue;
-    @FXML private Rectangle repairWorkService;
-    @FXML private Label repairWorklabel;
-    @FXML private Label repairworkQueueLabel;
-    @FXML private Group tireChangeQueue;
-    @FXML private Label tireChangeQueuelabel;
-    @FXML private Rectangle tireChangeService;
-    @FXML private Label tireChangeServicelabel;
+    @FXML
+    private Label arrivalLabel;
+    @FXML
+    private Rectangle arrivalQueue;
+    @FXML
+    private Rectangle customerServed;
+    @FXML
+    private Label customerServedlabel;
+    @FXML
+    private Group customerService;
+    @FXML
+    private Label customerServicelabel;
+    @FXML
+    private Group inspectionQueue;
+    @FXML
+    private Label inspectionQueuelabel;
+    @FXML
+    private Rectangle inspectionService;
+    @FXML
+    private Label inspectionServicelabel;
+    @FXML
+    private Group maintenanceQueue;
+    @FXML
+    private Label maintenanceQueuelabel;
+    @FXML
+    private Rectangle maintenanceService;
+    @FXML
+    private Label maintenancelabel;
+    @FXML
+    private Group oilChangeQueue;
+    @FXML
+    private Label oilChangeQueuelabel;
+    @FXML
+    private Rectangle oilChangeService;
+    @FXML
+    private Label oilChangeServicelabel;
+    @FXML
+    private Group repairWorkQueue;
+    @FXML
+    private Rectangle repairWorkService;
+    @FXML
+    private Label repairWorklabel;
+    @FXML
+    private Label repairworkQueueLabel;
+    @FXML
+    private Group tireChangeQueue;
+    @FXML
+    private Label tireChangeQueuelabel;
+    @FXML
+    private Rectangle tireChangeService;
+    @FXML
+    private Label tireChangeServicelabel;
 
     /**
      * Updates the label displaying the number of customers in the arrival queue.
@@ -165,7 +192,7 @@ public class VisualizeController {
         });
     }
 
-    public void setInspectionServicelabel (ServicePoint servicepoint) {
+    public void setInspectionServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
             if (c != null) {
@@ -177,12 +204,11 @@ public class VisualizeController {
     }
 
     public void setCustomerServedlabel(int i) {
-        Platform.runLater(()->{
+        Platform.runLater(() -> {
             int c = Customer.getTotalServed();
             customerServedlabel.setText("Customer served : " + c);
         });
     }
-
 
 
     public void setCustomerServiceOccupied(boolean occupied) {
@@ -203,7 +229,7 @@ public class VisualizeController {
     public void setMaintenanceServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
-                Rectangle r = (Rectangle) maintenanceService;
+                Rectangle r = maintenanceService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 maintenancelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
@@ -216,7 +242,7 @@ public class VisualizeController {
     public void setTireChangeServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
-                Rectangle r = (Rectangle) tireChangeService;
+                Rectangle r = tireChangeService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 tireChangeServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
@@ -229,7 +255,7 @@ public class VisualizeController {
     public void setOilChangeServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
-                Rectangle r = (Rectangle) oilChangeService;
+                Rectangle r = oilChangeService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 oilChangeServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
@@ -242,7 +268,7 @@ public class VisualizeController {
     public void setRepairWorkServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
-                Rectangle r = (Rectangle) repairWorkService;
+                Rectangle r = repairWorkService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 repairWorklabel.setTextFill(occupied ? Color.RED : Color.BLACK);
@@ -255,7 +281,7 @@ public class VisualizeController {
     public void setInspectionServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
-                Rectangle r = (Rectangle) inspectionService;
+                Rectangle r = inspectionService;
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff"));
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 inspectionServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);

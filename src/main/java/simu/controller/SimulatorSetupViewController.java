@@ -1,6 +1,6 @@
 package simu.controller;
 
-import controller.FieldController;
+import simu.model.FieldControllerModel;
 import eduni.distributions.Normal;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -223,10 +223,10 @@ public class SimulatorSetupViewController {
 
         Normal arrivalDistribution = new Normal(formatField(arrivalMean), formatField(arrivalVariance));
         m = new MyEngine(visualizeController, arrivalDistribution);
-        FieldController fieldController = new FieldController(m);
+        FieldControllerModel fieldControllerModel = new FieldControllerModel(m);
 
-        fieldController.setServiceRequired(formatField(meanService), formatField(serviceVariance));
-        fieldController.setInspectionFailRate(inspectionFailRate / 100);
+        fieldControllerModel.setServiceRequired(formatField(meanService), formatField(serviceVariance));
+        fieldControllerModel.setInspectionFailRate(inspectionFailRate / 100);
 
         m.setSimulationTime(formatField(totalTime));
         m.setName("Main Simulation");

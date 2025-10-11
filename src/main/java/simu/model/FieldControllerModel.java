@@ -1,17 +1,15 @@
-package controller;
+package simu.model;
 
 import eduni.distributions.Normal;
-import simu.framework.Engine;
-import simu.model.MyEngine;
 
 /**
  * A class handling Simulation setup
  */
-public class FieldController {
+public class FieldControllerModel {
 
-    private MyEngine myEngine;
+    private final MyEngine myEngine;
 
-    public FieldController(MyEngine engine) {
+    public FieldControllerModel(MyEngine engine) {
         myEngine = engine;
     }
 
@@ -21,6 +19,7 @@ public class FieldController {
 
     /**
      * Set number of maintenance required for customers
+     *
      * @param mean
      * @param variance
      */

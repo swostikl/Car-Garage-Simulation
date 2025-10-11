@@ -17,5 +17,6 @@ public abstract class MaintenanceStationServicePoint extends ServicePoint {
         super(generator, eventList);
     }
 
-    @Override abstract public void beginService();
+    @Override
+    abstract public void beginService();
 }

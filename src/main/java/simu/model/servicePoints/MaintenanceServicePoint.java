@@ -39,7 +39,7 @@ public class MaintenanceServicePoint extends ServicePoint {
         }
         reserved = true;
         double serviceTime = generator.sample();
-        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
         this.serviceTime += serviceTime;
         currentCustomer = nextCustomer;
     }

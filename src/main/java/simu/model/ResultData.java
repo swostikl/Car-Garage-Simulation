@@ -17,16 +17,16 @@ public class ResultData implements Serializable {
            Service points should be added to the array in this order
          */
 
-    private double customerServiceUtilizationRate;
-    private double maintenanceServiceUtilizationRate;
-    private double tireChangeServiceUtilizationRate;
-    private double oilChangeServiceUtilizationRate;
-    private double repairServiceUtilizationRate;
-    private double inspectionServiceUtilizationRate;
-    private double customerThroughput;
+    private final double customerServiceUtilizationRate;
+    private final double maintenanceServiceUtilizationRate;
+    private final double tireChangeServiceUtilizationRate;
+    private final double oilChangeServiceUtilizationRate;
+    private final double repairServiceUtilizationRate;
+    private final double inspectionServiceUtilizationRate;
+    private final double customerThroughput;
 
-    private DecimalFormat df = new DecimalFormat("#.##");
-    private DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
+    private final DecimalFormat df = new DecimalFormat("#.##");
+    private final DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
 
     public ResultData(double tireChangeServiceUtilizationRate, double customerServiceUtilizationRate, double maintenanceServiceUtilizationRate, double oilChangeServiceUtilizationRate, double repairServiceUtilizationRate, double inspectionServiceUtilizationRate, double customerThroughput) {
         df.setGroupingUsed(false);
@@ -47,18 +47,23 @@ public class ResultData implements Serializable {
     public String getMaintenanceServiceUtilizationRate() {
         return df.format(maintenanceServiceUtilizationRate * 100) + " %";
     }
+
     public String getTireChangeServiceUtilizationRate() {
         return df.format(tireChangeServiceUtilizationRate * 100) + " %";
     }
+
     public String getOilChangeServiceUtilizationRate() {
         return df.format(oilChangeServiceUtilizationRate * 100) + " %";
     }
+
     public String getRepairServiceUtilizationRate() {
         return df.format(repairServiceUtilizationRate * 100) + " %";
     }
+
     public String getInspectionServiceUtilizationRate() {
         return df.format(inspectionServiceUtilizationRate * 100) + " %";
     }
+
     public String getCustomerThroughput() {
         return customerThroughputFormat.format(customerThroughput) + " c/h";
     }

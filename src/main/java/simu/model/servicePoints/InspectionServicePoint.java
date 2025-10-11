@@ -13,6 +13,7 @@ public class InspectionServicePoint extends ServicePoint {
 
     /**
      * Create the InspectionServicePoint service point with a waiting queue.
+     *
      * @param generator Random number generator for service time simulation
      * @param eventList Simulator event list, needed for the insertion of service ready event
      */
@@ -27,7 +28,7 @@ public class InspectionServicePoint extends ServicePoint {
         this.eventTypeScheduled = nextCustomer.hasPassedInspection() ? EventType.DEP_INSPECTION_END : EventType.DEP_INSPECTION_MAINTENANCE;
         reserved = true;
         double serviceTime = generator.sample();
-        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
         this.serviceTime += serviceTime;
         currentCustomer = nextCustomer;
     }

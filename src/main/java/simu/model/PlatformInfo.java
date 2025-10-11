@@ -3,7 +3,7 @@ package simu.model;
 public class PlatformInfo {
 
     private static PlatformInfo instance;
-    private boolean isMac;
+    private final boolean isMac;
 
     private PlatformInfo() {
         String OS = System.getProperty("os.name").toLowerCase();
