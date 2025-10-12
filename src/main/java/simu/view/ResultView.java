@@ -68,5 +68,11 @@ public class ResultView {
         instance = null;
     }
 
+    public void closeStage() {
+        if (getCurrentStage() != null) {
+            getCurrentStage().close();
+        }
+    }
+
 
 }
