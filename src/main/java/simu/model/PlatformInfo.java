@@ -1,5 +1,8 @@
 package simu.model;
 
+/**
+ * Class to detect and store platform info
+ */
 public class PlatformInfo {
 
     private static PlatformInfo instance;
@@ -17,6 +20,10 @@ public class PlatformInfo {
         return instance;
     }
 
+    /**
+     * Is a mac
+     * @return {@code true} if is Mac, {@code false} if not
+     */
     public boolean getIsMac() {
         return isMac;
     }
