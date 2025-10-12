@@ -7,14 +7,15 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A data class used to store data
+ */
 public class DataStore implements Serializable {
 
-    private List<ResultData> resultDataList;
-    private SimulationSettings simulationSettings;
-
     private static DataStore instance = null;
-
     private static File currentFile;
+    private final List<ResultData> resultDataList;
+    private SimulationSettings simulationSettings;
 
     private DataStore(DataStore entity) {
         this.resultDataList = entity.resultDataList;
@@ -33,6 +34,7 @@ public class DataStore implements Serializable {
 
     /**
      * Load DataStore from a file and set it as the singleton instance.
+     *
      * @param file File to load the DataStore from
      */
     public static void loadFromFile(File file) throws CannotLoadFileException {
@@ -46,13 +48,30 @@ public class DataStore implements Serializable {
             System.out.println("Data loaded from file: " + file.getAbsolutePath());
             currentFile = file;
         } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
             throw new CannotLoadFileException();
         }
     }
 
     /**
+     * Get the singleton instance of DataStore.
+     *
+     * @return DataStore instance
+     */
+    public static DataStore getInstance() {
+        if (instance == null) {
+            instance = new DataStore();
+        }
+        return instance;
+    }
+
+    public static void clearInstance() {
+        instance = null;
+        currentFile = null;
+    }
+
+    /**
      * Save the current DataStore instance to a specified file.
+     *
      * @param file File to save the DataStore to
      */
     public void saveToFileAs(File file) {
@@ -68,6 +87,7 @@ public class DataStore implements Serializable {
 
     /**
      * Save the current DataStore instance to the last used file.
+     *
      * @throws NoFileSetException if no file has been set yet
      */
     public void saveToFile() throws NoFileSetException {
@@ -78,33 +98,13 @@ public class DataStore implements Serializable {
         }
     }
 
-
-
-    /**
-     * Get the singleton instance of DataStore.
-     * @return DataStore instance
-     */
-    public static DataStore getInstance() {
-        if (instance == null) {
-            instance = new DataStore();
-        }
-        return instance;
-    }
-
     /**
      * Get the list of ResultData.
+     *
      * @return List of ResultData
      */
     public List<ResultData> getResultDataList() {
         return resultDataList;
-    }
-
-    /**
-     * Get the simulation settings.
-     * @return SimulationSettings
-     */
-    public SimulationSettings getSimulationSettings() {
-        return simulationSettings;
     }
 
 //    /**
@@ -118,7 +118,21 @@ public class DataStore implements Serializable {
 //    }
 
     /**
+     * Get the simulation settings.
+     *
+     * @return SimulationSettings
+     */
+    public SimulationSettings getSimulationSettings() {
+        return simulationSettings;
+    }
+
+    public void setSimulationSettings(SimulationSettings s) {
+        this.simulationSettings = s;
+    }
+
+    /**
      * Add a ResultData entry to the list.
+     *
      * @param data ResultData to be added
      */
     public void addResult(ResultData data) {
@@ -127,18 +141,10 @@ public class DataStore implements Serializable {
 
     /**
      * Remove a ResultData entry from the list.
+     *
      * @param data ResultData to be removed
      */
     public void removeResult(ResultData data) {
         resultDataList.remove(data);
-    }
-
-    public void setSimulationSettings(SimulationSettings s) {
-        this.simulationSettings = s;
-    }
-
-    public static void clearInstance() {
-        instance = null;
-        currentFile = null;
     }
 }

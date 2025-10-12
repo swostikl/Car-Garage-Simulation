@@ -9,7 +9,9 @@ import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.ServicePoint;
 
-
+/**
+ * Customer check-in service point
+ */
 public class CustomerServicePoint extends ServicePoint {
 
     /**
@@ -22,6 +24,9 @@ public class CustomerServicePoint extends ServicePoint {
         super(generator, eventList);
     }
 
+    /**
+     * Begin service for customer in service queue
+     */
     @Override
     public void beginService() {
         Customer nextCustomer = getQueue().peek();
@@ -29,7 +34,7 @@ public class CustomerServicePoint extends ServicePoint {
         this.eventTypeScheduled = nextCustomer.needInspection() ? EventType.DEP_CS_INSPECTION : EventType.DEP_CS_MAINTENANCE;
         reserved = true;
         double serviceTime = generator.sample();
-        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
         this.serviceTime += serviceTime;
         currentCustomer = nextCustomer;
     }

@@ -10,6 +10,9 @@ import simu.model.EventType;
 import simu.model.MaintenanceType;
 import simu.model.ServicePoint;
 
+/**
+ * Car maintenance service point
+ */
 public class MaintenanceServicePoint extends ServicePoint {
 
     /**
@@ -39,7 +42,7 @@ public class MaintenanceServicePoint extends ServicePoint {
         }
         reserved = true;
         double serviceTime = generator.sample();
-        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
         this.serviceTime += serviceTime;
         currentCustomer = nextCustomer;
     }

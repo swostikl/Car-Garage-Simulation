@@ -2,6 +2,9 @@ package simu.framework;
 
 import java.util.ArrayList;
 
+/**
+ * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+ */
 public class ProcessManager {
 
     private ArrayList<Process> processes;
@@ -9,7 +12,7 @@ public class ProcessManager {
     private Process currentProcess;
 
     /**
-     * A cooperative multitasking process manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+     * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
      */
     public ProcessManager() {
         this.processes = new ArrayList<>();

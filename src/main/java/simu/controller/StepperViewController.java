@@ -1,7 +1,6 @@
 package simu.controller;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -9,7 +8,6 @@ import javafx.scene.control.ToggleButton;
 import simu.framework.ProcessManager;
 import simu.model.DelayProcess;
 import simu.model.Interrupt;
-import simu.model.MyEngine;
 
 public class StepperViewController {
 

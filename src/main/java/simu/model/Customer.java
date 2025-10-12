@@ -1,41 +1,38 @@
 package simu.model;
 
-import java.util.ArrayList;
+import eduni.distributions.ContinuousGenerator;
+import simu.framework.Clock;
+import simu.framework.Trace;
+
 import java.util.LinkedList;
 import java.util.Random;
 
-import eduni.distributions.ContinuousGenerator;
-import eduni.distributions.Normal;
-import simu.framework.*;
-
 /**
  * Customer in a simulator
- * TODO: This is to be implemented according to the requirements of the simulation model (data!)
  */
 
 
 // Here we need more method like needInspection, maintenanceType,
 public class Customer {
-    private double arrivalTime;
-    private double removalTime;
-    private int id;
-
+    private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
     private static int totalServed = 0; // total number of customer served
     private static int i = 1;
     private static long sum = 0;    //sum of all service time
-    private boolean needInspection; // check  need inspection or not
-    private boolean passedInspection; // inspection is passed or not
-    private LinkedList<MaintenanceType> mt;
-
     private final Random rand = new Random();
-    private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
+    private double arrivalTime;
+    private double removalTime;
+    private final int id;
+    private final boolean needInspection; // check  need inspection or not
+    private boolean passedInspection; // inspection is passed or not
+    private final LinkedList<MaintenanceType> mt;
 
 
     /**
      * Create a unique customer
-     * @param maintenanceGenerator a continuous generator used to generate numbers of maintenance needed
+     *
+     * @param maintenanceGenerator     a continuous generator used to generate numbers of maintenance needed
      * @param needInspectionPercentage percentage of customers that requires an inspection from 0.0 to 1.0
-     * @param inspectionFailRate percentage of customers that will fail initial inspection
+     * @param inspectionFailRate       percentage of customers that will fail initial inspection
      */
     public Customer(ContinuousGenerator maintenanceGenerator, double needInspectionPercentage, double inspectionFailRate) {
         this.mt = new LinkedList<>();
@@ -54,7 +51,7 @@ public class Customer {
             sample = maintenanceGenerator.sample();
         } while (Math.round(sample) < 1);
 
-        int maintenanceNeeded = (int)Math.round(sample);
+        int maintenanceNeeded = (int) Math.round(sample);
 
         for (int i = 0; i < maintenanceNeeded; i++) {
             mt.add(getRandomMaintenanceType());
@@ -64,7 +61,31 @@ public class Customer {
         Trace.out(Trace.Level.INFO, "New customer #" + id + " arrived at  " + arrivalTime +
                 " | Needs inspection: " + needInspection);
     }
-// Randomly pick a maintenance type
+
+    /**
+     * Get total customer served
+     *
+     * @return total customer served
+     */
+    public static int getTotalServed() {
+        return totalServed;
+    }
+
+    /**
+     * Reset the total served counter and sum for a new simulation run
+     */
+    public static void resetTotalServed() {
+        totalServed = 0;
+        sum = 0;
+        i = 1;
+    }
+
+    // Randomly pick a maintenance type
+    /**
+     * Method to randomly pick a maintenance type
+     *
+     * @return {@code MaintenanceType}
+     */
     private MaintenanceType getRandomMaintenanceType() {
         return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
 
@@ -116,11 +137,6 @@ public class Customer {
         return id;
     }
 
-    /**
-     * Report the measured variables of the customer. In this case to the diagnostic output.
-     */
-
-
     public void addMaintenanceType(MaintenanceType mt) {
         this.mt.add(mt);
     }
@@ -147,6 +163,7 @@ public class Customer {
 
     /**
      * is inspection needed
+     *
      * @return is inspection needed
      */
     public boolean needInspection() {
@@ -155,6 +172,7 @@ public class Customer {
 
     /**
      * Misleading method name, returns if customer will pass the upcoming inspection
+     *
      * @return will customer pass upcoming inspection
      */
     public boolean hasPassedInspection() {
@@ -163,12 +181,16 @@ public class Customer {
 
     /**
      * Misleading method name, set if customer will pass the upcoming inspection
+     *
      * @param passed will customer pass the upcoming inspection
      */
     public void setPassedInspection(boolean passed) {
         this.passedInspection = passed;
     }
 
+    /**
+     * End customer's time in the simulation, reports the result
+     */
     public void reportResults() {
 
         Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");
@@ -176,23 +198,11 @@ public class Customer {
         Trace.out(Trace.Level.INFO, "Customer " + id + " removed: " + removalTime);
         Trace.out(Trace.Level.INFO, "Customer " + id + " stayed: " + (removalTime - arrivalTime));
 
-        sum += (removalTime - arrivalTime);
-        totalServed++; // increament global counter (to see total number of customer being served
-        double mean = sum / totalServed;
+        sum += (long) (removalTime - arrivalTime);
+        totalServed++; // increment global counter (to see total number of customer being served
+        double mean = (double) sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
         System.out.println(" Total number of customer served : " + totalServed);
-    }
-
-    public static int getTotalServed() {
-        return totalServed;
-    }
-
-    /** Reset the total served counter and sum for a new simulation run
-     */
-    public static void resetTotalServed() {
-        totalServed = 0;
-        sum = 0;
-        i = 1;
     }
 }
 

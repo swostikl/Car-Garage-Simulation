@@ -2,6 +2,9 @@ package simu.model;
 
 import simu.framework.Process;
 
+/**
+ * A thread of type {@code Process} that will delay the simulation for a given milliseconds
+ */
 public class DelayProcess extends Process {
     private volatile int delayMs;
     private volatile boolean running = true;
@@ -28,6 +31,10 @@ public class DelayProcess extends Process {
         }
     }
 
+    /**
+     * Set delay time
+     * @param delayMs delay time (in milliseconds)
+     */
     public void setDelay(int delayMs) {
         this.delayMs = delayMs;
     }

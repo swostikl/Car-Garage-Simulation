@@ -42,6 +42,10 @@ public class ResultViewController {
     private double customerThroughput;
      */
 
+    /**
+     * Initialize result view
+     * @param results {@code ResultData} data
+     */
     public void init(List<ResultData> results) {
         cThroughputColumn.setCellValueFactory(
                 new PropertyValueFactory<>("customerThroughput")
@@ -71,10 +75,17 @@ public class ResultViewController {
         }
     }
 
+    /**
+     * Method to add result to the result view
+     * @param resultData {@code ResultData}
+     */
     public void addResult(ResultData resultData) {
         cThroughputColumn.getTableView().getItems().add(resultData);
     }
 
+    /**
+     * Clear the table view
+     */
     public void clearTableView() {
         Platform.runLater(() -> {
             cThroughputColumn.getTableView().getItems().clear();
