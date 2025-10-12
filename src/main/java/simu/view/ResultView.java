@@ -10,6 +10,9 @@ import simu.model.ResultData;
 
 import java.io.IOException;
 
+/**
+ * A view to display the simulation results
+ */
 public class ResultView {
 
     private static ResultView instance;

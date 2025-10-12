@@ -16,6 +16,9 @@ import simu.model.PlatformInfo;
 
 import java.io.IOException;
 
+/**
+ * View to configure the simulation
+ */
 public class SetupView extends Application {
 
     // create menubar
