@@ -8,6 +8,9 @@ import simu.controller.StepperViewController;
 
 import java.io.IOException;
 
+/**
+ * View to manipulate simulation while running
+ */
 public class StepperView {
 
     private StepperViewController controller;

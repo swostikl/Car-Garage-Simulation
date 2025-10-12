@@ -11,6 +11,9 @@ import simu.controller.VisualizeController;
 import java.awt.*;
 import java.io.IOException;
 
+/**
+ * Simulation visualization view
+ */
 public class VisualizeView {
 
     private VisualizeController controller;
@@ -69,6 +72,10 @@ public class VisualizeView {
         return stage;
     }
 
+    /**
+     * Get visualize view controller
+     * @return visualize view controller
+     */
     public VisualizeController getController() {
         return controller;
     }
