@@ -9,6 +9,9 @@ import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.servicePoints.MaintenanceStationServicePoint;
 
+/**
+ * Other repairs service point
+ */
 public class OtherServicePoint extends MaintenanceStationServicePoint {
     /**
      * Create the other repairs service point with a waiting queue.

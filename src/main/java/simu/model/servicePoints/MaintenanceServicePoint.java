@@ -10,6 +10,9 @@ import simu.model.EventType;
 import simu.model.MaintenanceType;
 import simu.model.ServicePoint;
 
+/**
+ * Car maintenance service point
+ */
 public class MaintenanceServicePoint extends ServicePoint {
 
     /**

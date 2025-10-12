@@ -62,6 +62,7 @@ public class SimulatorSetupViewController {
     @FXML private Label inspectionFailRateLabel;
     @FXML private MenuBar menuBar;
 
+
     @FXML
     void onRunProgram(ActionEvent event) throws IOException {
         if (!hasRun) {
@@ -104,6 +105,9 @@ public class SimulatorSetupViewController {
     }
 
     // CLEAN window close handlers
+    /**
+     * Setup {@code Stage} onCloseRequest handler
+     */
     private void setupWindowCloseHandlers() {
         if (stepperStage != null) {
             stepperStage.setOnCloseRequest(event -> stopSimulationOnly());
@@ -114,7 +118,12 @@ public class SimulatorSetupViewController {
         }
     }
 
+
     // CLEAN stop simulation only
+
+    /**
+     * Stop the simulation and save current results
+     */
     private void stopSimulationOnly() {
         System.out.println("Stop only the simulation, not the entire application");
         if (pm.containProcess(m)) {
@@ -139,6 +148,9 @@ public class SimulatorSetupViewController {
         });
     }
 
+    /**
+     * Stop the simulation, quit the program without saving results
+     */
     private void stopSimulationAndCloseAll() {
         Platform.exit();
         System.exit(0);
@@ -236,6 +248,9 @@ public class SimulatorSetupViewController {
         Trace.out(Trace.Level.INFO, "Simulation engine and delay process added to ProcessManager");
     }
 
+    /**
+     * Initialize {@code SimulationSetupViewController}
+     */
     public void init() {
         updateDelayLabel();
         df.setGroupingUsed(false);
@@ -283,10 +298,16 @@ public class SimulatorSetupViewController {
         }));
     }
 
+    /**
+     * Update delay label
+     */
     private void updateDelayLabel() {
         Platform.runLater(() -> delayLabel.setText(String.format("%dms", currentDelay)));
     }
 
+    /**
+     * Increase delay by step of +100
+     */
     private void increaseDelay() {
         currentDelay = Math.min(currentDelay + 100, DELAY_MAX);
         if (currentDelay == DELAY_MAX) {
@@ -296,6 +317,9 @@ public class SimulatorSetupViewController {
         updateDelayLabel();
     }
 
+    /**
+     * Decrease delay by step of -100
+     */
     private void decreaseDelay() {
         currentDelay = Math.max(currentDelay - 100, DELAY_MIN);
         if (currentDelay == DELAY_MIN) {
@@ -305,6 +329,12 @@ public class SimulatorSetupViewController {
         updateDelayLabel();
     }
 
+    /**
+     * Format the {@code TextField} and return the result as double
+     * @param textField {@code TextField} to format
+     * @return double value of the {@code TextField}
+     * @throws ZeroValueException
+     */
     private double formatField(TextField textField) throws ZeroValueException {
         String valText = textField.getText();
         if (!valText.isBlank()) {
@@ -325,6 +355,10 @@ public class SimulatorSetupViewController {
         throw new ZeroValueException();
     }
 
+    /**
+     * Load value from saved simulation settings
+     * @param settings
+     */
     public void setFromSimulationSettings(SimulationSettings settings) {
         arrivalMean.setText(settings.getArrivalTimeMean());
         arrivalVariance.setText(settings.getArrivalTimeVariance());
@@ -337,6 +371,11 @@ public class SimulatorSetupViewController {
     }
 
     // when user click load Object from file
+
+    /**
+     * Handle open action
+     * @param viewStage
+     */
     public void handleOpen(Stage viewStage) {
         if (hasRun) {
             stopSimulationAndCloseAll();
@@ -362,6 +401,11 @@ public class SimulatorSetupViewController {
     }
 
     // when user click saveAs Object to file
+
+    /**
+     * Handle save as action
+     * @param viewStage
+     */
     public void handleSaveAs(Stage viewStage) {
         if (hasRun) {
             stopSimulationAndCloseAll();
@@ -385,6 +429,11 @@ public class SimulatorSetupViewController {
     }
 
     // when user click save Object to file
+
+    /**
+     * Handle save action
+     * @param viewStage
+     */
     public void handleSave(Stage viewStage) {
         if (hasRun) {
             stopSimulationAndCloseAll();
@@ -405,6 +454,9 @@ public class SimulatorSetupViewController {
         }
     }
 
+    /**
+     * Handle new file action
+     */
     public void handleNew() {
         if (hasRun) {
             stopSimulationAndCloseAll();
@@ -415,6 +467,9 @@ public class SimulatorSetupViewController {
         clearAndEnableAllFields();
     }
 
+    /**
+     * Disable all input fields (including slider)
+     */
     private void disableAllFields() {
         arrivalMean.setDisable(true);
         arrivalVariance.setDisable(true);
@@ -424,6 +479,9 @@ public class SimulatorSetupViewController {
         inspectionFailRateSlider.setDisable(true);
     }
 
+    /**
+     * Clear and enable all fields
+     */
     private void clearAndEnableAllFields() {
         arrivalMean.clear();
         arrivalVariance.clear();
@@ -439,6 +497,10 @@ public class SimulatorSetupViewController {
         serviceVariance.setDisable(false);
     }
 
+    /**
+     * Returns the current scene's {@code MenuBar}
+     * @return Menu bar
+     */
     public MenuBar getMenuBar() {
         return menuBar;
     }

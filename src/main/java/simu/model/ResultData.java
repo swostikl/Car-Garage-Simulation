@@ -3,6 +3,9 @@ package simu.model;
 import java.io.Serializable;
 import java.text.DecimalFormat;
 
+/**
+ * A data class used to store simulation result data
+ */
 public class ResultData implements Serializable {
 
     /* There are six service points
@@ -14,8 +17,7 @@ public class ResultData implements Serializable {
            5. Inspection
 
            Each service point has its own class
-           Service points should be added to the array in this order
-         */
+    */
 
     private final double customerServiceUtilizationRate;
     private final double maintenanceServiceUtilizationRate;
@@ -28,6 +30,15 @@ public class ResultData implements Serializable {
     private final DecimalFormat df = new DecimalFormat("#.##");
     private final DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
 
+    /**
+     * @param tireChangeServiceUtilizationRate
+     * @param customerServiceUtilizationRate
+     * @param maintenanceServiceUtilizationRate
+     * @param oilChangeServiceUtilizationRate
+     * @param repairServiceUtilizationRate
+     * @param inspectionServiceUtilizationRate
+     * @param customerThroughput
+     */
     public ResultData(double tireChangeServiceUtilizationRate, double customerServiceUtilizationRate, double maintenanceServiceUtilizationRate, double oilChangeServiceUtilizationRate, double repairServiceUtilizationRate, double inspectionServiceUtilizationRate, double customerThroughput) {
         df.setGroupingUsed(false);
         customerThroughputFormat.setGroupingUsed(false);

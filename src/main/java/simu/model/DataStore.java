@@ -7,6 +7,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A data class used to store data
+ */
 public class DataStore implements Serializable {
 
     private static DataStore instance = null;

@@ -9,7 +9,6 @@ import java.util.Random;
 
 /**
  * Customer in a simulator
- * TODO: This is to be implemented according to the requirements of the simulation model (data!)
  */
 
 
@@ -63,6 +62,11 @@ public class Customer {
                 " | Needs inspection: " + needInspection);
     }
 
+    /**
+     * Get total customer served
+     *
+     * @return total customer served
+     */
     public static int getTotalServed() {
         return totalServed;
     }
@@ -77,6 +81,11 @@ public class Customer {
     }
 
     // Randomly pick a maintenance type
+    /**
+     * Method to randomly pick a maintenance type
+     *
+     * @return {@code MaintenanceType}
+     */
     private MaintenanceType getRandomMaintenanceType() {
         return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
 
@@ -127,11 +136,6 @@ public class Customer {
     public int getId() {
         return id;
     }
-
-    /**
-     * Report the measured variables of the customer. In this case to the diagnostic output.
-     */
-
 
     public void addMaintenanceType(MaintenanceType mt) {
         this.mt.add(mt);
@@ -184,6 +188,9 @@ public class Customer {
         this.passedInspection = passed;
     }
 
+    /**
+     * End customer's time in the simulation, reports the result
+     */
     public void reportResults() {
 
         Trace.out(Trace.Level.INFO, "\nCustomer " + id + " ready! ");

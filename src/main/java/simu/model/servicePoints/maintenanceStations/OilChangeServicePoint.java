@@ -9,6 +9,9 @@ import simu.model.Customer;
 import simu.model.EventType;
 import simu.model.servicePoints.MaintenanceStationServicePoint;
 
+/**
+ * Oil change service point
+ */
 public class OilChangeServicePoint extends MaintenanceStationServicePoint {
     /**
      * Create the oil change service point with a waiting queue.

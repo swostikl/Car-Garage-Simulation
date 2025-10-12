@@ -1,7 +1,7 @@
 package simu.model.servicePoints;
 
 /**
- * Types of service points
+ * {@code enum} Types of service points
  */
 public enum ServicePointTypes {
     /**

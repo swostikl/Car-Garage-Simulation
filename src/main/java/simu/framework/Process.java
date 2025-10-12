@@ -1,5 +1,8 @@
 package simu.framework;
 
+/**
+ * Threads that are managed by the {@code ProcessManager}
+ */
 public abstract class Process extends Thread {
 
     private Object lock;
