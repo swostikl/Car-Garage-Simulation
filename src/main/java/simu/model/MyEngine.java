@@ -11,7 +11,6 @@ import simu.model.servicePoints.MaintenanceServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OilChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
-import simu.util.CSVWriter;
 import simu.view.ResultView;
 
 /**
@@ -138,7 +137,7 @@ public class MyEngine extends Engine {
     public void setInspectionFailRate(double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
     }
-/*
+
     @Override
     protected void results() {
         double currentTime = Clock.getInstance().getClock();
@@ -173,7 +172,7 @@ public class MyEngine extends Engine {
 
            Each service point has its own class
            Service points should be added to the array in this order
-
+         */
 
         Platform.runLater(() -> {
             ResultView.getInstance().addResult(new ResultData(
@@ -187,58 +186,9 @@ public class MyEngine extends Engine {
             ));
         });
 
-
-
         Clock.getInstance().setClock(0); // Reset clock for potential next run
 
         stopSimulation = false;
         deregister();
     }
-
-
-    */
-@Override
-protected void results() {
-    double currentTime = Clock.getInstance().getClock();
-
-    System.out.println("\n" + "=".repeat(50));
-    System.out.println("SIMULATION RESULTS");
-    System.out.println("=".repeat(50));
-
-    if (stopSimulation) {
-        System.out.println("Status: STOPPED BY USER");
-        if (mySimulationTime > 0) {
-            System.out.printf("Completed: %.1f%% (%.0f / %.0f minutes)%n",
-                    (currentTime / mySimulationTime) * 100, currentTime, mySimulationTime);
-        }
-    } else {
-        System.out.println("Status: COMPLETED SUCCESSFULLY");
-    }
-
-    System.out.printf("Simulation ended at: %.2f minutes%n", currentTime);
-    System.out.printf("Customer throughput: %.6f customer(s) per hour%n",
-            (Customer.getTotalServed() / currentTime) * 60);
-    System.out.printf("Total customers served: %d%n", Customer.getTotalServed());
-    System.out.println("=".repeat(50) + "\n");
-
-    ResultData result = new ResultData(
-            servicePoints[2].serviceTime / currentTime,
-            servicePoints[0].serviceTime / currentTime,
-            servicePoints[1].serviceTime / currentTime,
-            servicePoints[3].serviceTime / currentTime,
-            servicePoints[4].serviceTime / currentTime,
-            servicePoints[5].serviceTime / currentTime,
-            ((Customer.getTotalServed() / currentTime) * 60)
-    );
-
-    Platform.runLater(() -> ResultView.getInstance().addResult(result));
-
-    CSVWriter.writeResult(result); //  Save to CSV
-
-    Clock.getInstance().setClock(0); //reset clock for potential zero
-    stopSimulation = false;
-    deregister();
-}
-
-
 }
