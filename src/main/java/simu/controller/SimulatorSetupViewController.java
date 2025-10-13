@@ -28,6 +28,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+/**
+ * Controller class for SetupView
+ */
 public class SimulatorSetupViewController {
 
     private int currentDelay = 500;
@@ -63,6 +66,11 @@ public class SimulatorSetupViewController {
     @FXML private MenuBar menuBar;
 
 
+    /**
+     * On run button clicked
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void onRunProgram(ActionEvent event) throws IOException {
         if (!hasRun) {
@@ -104,7 +112,7 @@ public class SimulatorSetupViewController {
         }
     }
 
-    // CLEAN window close handlers
+
     /**
      * Setup {@code Stage} onCloseRequest handler
      */
@@ -119,7 +127,6 @@ public class SimulatorSetupViewController {
     }
 
 
-    // CLEAN stop simulation only
 
     /**
      * Stop the simulation and save current results
@@ -156,20 +163,18 @@ public class SimulatorSetupViewController {
         System.exit(0);
     }
 
+    /**
+     * When the slider is slided
+     */
     void onInspectionFailRateSlide() {
         inspectionFailRate = inspectionFailRateSlider.getValue();
         inspectionFailRateLabel.setText(String.format("%.2f%%", inspectionFailRate));
     }
 
-    @FXML
-    void onSetDefault(ActionEvent event) {
-        if (hasRun) {
-            stopSimulationAndCloseAll();
-        } else {
-            System.out.println("Settings reset to default values");
-        }
-    }
-
+    /**
+     * When decrease delay is pressed
+     * @param event
+     */
     @FXML
     void onDecreaseDelayPressed(MouseEvent event) {
         decreaseDelay();
@@ -189,6 +194,10 @@ public class SimulatorSetupViewController {
         });
     }
 
+    /**
+     * When decrease delay is released
+     * @param event
+     */
     @FXML
     void onDecreaseDelayReleased(MouseEvent event) {
         if (delayUpdateThread != null) {
@@ -197,6 +206,10 @@ public class SimulatorSetupViewController {
         holdTimer.stop();
     }
 
+    /**
+     * When increase delay is pressed
+     * @param event
+     */
     @FXML
     void onIncreaseDelayPressed(MouseEvent event) {
         increaseDelay();
@@ -216,6 +229,10 @@ public class SimulatorSetupViewController {
         });
     }
 
+    /**
+     * When increase delay is released
+     * @param event
+     */
     @FXML
     void onIncreaseDelayReleased(MouseEvent event) {
         if (delayUpdateThread != null) {
@@ -224,11 +241,20 @@ public class SimulatorSetupViewController {
         holdTimer.stop();
     }
 
+    /**
+     * On show result pressed
+     * @param event
+     */
     @FXML
     void onShowResults(ActionEvent event) {
         ResultView.getInstance();
     }
 
+    /**
+     * Start the simulation thread
+     * @param visualizeController Visualize Controller
+     * @throws ZeroValueException
+     */
     public void startSimulation(VisualizeController visualizeController) throws ZeroValueException {
         pm = new ProcessManager();
         Trace.setTraceLevel(Trace.Level.INFO);

@@ -55,13 +55,6 @@ public class ResultView {
         instance = null;
     }
 
-    public void addResult(ResultData data) {
-        DataStore.getInstance().addResult(data);
-        if (controller != null) {
-            controller.addResult(data);
-        }
-    }
-
     public ResultViewController getController() {
         return controller;
     }

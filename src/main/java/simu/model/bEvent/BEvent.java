@@ -13,19 +13,25 @@ import simu.model.servicePoints.ServicePointTypes;
 import java.util.Map;
 
 /**
- * B event
+ * B event of the simulation
  */
 public class BEvent {
-    public BEvent() {
-    }
 
     // write B event here
+
+    /**
+     * Execute B Event
+     * @param servicePoints service point HashMap
+     * @param arrivalProcess arrival process
+     * @param event event to be run
+     * @param maintenanceGenerator maintenance generator (Continuous Generator)
+     * @param inspectionFailRate inspection fail rate (0.0 - 1.0)
+     */
     static public void runBEvent(
             // pass something here if needed
             Map<ServicePointTypes, ServicePoint> servicePoints,
             ArrivalProcess arrivalProcess,
             Event event,
-            VisualizeController vc,
             ContinuousGenerator maintenanceGenerator,
             double inspectionFailRate
     ) {

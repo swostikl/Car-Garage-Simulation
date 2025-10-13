@@ -4,10 +4,14 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import simu.model.DataStore;
 import simu.model.ResultData;
 
 import java.util.List;
 
+/**
+ * Controller class for ResultView
+ */
 public class ResultViewController {
 
     @FXML
@@ -80,6 +84,7 @@ public class ResultViewController {
      * @param resultData {@code ResultData}
      */
     public void addResult(ResultData resultData) {
+        DataStore.getInstance().addResult(resultData);
         cThroughputColumn.getTableView().getItems().add(resultData);
     }
 

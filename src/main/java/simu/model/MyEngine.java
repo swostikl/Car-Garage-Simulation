@@ -110,7 +110,7 @@ public class MyEngine extends Engine {
             return;
         }
 
-        BEvent.runBEvent(servicePoints, arrivalProcess, t, vc, serviceContinuousGenerator, inspectionFailRate);
+        BEvent.runBEvent(servicePoints, arrivalProcess, t, serviceContinuousGenerator, inspectionFailRate);
     }
 
     @Override
@@ -172,7 +172,7 @@ public class MyEngine extends Engine {
          */
 
         Platform.runLater(() -> {
-            ResultView.getInstance().addResult(new ResultData(
+            ResultView.getInstance().getController().addResult(new ResultData(
                     servicePoints.get(ServicePointTypes.TIRE_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.CUSTOMER_SERVICE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.MAINTENANCE).serviceTime / currentTime,
