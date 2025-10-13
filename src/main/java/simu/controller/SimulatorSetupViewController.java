@@ -28,6 +28,9 @@ import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
 
+/**
+ * Controller class for SetupView
+ */
 public class SimulatorSetupViewController {
 
     private int currentDelay = 500;

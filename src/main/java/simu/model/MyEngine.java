@@ -110,7 +110,7 @@ public class MyEngine extends Engine {
             return;
         }
 
-        BEvent.runBEvent(servicePoints, arrivalProcess, t, vc, serviceContinuousGenerator, inspectionFailRate);
+        BEvent.runBEvent(servicePoints, arrivalProcess, t, serviceContinuousGenerator, inspectionFailRate);
     }
 
     @Override

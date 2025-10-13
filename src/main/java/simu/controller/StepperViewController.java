@@ -9,6 +9,9 @@ import simu.framework.ProcessManager;
 import simu.model.DelayProcess;
 import simu.model.Interrupt;
 
+/**
+ * Controller class for StepperView
+ */
 public class StepperViewController {
 
     private ProcessManager pm;

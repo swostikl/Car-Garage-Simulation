@@ -8,6 +8,9 @@ import simu.model.ResultData;
 
 import java.util.List;
 
+/**
+ * Controller class for ResultView
+ */
 public class ResultViewController {
 
     @FXML
