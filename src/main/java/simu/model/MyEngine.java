@@ -172,7 +172,7 @@ public class MyEngine extends Engine {
          */
 
         Platform.runLater(() -> {
-            ResultView.getInstance().addResult(new ResultData(
+            ResultView.getInstance().getController().addResult(new ResultData(
                     servicePoints.get(ServicePointTypes.TIRE_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.CUSTOMER_SERVICE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.MAINTENANCE).serviceTime / currentTime,
