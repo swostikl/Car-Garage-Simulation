@@ -31,6 +31,7 @@ public class GuiUpdateThread extends Thread {
      * indicators for each service point type. It should be run in a separate thread to keep the user interface
      * responsive during simulation updates.
      * </p>
+     *
      */
     @Override
     public void run() {
