@@ -18,6 +18,7 @@ import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.view.ResultView;
 
+import javax.xml.crypto.Data;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,8 +39,8 @@ public class MyEngine extends Engine {
      * service times.
      */
 
-    public MyEngine(VisualizeController vc, ContinuousGenerator arrivalContinuousGenerator) {
-        super(vc);
+    public MyEngine(ContinuousGenerator arrivalContinuousGenerator) {
+//        super();
 
         // set arrivalContinuousGenerator
         this.arrivalContinuousGenerator = arrivalContinuousGenerator;
@@ -172,15 +173,16 @@ public class MyEngine extends Engine {
          */
 
         Platform.runLater(() -> {
-            ResultView.getInstance().getController().addResult(new ResultData(
+            ResultData resultData = new ResultData(
                     servicePoints.get(ServicePointTypes.TIRE_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.CUSTOMER_SERVICE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.MAINTENANCE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.OIL_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.OTHER_REPAIRS).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.INSPECTION).serviceTime / currentTime,
-                    ((Customer.getTotalServed() / currentTime) * 60)
-            ));
+                    ((Customer.getTotalServed() / currentTime) * 60));
+            ResultView.getInstance().getController().addResult(resultData);
+            DataStore.getInstance().addResult(resultData);
         });
 
         Clock.getInstance().setClock(0); // Reset clock for potential next run

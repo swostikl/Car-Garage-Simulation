@@ -13,7 +13,6 @@ import java.util.List;
 public class DataStore implements Serializable {
 
     private static DataStore instance = null;
-    private static File currentFile;
     private final List<ResultData> resultDataList;
     private SimulationSettings simulationSettings;
 
@@ -38,18 +37,7 @@ public class DataStore implements Serializable {
      * @param file File to load the DataStore from
      */
     public static void loadFromFile(File file) throws CannotLoadFileException {
-        if (file == null) {
-            throw new CannotLoadFileException();
-        }
-        try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            Object loadedObject = ois.readObject();
-            instance = new DataStore((DataStore) loadedObject);
-            System.out.println("Data loaded from file: " + file.getAbsolutePath());
-            currentFile = file;
-        } catch (IOException | ClassNotFoundException e) {
-            throw new CannotLoadFileException();
-        }
+        instance = new DataStore(FileLoader.loadFromFile(file));
     }
 
     /**
@@ -66,7 +54,7 @@ public class DataStore implements Serializable {
 
     public static void clearInstance() {
         instance = null;
-        currentFile = null;
+        FileLoader.clearLoader();
     }
 
     /**
@@ -74,12 +62,9 @@ public class DataStore implements Serializable {
      *
      * @param file File to save the DataStore to
      */
-    public void saveToFileAs(File file) {
-        try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(this);
-            System.out.println("Data saved to file: " + file.getAbsolutePath());
-            currentFile = file;
+    public synchronized void saveToFileAs(File file) {
+        try {
+            FileLoader.saveToFileAs(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,12 +75,8 @@ public class DataStore implements Serializable {
      *
      * @throws NoFileSetException if no file has been set yet
      */
-    public void saveToFile() throws NoFileSetException {
-        if (currentFile != null) {
-            saveToFileAs(currentFile);
-        } else {
-            throw new NoFileSetException();
-        }
+    public synchronized void saveToFile() throws NoFileSetException {
+        FileLoader.saveToFile();
     }
 
     /**
@@ -103,7 +84,7 @@ public class DataStore implements Serializable {
      *
      * @return List of ResultData
      */
-    public List<ResultData> getResultDataList() {
+    public synchronized List<ResultData> getResultDataList() {
         return resultDataList;
     }
 
@@ -122,11 +103,11 @@ public class DataStore implements Serializable {
      *
      * @return SimulationSettings
      */
-    public SimulationSettings getSimulationSettings() {
+    public synchronized SimulationSettings getSimulationSettings() {
         return simulationSettings;
     }
 
-    public void setSimulationSettings(SimulationSettings s) {
+    public synchronized void setSimulationSettings(SimulationSettings s) {
         this.simulationSettings = s;
     }
 
@@ -135,7 +116,7 @@ public class DataStore implements Serializable {
      *
      * @param data ResultData to be added
      */
-    public void addResult(ResultData data) {
+    public synchronized void addResult(ResultData data) {
         resultDataList.add(data);
     }
 

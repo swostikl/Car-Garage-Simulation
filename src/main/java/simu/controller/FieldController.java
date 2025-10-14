@@ -1,15 +1,16 @@
-package simu.model;
+package simu.controller;
 
 import eduni.distributions.Normal;
+import simu.model.MyEngine;
 
 /**
  * A class handling Simulation setup
  */
-public class FieldControllerModel {
+public class FieldController {
 
     private final MyEngine myEngine;
 
-    public FieldControllerModel(MyEngine engine) {
+    public FieldController(MyEngine engine) {
         myEngine = engine;
     }
 

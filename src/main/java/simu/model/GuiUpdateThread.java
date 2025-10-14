@@ -1,6 +1,7 @@
 package simu.model;
 
 import simu.controller.VisualizeController;
+import simu.listener.VisualizeControllerListener;
 import simu.model.servicePoints.ServicePointTypes;
 
 import java.util.Map;
@@ -10,8 +11,8 @@ public class GuiUpdateThread extends Thread {
     private final VisualizeController vc;
     private final Map<ServicePointTypes, ServicePoint> servicePoints;
 
-    public GuiUpdateThread(VisualizeController vc, Map<ServicePointTypes, ServicePoint> servicePoints) {
-        this.vc = vc;
+    public GuiUpdateThread(Map<ServicePointTypes, ServicePoint> servicePoints) {
+        this.vc = VisualizeControllerListener.getInstance();
         this.servicePoints = servicePoints;
     }
 
