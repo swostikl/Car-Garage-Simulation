@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
 import javafx.stage.Stage;
 import simu.controller.VisualizeController;
+import simu.listener.VisualizeControllerListener;
 
 import java.awt.*;
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class VisualizeView {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/visualize_view.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
+        VisualizeControllerListener.getInstance().init(controller);
         Group content = new Group(root);
         ScrollPane scrollPane = new ScrollPane(content);
         scrollPane.setFitToHeight(true);

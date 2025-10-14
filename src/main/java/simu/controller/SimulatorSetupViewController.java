@@ -1,6 +1,6 @@
 package simu.controller;
 
-import simu.model.FieldControllerModel;
+import simu.model.*;
 import eduni.distributions.Normal;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
@@ -14,12 +14,9 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import simu.framework.ProcessManager;
 import simu.framework.Trace;
-import simu.model.DataStore;
 import simu.model.Exceptions.CannotLoadFileException;
 import simu.model.Exceptions.NoFileSetException;
 import simu.model.Exceptions.ZeroValueException;
-import simu.model.MyEngine;
-import simu.model.SimulationSettings;
 import simu.view.ResultView;
 import simu.view.StepperView;
 import simu.view.VisualizeView;
@@ -260,11 +257,11 @@ public class SimulatorSetupViewController {
         Trace.setTraceLevel(Trace.Level.INFO);
 
         Normal arrivalDistribution = new Normal(formatField(arrivalMean), formatField(arrivalVariance));
-        m = new MyEngine(visualizeController, arrivalDistribution);
-        FieldControllerModel fieldControllerModel = new FieldControllerModel(m);
+        m = new MyEngine(arrivalDistribution);
+        FieldController fieldController = new FieldController(m);
 
-        fieldControllerModel.setServiceRequired(formatField(meanService), formatField(serviceVariance));
-        fieldControllerModel.setInspectionFailRate(inspectionFailRate / 100);
+        fieldController.setServiceRequired(formatField(meanService), formatField(serviceVariance));
+        fieldController.setInspectionFailRate(inspectionFailRate / 100);
 
         m.setSimulationTime(formatField(totalTime));
         m.setName("Main Simulation");
@@ -362,23 +359,16 @@ public class SimulatorSetupViewController {
      * @throws ZeroValueException
      */
     private double formatField(TextField textField) throws ZeroValueException {
-        String valText = textField.getText();
-        if (!valText.isBlank()) {
-            if (valText.equals(".") || valText.equals(",")) {
-                throw new ZeroValueException();
-            }
-            double doubleVal = Double.parseDouble(valText.replaceAll(",", "."));
-            if (doubleVal <= 0) {
-                Platform.runLater(() -> textField.getStyleClass().add("invalid"));
-                throw new ZeroValueException();
-            }
+        try {
+            double doubleVal = FormFormatter.formatField(textField.getText());
             textField.getStyleClass().remove("invalid");
             Platform.runLater(() -> textField.setText(df.format(doubleVal)));
             return doubleVal;
+        } catch (ZeroValueException e) {
+            Trace.out(Trace.Level.INFO, "Field '" + (textField.getId() != null ? textField.getId() : "unknown") + "' is blank, throwing ZeroValueException");
+            Platform.runLater(() -> textField.getStyleClass().add("invalid"));
+            throw new ZeroValueException();
         }
-        Trace.out(Trace.Level.INFO, "Field '" + (textField.getId() != null ? textField.getId() : "unknown") + "' is blank, throwing ZeroValueException");
-        Platform.runLater(() -> textField.getStyleClass().add("invalid"));
-        throw new ZeroValueException();
     }
 
     /**

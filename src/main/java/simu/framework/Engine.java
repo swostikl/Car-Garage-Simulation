@@ -16,16 +16,15 @@ import java.util.Map;
 public abstract class Engine extends Process {
     protected Map<ServicePointTypes, ServicePoint> servicePoints;
     protected EventList eventList;        // events to be processed are stored here
-    protected VisualizeController vc;
+//    protected VisualizeController vc;
     private double simulationTime = 0;    // time when the simulation will be stopped
     private final Clock clock;                // to simplify the code (clock.getClock() instead Clock.getInstance().getClock())
 
     /**
      * Service Points are created in simu.model-package's class inheriting the Engine class
      */
-    public Engine(VisualizeController vc) {
+    public Engine() {
         super();
-        this.vc = vc;
         clock = Clock.getInstance();    // to improve the speed of the simulation
         eventList = new EventList();
     }
@@ -57,7 +56,7 @@ public abstract class Engine extends Process {
             Trace.out(Trace.Level.INFO, "\nC-phase:");
 
             // Queue labels
-            Thread t = new GuiUpdateThread(vc, servicePoints);
+            Thread t = new GuiUpdateThread(servicePoints);
             t.start();
 
 

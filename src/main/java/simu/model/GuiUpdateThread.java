@@ -1,38 +1,21 @@
 package simu.model;
 
 import simu.controller.VisualizeController;
+import simu.listener.VisualizeControllerListener;
 import simu.model.servicePoints.ServicePointTypes;
 
 import java.util.Map;
-
-/**
- * Thread responsible for updating the graphical user interface (GUI) with the current state of all service points in the simulation.
- */
 
 public class GuiUpdateThread extends Thread {
 
     private final VisualizeController vc;
     private final Map<ServicePointTypes, ServicePoint> servicePoints;
 
-    /**
-     *  Constructs a new {@code GuiUpdateThread} with the given controller and service points.
-     * @param vc the visualization controller responsible for updating the GUI.
-     * @param servicePoints a mapping of service points to their corresponding {@link ServicePoint} instances
-     */
-    public GuiUpdateThread(VisualizeController vc, Map<ServicePointTypes, ServicePoint> servicePoints) {
-        this.vc = vc;
+    public GuiUpdateThread(Map<ServicePointTypes, ServicePoint> servicePoints) {
+        this.vc = VisualizeControllerListener.getInstance();
         this.servicePoints = servicePoints;
     }
 
-    /**
-     * Executes the GUI update routine
-     * <p>
-     * This method updates the queue labels, service status labels, total number of customers served, and occupancy
-     * indicators for each service point type. It should be run in a separate thread to keep the user interface
-     * responsive during simulation updates.
-     * </p>
-     *
-     */
     @Override
     public void run() {
         vc.setArrivalLabel(servicePoints.get(ServicePointTypes.CUSTOMER_SERVICE));          // Customer Service queue
