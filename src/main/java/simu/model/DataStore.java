@@ -88,16 +88,6 @@ public class DataStore implements Serializable {
         return resultDataList;
     }
 
-//    /**
-//     * Initialize the DataStore singleton instance with the provided settings if it hasn't been initialized yet.
-//     * @param settings SimulationSettings to initialize the DataStore with
-//     */
-//    public static void init(SimulationSettings settings) {
-//        if (instance == null) {
-//            instance = new DataStore(settings);
-//        }
-//    }
-
     /**
      * Get the simulation settings.
      *

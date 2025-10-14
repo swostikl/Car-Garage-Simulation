@@ -31,13 +31,16 @@ public class ResultData implements Serializable {
     private final DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
 
     /**
-     * @param tireChangeServiceUtilizationRate
-     * @param customerServiceUtilizationRate
-     * @param maintenanceServiceUtilizationRate
-     * @param oilChangeServiceUtilizationRate
-     * @param repairServiceUtilizationRate
-     * @param inspectionServiceUtilizationRate
-     * @param customerThroughput
+     * Creates a new {@code ResultData} object containing the utilization rates and throughput metrics.
+     * @param tireChangeServiceUtilizationRate utilization rate of the Tire Change service point
+     * @param customerServiceUtilizationRate    utilization rate of the Customer Service point
+     * @param maintenanceServiceUtilizationRate utilization rate of the Maintenance service point
+     * @param oilChangeServiceUtilizationRate   utilization rate of the oil change service point
+     * @param repairServiceUtilizationRate  utilization rate of the other repairs service point
+     * @param inspectionServiceUtilizationRate utilization rate of the Inspection service point
+     * @param customerThroughput average number of customers served per hour (customers/hour)
+     *
+     *
      */
     public ResultData(double tireChangeServiceUtilizationRate, double customerServiceUtilizationRate, double maintenanceServiceUtilizationRate, double oilChangeServiceUtilizationRate, double repairServiceUtilizationRate, double inspectionServiceUtilizationRate, double customerThroughput) {
         df.setGroupingUsed(false);
@@ -51,29 +54,72 @@ public class ResultData implements Serializable {
         this.customerThroughput = customerThroughput;
     }
 
+    /**
+     * Returns the utilization rate of the Customer Service point as a percentage string.
+     *
+     * @return the formatted Customer Service utilization rate (e.g., {@code "85.4 %"})
+     *
+     */
     public String getCustomerServiceUtilizationRate() {
         return df.format(customerServiceUtilizationRate * 100) + " %";
     }
 
+    /**
+     *Returns the utilization rate of the Maintenance service point as a percentage string.
+     * @return the formatted Maintenance utilization rate (e.g.{@code "77.2%"})
+     */
     public String getMaintenanceServiceUtilizationRate() {
         return df.format(maintenanceServiceUtilizationRate * 100) + " %";
     }
+
+    /**
+     *
+     * Returns the utilization rate of the Tire Change service point as a percentage string.
+     *
+     * @return the formatted Tire Change utilization rate (e.g., {@code "91.7 %"})
+     */
 
     public String getTireChangeServiceUtilizationRate() {
         return df.format(tireChangeServiceUtilizationRate * 100) + " %";
     }
 
+    /**
+     * Returns the utilization rate of the Oil Change service point as a percentage string.
+     *
+     * @return the formatted Oil Change utilization rate (e.g., {@code "83.9 %"})
+     */
+
     public String getOilChangeServiceUtilizationRate() {
         return df.format(oilChangeServiceUtilizationRate * 100) + " %";
     }
+
+    /**
+     * Returns the utilization rate of the Other Repairs service point as a percentage string.
+     *
+     * @return the formatted Other Repairs utilization rate (e.g., {@code "62.5 %"})
+     *
+     */
 
     public String getRepairServiceUtilizationRate() {
         return df.format(repairServiceUtilizationRate * 100) + " %";
     }
 
+    /**
+     * Returns the utilization rate of the Inspection service point as a percentage string.
+     *
+     * @return the formatted Inspection utilization rate (e.g., {@code "70.3 %"})
+     *
+     */
+
     public String getInspectionServiceUtilizationRate() {
         return df.format(inspectionServiceUtilizationRate * 100) + " %";
     }
+    /**
+     * Returns the overall customer throughput of the simulation.
+     *
+     * @return the formatted throughput value (e.g., {@code "3.4578912 c/h"})
+     *
+     */
 
     public String getCustomerThroughput() {
         return customerThroughputFormat.format(customerThroughput) + " c/h";

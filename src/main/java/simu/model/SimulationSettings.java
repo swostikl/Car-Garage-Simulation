@@ -2,6 +2,9 @@ package simu.model;
 
 import java.io.Serializable;
 
+/**
+ * class for the configurable settings for the simulation run.
+ */
 public class SimulationSettings implements Serializable {
 
     private String arrivalTimeMean;
@@ -11,6 +14,15 @@ public class SimulationSettings implements Serializable {
     private String serviceRequiredVariance;
     private double inspectionFailRate;
 
+    /**
+     * constructs a new {@code SimulationSettings} object with the specified parameters.
+     * @param arrivalTimeMean the mean arrival time for customers
+     * @param arrivalTimeVariance the variance for the arrival time
+     * @param totalSimulationTime the total duration of the simulation
+     * @param serviceRequiredMean the mean service requires per customer
+     * @param serviceRequiredVariance the variance of the service time
+     * @param inspectionFailRate the probability of the failed inspection (0.0-0.1)
+     */
     public SimulationSettings(String arrivalTimeMean, String arrivalTimeVariance, String totalSimulationTime, String serviceRequiredMean, String serviceRequiredVariance, double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
         this.arrivalTimeMean = arrivalTimeMean;
@@ -20,50 +32,64 @@ public class SimulationSettings implements Serializable {
         this.serviceRequiredVariance = serviceRequiredVariance;
     }
 
+    /**
+     * Returns the mean arrival time
+     */
     public String getArrivalTimeMean() {
         return arrivalTimeMean;
     }
 
+    /**
+     * Sets the mean arrival time
+     */
     public void setArrivalTimeMean(String arrivalTimeMean) {
         this.arrivalTimeMean = arrivalTimeMean;
     }
 
+    /** Returns the variance of the arrival time */
     public String getArrivalTimeVariance() {
         return arrivalTimeVariance;
     }
 
+    /** Sets the variance of the arrival time */
     public void setArrivalTimeVariance(String arrivalTimeVariance) {
         this.arrivalTimeVariance = arrivalTimeVariance;
     }
 
+    /** Returns the total simulation time */
     public String getTotalSimulationTime() {
         return totalSimulationTime;
     }
 
+    /** Sets the total simulation time */
     public void setTotalSimulationTime(String totalSimulationTime) {
         this.totalSimulationTime = totalSimulationTime;
     }
 
+    /** Returns the mean service time required per person */
     public String getServiceRequiredMean() {
         return serviceRequiredMean;
     }
-
+    /** Sets the mean of the service time required */
     public void setServiceRequiredMean(String serviceRequiredMean) {
         this.serviceRequiredMean = serviceRequiredMean;
     }
 
+    /** Returns the variance of the service time required. */
     public String getServiceRequiredVariance() {
         return serviceRequiredVariance;
     }
-
+    /** Sets the variance of the service time required. */
     public void setServiceRequiredVariance(String serviceRequiredVariance) {
         this.serviceRequiredVariance = serviceRequiredVariance;
     }
 
+    /** Returns the inspection failure rate. */
     public double getInspectionFailRate() {
         return inspectionFailRate;
     }
 
+    /** Sets the inspection failure rate. */
     public void setInspectionFailRate(double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
     }
