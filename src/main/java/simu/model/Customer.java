@@ -88,7 +88,6 @@ public class Customer {
      */
     private MaintenanceType getRandomMaintenanceType() {
         return MAINTENANCE_TYPES[rand.nextInt(MAINTENANCE_TYPES.length)];
-
     }
 
     /**
