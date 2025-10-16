@@ -1,16 +1,22 @@
 package simu.model;
 
-import javafx.application.Platform;
-import javafx.scene.control.TextField;
-import simu.framework.Trace;
 import simu.model.Exceptions.ZeroValueException;
 
 import java.text.DecimalFormat;
 
-
+/**
+ *  Utility class for validating and formatting numeric input values from text fields.
+ */
 public class FormFormatter {
-
+    /** Decimal format for potential number formatting needs. */
     private static final DecimalFormat df = new DecimalFormat("#.##");
+
+    /**
+     *
+     * @param valText the string representation of the numeric value (e.g. "10.5" or "1,14")
+     * @return the parsed {@code double} value
+     *
+     */
     public static double formatField(String valText) throws ZeroValueException {
         if (!valText.isBlank()) {
             if (valText.equals(".") || valText.equals(",")) {
