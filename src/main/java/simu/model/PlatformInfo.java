@@ -1,17 +1,30 @@
 package simu.model;
 
 /**
- * Class to detect and store platform info
+ * Singleton Class to detect and store platform info
  */
 public class PlatformInfo {
 
     private static PlatformInfo instance;
     private final boolean isMac;
 
+    /**
+     * Private constructor for singleton pattern.
+     * <p>
+     * Detects the operating system and sets the {@code isMac} flag.
+     * </p>
+     */
+
     private PlatformInfo() {
         String OS = System.getProperty("os.name").toLowerCase();
         isMac = OS.contains("darwin") || OS.contains("mac");
     }
+
+    /**
+     * Returns the singleton instance of {@code PlatformInfo}.
+     *
+     * @return the {@code PlatformInfo} instance
+     */
 
     public static PlatformInfo getInstance() {
         if (instance == null) {
