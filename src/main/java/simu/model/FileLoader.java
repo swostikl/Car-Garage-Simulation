@@ -5,9 +5,18 @@ import simu.model.Exceptions.NoFileSetException;
 
 import java.io.*;
 
+/**
+ * Utility class for saving and loading {@link DataStore} objects from the file
+ */
 public class FileLoader {
 
     private static File currentFile;
+
+    /**
+     * Loads a {@link DataStore} object from a specified file
+     * @param file the file to load data from
+     * @return the deserialized {@link DataStore} object
+     */
     public static DataStore loadFromFile(File file) throws CannotLoadFileException {
         if (file == null) {
             throw new CannotLoadFileException();
@@ -24,6 +33,13 @@ public class FileLoader {
         }
     }
 
+    /**
+     * Saves the current{@link DataStore} instance to the specified file
+     *
+     * @param file the file to which data will be saved
+     *
+     */
+
     public static void saveToFileAs(File file) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(file);
              ObjectOutputStream oos = new ObjectOutputStream(fos)) {
@@ -32,6 +48,11 @@ public class FileLoader {
             currentFile = file;
         }
     }
+
+    /**
+     * Saves the current {@link DataStore} instance to the last used file
+     *
+     */
 
     public static void saveToFile() throws NoFileSetException {
         if (currentFile != null) {
@@ -45,6 +66,9 @@ public class FileLoader {
         }
     }
 
+    /**
+     * Clears the current file reference.
+     */
     public static void clearLoader() {
         currentFile = null;
     }
