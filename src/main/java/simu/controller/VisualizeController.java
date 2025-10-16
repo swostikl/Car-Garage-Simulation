@@ -137,6 +137,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label showing the currently served customer at customer service.
+     *
+     * @param servicepoint the customer service point
+     */
     public void setCustomerServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -148,6 +153,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label showing the currently served customer at maintenance.
+     *
+     * @param servicepoint the maintenance service point
+     */
     public void setMaintenancelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -159,6 +169,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label showing the currently served customer at tire change.
+     *
+     * @param servicepoint the tire change service point
+     */
     public void setTireChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -170,6 +185,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label showing the currently served customer at oil change.
+     *
+     * @param servicepoint the oil change service point
+     */
     public void setOilChangeServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -180,6 +200,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the label showing the currently served customer at repair work
+     *
+     * @param servicepoint the repair work service point
+     */
 
     public void setRepairWorklabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
@@ -192,6 +217,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the label showing the currently served customer at inspection.
+     *
+     * @param servicepoint the inspection service point
+     */
     public void setInspectionServicelabel(ServicePoint servicepoint) {
         Platform.runLater(() -> {
             Customer c = servicepoint.getCurrentCustomer();
@@ -202,6 +232,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the label displaying the total number of customers served.
+     *
+     * @param i unused parameter (total served is fetched directly from Customer)
+     */
 
     public void setCustomerServedlabel(int i) {
         Platform.runLater(() -> {
@@ -210,12 +245,15 @@ public class VisualizeController {
         });
     }
 
-
+    /**
+     * Updates the color of the customer service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
     public void setCustomerServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
                 Rectangle r = (Rectangle) customerService.getChildren().getFirst();
-//                Label l = (Label) customerService.getChildren().get(1);
                 r.setFill(Color.web(occupied ? "#fc5d68" : "#ebebff")); // red if busy, blue if free
                 r.setStroke(Color.web(occupied ? "#f7202f" : "#9270bc"));
                 customerServicelabel.setTextFill(occupied ? Color.RED : Color.BLACK);
@@ -226,6 +264,11 @@ public class VisualizeController {
         });
     }
 
+    /**
+     * Updates the color of the maintenance service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
     public void setMaintenanceServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
             try {
@@ -238,6 +281,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the color of the tire change service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
 
     public void setTireChangeServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
@@ -251,6 +299,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the color of the oil change service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
 
     public void setOilChangeServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
@@ -264,6 +317,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the color of the repair work service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
 
     public void setRepairWorkServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
@@ -277,6 +335,11 @@ public class VisualizeController {
             }
         });
     }
+    /**
+     * Updates the color of the Inspection service rectangle to indicate occupancy.
+     *
+     * @param occupied true if the service point is currently occupied, false otherwise
+     */
 
     public void setInspectionServiceOccupied(boolean occupied) {
         Platform.runLater(() -> {
