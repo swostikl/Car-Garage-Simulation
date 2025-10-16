@@ -105,6 +105,11 @@ public abstract class ServicePoint {
         return !queue.isEmpty();
     }
 
+    /**
+     * Returns the queue of customers currently waiting at the service point
+     * @return a {@link LinkedList} containing the {@link Customer} objects in the queue
+     */
+
     protected LinkedList<Customer> getQueue() {
         return queue;
     }
