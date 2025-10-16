@@ -3,7 +3,7 @@ package simu.framework;
 import java.util.ArrayList;
 
 /**
- * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+ * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the CPU time to the next thread.
  */
 public class ProcessManager {
 

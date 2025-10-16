@@ -4,12 +4,14 @@ import eduni.distributions.ContinuousGenerator;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import simu.controller.VisualizeController;
-import simu.framework.ArrivalProcess;
+import org.mockito.ArgumentCaptor;
+import simu.framework.Event;
 import simu.framework.EventList;
 import simu.framework.Trace;
+import simu.model.servicePoints.CustomerServicePoint;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class CustomerTest {
 
@@ -42,14 +44,9 @@ class CustomerTest {
         Trace.setTraceLevel(Trace.Level.INFO);
     }
 
-    @BeforeEach
-    void beforeEach() {
-        c = new Customer(continuousGenerator, 0.5, 0.5);
-    }
-
     @Test
     void testMaintenanceCount() {
-        System.out.println("-".repeat(15) + "Testing Maintenance Count" + "-".repeat(15));
+        c = new Customer(continuousGenerator, 0.5, 0.5);
         int count = 0;
         while (c.pollMaintenance() != null) {
             count++;

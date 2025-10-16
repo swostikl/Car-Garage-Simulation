@@ -6,6 +6,7 @@ import simu.model.Exceptions.NoFileSetException;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A data class used to store data
@@ -117,5 +118,16 @@ public class DataStore implements Serializable {
      */
     public void removeResult(ResultData data) {
         resultDataList.remove(data);
+    }
+
+    public DataStore copy() {
+        return new DataStore(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        DataStore dataStore = (DataStore) o;
+        return Objects.equals(resultDataList, dataStore.resultDataList) && Objects.equals(simulationSettings, dataStore.simulationSettings);
     }
 }

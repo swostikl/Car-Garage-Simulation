@@ -2,6 +2,7 @@ package simu.model;
 
 import java.io.Serializable;
 import java.text.DecimalFormat;
+import java.util.Objects;
 
 /**
  * A data class used to store simulation result data
@@ -123,5 +124,12 @@ public class ResultData implements Serializable {
 
     public String getCustomerThroughput() {
         return customerThroughputFormat.format(customerThroughput) + " c/h";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        ResultData that = (ResultData) o;
+        return Double.compare(customerServiceUtilizationRate, that.customerServiceUtilizationRate) == 0 && Double.compare(maintenanceServiceUtilizationRate, that.maintenanceServiceUtilizationRate) == 0 && Double.compare(tireChangeServiceUtilizationRate, that.tireChangeServiceUtilizationRate) == 0 && Double.compare(oilChangeServiceUtilizationRate, that.oilChangeServiceUtilizationRate) == 0 && Double.compare(repairServiceUtilizationRate, that.repairServiceUtilizationRate) == 0 && Double.compare(inspectionServiceUtilizationRate, that.inspectionServiceUtilizationRate) == 0 && Double.compare(customerThroughput, that.customerThroughput) == 0 && Objects.equals(df, that.df) && Objects.equals(customerThroughputFormat, that.customerThroughputFormat);
     }
 }
