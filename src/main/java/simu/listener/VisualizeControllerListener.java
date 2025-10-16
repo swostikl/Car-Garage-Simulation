@@ -3,6 +3,9 @@ package simu.listener;
 import simu.controller.VisualizeController;
 import simu.model.ServicePoint;
 
+/**
+ * Singleton listener that acts as a proxy to update the {@link VisualizeController}
+ */
 public class VisualizeControllerListener extends VisualizeController {
 
     private VisualizeController vc;
@@ -11,10 +14,18 @@ public class VisualizeControllerListener extends VisualizeController {
 
     private VisualizeControllerListener() {}
 
+    /**
+     * Initializes the listener with the actual {@link VisualizeController} instance
+     * @param vc the controller top delegate GUI updates to
+     */
     public void init(VisualizeController vc) {
         this.vc = vc;
     }
 
+    /**
+     * Returns the singleton instance of this listener
+     * @return the {@code VisualizeControllerListener} instance
+     */
     public static VisualizeControllerListener getInstance() {
         if (instance == null) {
             instance = new VisualizeControllerListener();
