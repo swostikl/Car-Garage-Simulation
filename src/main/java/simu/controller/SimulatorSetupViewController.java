@@ -47,7 +47,6 @@ public class SimulatorSetupViewController {
     // Window closing properties
     private Stage stepperStage;
     private Stage visualizeStage;
-    private Stage setupStage;
 
     @FXML private TextField arrivalMean;
     @FXML private TextField arrivalVariance;
@@ -65,7 +64,7 @@ public class SimulatorSetupViewController {
 
     /**
      * On run button clicked
-     * @param event
+     * @param event event
      * @throws IOException
      */
     @FXML
@@ -74,8 +73,6 @@ public class SimulatorSetupViewController {
             runProgram.setText("Running");
             runProgram.setDisable(true);
             hasRun = true;
-
-            setupStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
             System.out.println("Car Garage Simulation starting...");
 

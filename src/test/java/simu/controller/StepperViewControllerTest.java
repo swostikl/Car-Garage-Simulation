@@ -11,9 +11,9 @@ import simu.framework.Process;
 import simu.framework.ProcessManager;
 import simu.model.DelayProcess;
 import javafx.embed.swing.JFXPanel;
+import test.PrivateFieldAccess;
 
 import java.io.IOException;
-import java.lang.reflect.Field;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -26,7 +26,6 @@ class StepperViewControllerTest {
     @BeforeAll
     static void initJavaFX() {
         new JFXPanel();
-        
     }
 
     @BeforeEach
@@ -57,9 +56,7 @@ class StepperViewControllerTest {
     @Test
     void delayAddTest() throws NoSuchFieldException, IllegalAccessException {
         // arrange: get private increaseSpeed button from stepperViewController and create a mock ProcessManager
-        Field increaseSpeedField = stepperViewController.getClass().getDeclaredField("increaseSpeed");
-        increaseSpeedField.setAccessible(true);
-        Button increaseSpeed = (Button) increaseSpeedField.get(stepperViewController);
+        Button increaseSpeed = PrivateFieldAccess.getPrivateField(stepperViewController, "increaseSpeed");
         ProcessManager pm = mock(ProcessManager.class);
         ArgumentCaptor<Process> processArgumentCaptor = ArgumentCaptor.forClass(Process.class);
 
@@ -94,9 +91,7 @@ class StepperViewControllerTest {
         // arrange: create a mock ProcessManager and get private decreaseSpeed button from stepperViewController
         ProcessManager pm = mock(ProcessManager.class);
         ArgumentCaptor<Process> processArgumentCaptor = ArgumentCaptor.forClass(Process.class);
-        Field decreaseSpeedField = stepperViewController.getClass().getDeclaredField("decreaseSpeed");
-        decreaseSpeedField.setAccessible(true);
-        Button decreaseSpeed = (Button) decreaseSpeedField.get(stepperViewController);
+        Button decreaseSpeed = PrivateFieldAccess.getPrivateField(stepperViewController, "decreaseSpeed");
 
         /*
             act:
