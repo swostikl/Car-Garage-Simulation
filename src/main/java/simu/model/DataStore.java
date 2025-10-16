@@ -53,6 +53,9 @@ public class DataStore implements Serializable {
         return instance;
     }
 
+    /**
+     * Method to clear singleton instance
+     */
     public static void clearInstance() {
         instance = null;
         FileLoader.clearLoader();
@@ -98,6 +101,10 @@ public class DataStore implements Serializable {
         return simulationSettings;
     }
 
+    /**
+     * Method to set SimulationSettings
+     * @param s parameters for simulation settings
+     */
     public synchronized void setSimulationSettings(SimulationSettings s) {
         this.simulationSettings = s;
     }
