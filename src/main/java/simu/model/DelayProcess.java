@@ -9,11 +9,23 @@ public class DelayProcess extends Process {
     private volatile int delayMs;
     private volatile boolean running = true;
 
+    /**
+     * Constructs a new {@code DelayProcess} with the given delay duration
+     * @param delayMs the delay time in milliseconds
+     */
     public DelayProcess(int delayMs) {
         this.delayMs = delayMs;
         setName("Delay Process");
     }
 
+    /**
+     * Main process loop. Waits for activation from the {@code ProcessManager},
+     * then sleeps for the configured delay time, and yields control back.
+     * <p>
+     * This method will continue looping until {@link #stopDelay()} is called,
+     * or the thread is interrupted.
+     * </p>
+     */
     @Override
     public void run() {
         while (running) {
@@ -21,11 +33,11 @@ public class DelayProcess extends Process {
                 await(); // waiting for ProcessManager to make this process to run
 
 
-                Thread.sleep(delayMs);
+                Thread.sleep(delayMs); // Introduce the delay
 
-                giveUp();
+                giveUp(); // yield control back to the ProcessManager
             } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
+                Thread.currentThread().interrupt(); // Re-interrupt the thread and exit the loop
                 break;
             }
         }
@@ -46,6 +58,14 @@ public class DelayProcess extends Process {
     public int getDelayMs() {
         return delayMs;
     }
+
+    /**
+     * stops the delay process
+     * <p>
+     * This method sets the {@code running} flag to {@code false} and deregisters
+     * the process from the {@code ProcessManager}, effectively ending its loop.
+     * </p>
+     */
 
     public void stopDelay() {
         running = false;
