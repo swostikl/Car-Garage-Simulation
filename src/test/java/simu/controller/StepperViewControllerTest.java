@@ -26,6 +26,7 @@ class StepperViewControllerTest {
     @BeforeAll
     static void initJavaFX() {
         new JFXPanel();
+        
     }
 
     @BeforeEach
@@ -54,13 +55,13 @@ class StepperViewControllerTest {
     }
 
     @Test
-    void delayAddTest() throws IOException, NoSuchFieldException, IllegalAccessException {
+    void delayAddTest() throws NoSuchFieldException, IllegalAccessException {
         // arrange: get private increaseSpeed button from stepperViewController and create a mock ProcessManager
-        Field increaseSpeedField = StepperViewController.class.getDeclaredField("increaseSpeed");
+        Field increaseSpeedField = stepperViewController.getClass().getDeclaredField("increaseSpeed");
         increaseSpeedField.setAccessible(true);
         Button increaseSpeed = (Button) increaseSpeedField.get(stepperViewController);
         ProcessManager pm = mock(ProcessManager.class);
-        ArgumentCaptor<Process> delayProcessArgumentCaptor = ArgumentCaptor.forClass(Process.class);
+        ArgumentCaptor<Process> processArgumentCaptor = ArgumentCaptor.forClass(Process.class);
 
         /*
             act:
@@ -69,8 +70,8 @@ class StepperViewControllerTest {
             3. fire the increaseSpeed Button
          */
         stepperViewController.init(pm, 200);
-        verify(pm).addProcess(delayProcessArgumentCaptor.capture());
-        Process delayProcess = delayProcessArgumentCaptor.getValue();
+        verify(pm).addProcess(processArgumentCaptor.capture());
+        Process delayProcess = processArgumentCaptor.getValue();
         increaseSpeed.fire();
 
         // assert: assert if the delayMs is correct
@@ -79,12 +80,47 @@ class StepperViewControllerTest {
         }
         assertEquals(300, ((DelayProcess) delayProcess).getDelayMs());
 
-        // act 2: increase speed further
+        // act 1: increase speed further
         for (int i = 0; i < 50; i++) {
             increaseSpeed.fire();
         }
 
-        // assert 2: assert if the delay equals 2000
+        // assert 1: assert if the delay equals 2000
         assertEquals(2000, ((DelayProcess) delayProcess).getDelayMs());
+    }
+
+    @Test
+    void delaySubtractTest() throws NoSuchFieldException, IllegalAccessException {
+        // arrange: create a mock ProcessManager and get private decreaseSpeed button from stepperViewController
+        ProcessManager pm = mock(ProcessManager.class);
+        ArgumentCaptor<Process> processArgumentCaptor = ArgumentCaptor.forClass(Process.class);
+        Field decreaseSpeedField = stepperViewController.getClass().getDeclaredField("decreaseSpeed");
+        decreaseSpeedField.setAccessible(true);
+        Button decreaseSpeed = (Button) decreaseSpeedField.get(stepperViewController);
+
+        /*
+            act:
+            1. initialize stepperViewController with mock pm
+            2. Capture delayProcess argument from ProcessManager .addProcess() method
+            3. fire the decreaseSpeed Button
+         */
+        stepperViewController.init(pm, 400);
+        verify(pm).addProcess(processArgumentCaptor.capture());
+        Process delayProcess = processArgumentCaptor.getValue();
+        decreaseSpeed.fire();
+
+        // assert: assert if the delayMs is correct
+        if (!(delayProcess instanceof DelayProcess)) {
+            fail("Captured Process not an instance of DelayProcess");
+        }
+        assertEquals(300, ((DelayProcess) delayProcess).getDelayMs());
+
+        // act 1: decrease speed further
+        for (int i = 0; i < 50; i++) {
+            decreaseSpeed.fire();
+        }
+
+        // assert 1: assert if the delay equals 100
+        assertEquals(100, ((DelayProcess) delayProcess).getDelayMs());
     }
 }
