@@ -39,6 +39,14 @@ public class DelayProcess extends Process {
         this.delayMs = delayMs;
     }
 
+    /**
+     * Get delay time in ms
+     * @return delay in ms
+     */
+    public int getDelayMs() {
+        return delayMs;
+    }
+
     public void stopDelay() {
         running = false;
         deregister(); // Removing from ProcessManager

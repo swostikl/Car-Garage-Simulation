@@ -99,7 +99,9 @@ public class StepperViewController {
         pm.addProcess(delayProcess);
     }
 
+
     //  stop method for window closing
+    @Deprecated
     public void stopSimulation() {
 
         if (delayProcess != null) {
