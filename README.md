@@ -82,3 +82,12 @@ flowchart TD
     style start height:0px
 ```
 # Simulation Instructions
+- [1] Download the Zip file 
+- [2] Open the Simulator and load the Setup Window.
+- [3] Enter the required input Parameters.
+- [4] Adjust the inspection failure rate and speed if necessary.
+- [5] Click Run to start the simulation.
+- [6] Observe the real-time process in the Simulation window.
+- [7] Use the Stepper Control Window to pause, resume, or step through events.
+- [8] Once completes, result view will automatically appear when the simulation exists.
+- [9] Interpret the performance data and adjust parameters for further experiment.
