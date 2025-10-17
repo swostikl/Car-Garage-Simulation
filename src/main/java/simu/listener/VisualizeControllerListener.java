@@ -19,8 +19,8 @@ public class VisualizeControllerListener extends VisualizeController {
      * @param vc the controller to delegate GUI updates to
      */
     public void init(VisualizeController vc) {
-        this.vc = vc;
-    }
+        this.vc = null;
+    } // set as null for testing purposes
 
     /**
      * Returns the singleton instance of this listener
