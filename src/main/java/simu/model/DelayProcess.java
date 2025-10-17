@@ -32,6 +32,7 @@ public class DelayProcess extends Process {
         while (running) {
             try {
                 await(); // waiting for ProcessManager to make this process to run
+                deregister(); // remove delay for testing purposes
 
 
                 Thread.sleep(delayMs); // Introduce the delay
