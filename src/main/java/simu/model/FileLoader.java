@@ -38,7 +38,7 @@ public class FileLoader {
      * Saves the current {@link DataStore} instance to the specified file
      *
      * @param file the file to which data will be saved
-     *
+     * @throws IOException if an I/O error occurs while writing to the file
      */
 
     public static void saveToFileAs(File file) throws IOException {
