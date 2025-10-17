@@ -3,7 +3,7 @@ package simu.framework;
 import java.util.ArrayList;
 
 /**
- * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the processing power to the next process.
+ * A cooperative multitasking thread manager. Relying on each process to voluntarily call {@code giveUp();} to hand the CPU time to the next thread.
  */
 public class ProcessManager {
 
@@ -19,7 +19,8 @@ public class ProcessManager {
     }
 
     /**
-     * Add a process to the process manager and start it.
+     * Add a {@link Process} to the process manager and start it.
+     * When a {@link Process} is started, {@link simu.framework.Process#deregister()} must be called from its instance to remove the process from {@link ProcessManager}
      * @param p Process
      */
     synchronized public void addProcess(Process p) {

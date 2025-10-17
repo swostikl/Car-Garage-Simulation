@@ -3,7 +3,7 @@ package simu.model;
 import simu.framework.Process;
 
 /**
- * A thread of type {@code Process} that pauses the simulation
+ * A thread of type {@link Process} that pauses the simulation
  */
 public class Interrupt extends Process {
     public Interrupt() {

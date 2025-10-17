@@ -10,7 +10,7 @@ import simu.model.DelayProcess;
 import simu.model.Interrupt;
 
 /**
- * Controller class for StepperView
+ * Controller class for StepperView UI
  */
 public class StepperViewController {
 
@@ -35,6 +35,14 @@ public class StepperViewController {
 
     private int currentDelay;
 
+    /**
+     * Handles the pause/resume toggle button action
+     * <p>
+     * When paused, the delay process is deregistered and an interrupt
+     * process is added to halt the simulation. When resumed, the delay
+     * process is restarted and the interrupt is removed.
+     * </p>
+     */
     @FXML
     void onPausePressed() {
         if (pauseButton.isSelected()) {
@@ -56,12 +64,23 @@ public class StepperViewController {
         }
     }
 
+    /**
+     * handles the "Step" button action
+     */
     @FXML
     void onStepPressed() {
         if (interrupt != null) {
             interrupt.giveUp();
         }
     }
+
+    /**
+     * Decreases the simulation speed (reduces delay between steps).
+     * <p>
+     * Updates the delay value, the label, and the delay process.
+     * Minimum delay is 100 ms.
+     * </p>
+     */
 
     @FXML
     void onDecreaseSpeed() {
@@ -70,12 +89,24 @@ public class StepperViewController {
         updateDelayProcess();
     }
 
+    /**
+     * Increases the simulation speed (increases delay between steps).
+     * <p>
+     * Updates the delay value, the label, and the delay process.
+     * Maximum delay is 2000 ms.
+     * </p>
+     */
+
     @FXML
     void onIncreaseSpeed() {
         currentDelay = Math.min(currentDelay + 100, 2000);
         updateDelayLabel();
         updateDelayProcess();
     }
+
+    /**
+     * Updates the delay label in the UI asynchronously using {@link Platform#runLater}.
+     */
 
     private void updateDelayLabel() {
         Platform.runLater(() -> {
@@ -85,12 +116,21 @@ public class StepperViewController {
         });
     }
 
+    /**
+     * Updates the delay value of the current {@link DelayProcess}.
+     */
+
     private void updateDelayProcess() {
         if (delayProcess != null) {
             delayProcess.setDelay(currentDelay);
         }
     }
 
+    /**
+     * Initializes the controller with the {@link ProcessManager} and starting delay.
+     * @param pm process manager that runs the simulation
+     * @param currentDelay the initial delay in ms between simulation steps
+     */
     public void init(ProcessManager pm, int currentDelay) {
         this.pm = pm;
         this.currentDelay = currentDelay;
@@ -99,7 +139,14 @@ public class StepperViewController {
         pm.addProcess(delayProcess);
     }
 
+
     //  stop method for window closing
+
+    /**
+     * Stops simulation and cleans up processes and UI elements
+     * @deprecated This method is deprecated and will be removed in future versions. Use appropriate cleanup logic in your application shutdown handler instead.
+     */
+    @Deprecated
     public void stopSimulation() {
 
         if (delayProcess != null) {

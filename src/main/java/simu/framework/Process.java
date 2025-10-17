@@ -15,10 +15,18 @@ public abstract class Process extends Thread {
     public Process() {
     }
 
+    /**
+     * returns the {@link ProcessManager} that manages this process
+     * @return the associated {@code ProcessManager}
+     */
     public ProcessManager getPm() {
         return pm;
     }
 
+    /**
+     * Sets the {@link ProcessManager} for this process
+     * @param pm the {@code ProcessManager} to manage this process
+     */
     public void setPm(ProcessManager pm) {
         this.pm = pm;
         this.lock = pm;
@@ -50,6 +58,9 @@ public abstract class Process extends Thread {
         }
     }
 
+    /**
+     * Remove current Process (Thread) from the Process Manager
+     */
     public void deregister() {
         pm.removeProcess(this);
         synchronized (lock) {

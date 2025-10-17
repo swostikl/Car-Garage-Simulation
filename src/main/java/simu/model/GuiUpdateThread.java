@@ -1,35 +1,39 @@
 package simu.model;
 
 import simu.controller.VisualizeController;
+import simu.listener.VisualizeControllerListener;
 import simu.model.servicePoints.ServicePointTypes;
 
 import java.util.Map;
 
-/**
- * Thread responsible for updating the graphical user interface (GUI) with the current state of all service points in the simulation.
- */
 
+/**
+ * A thread responsible for updating the GUI with the latest simulation data.
+ * <p>
+ * This thread retrieves information about various service points and updates
+ * the corresponding labels and visual indicators in the GUI. It handles queue sizes,
+ * service statuses, total customers served, and occupied/free status of service points.
+ * </p>
+ */
 public class GuiUpdateThread extends Thread {
 
     private final VisualizeController vc;
     private final Map<ServicePointTypes, ServicePoint> servicePoints;
 
     /**
-     *  Constructs a new {@code GuiUpdateThread} with the given controller and service points.
-     * @param vc the visualization controller responsible for updating the GUI.
-     * @param servicePoints a mapping of service points to their corresponding {@link ServicePoint} instances
+     *
+     * @param servicePoints a map of {@link ServicePointTypes} to {@link ServicePoint} representing all service points in the simulation
      */
-    public GuiUpdateThread(VisualizeController vc, Map<ServicePointTypes, ServicePoint> servicePoints) {
-        this.vc = vc;
+    public GuiUpdateThread(Map<ServicePointTypes, ServicePoint> servicePoints) {
+        this.vc = VisualizeControllerListener.getInstance();
         this.servicePoints = servicePoints;
     }
 
     /**
-     * Executes the GUI update routine
+     * Runs in the GUI update thread
      * <p>
-     * This method updates the queue labels, service status labels, total number of customers served, and occupancy
-     * indicators for each service point type. It should be run in a separate thread to keep the user interface
-     * responsive during simulation updates.
+     * This method is executed in a separate thread, allowing the GUI to refresh
+     * concurrently with the simulation logic.
      * </p>
      *
      */

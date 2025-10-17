@@ -3,7 +3,6 @@ package simu.model;
 import eduni.distributions.ContinuousGenerator;
 import eduni.distributions.Normal;
 import javafx.application.Platform;
-import simu.controller.VisualizeController;
 import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Engine;
@@ -17,6 +16,7 @@ import simu.model.servicePoints.maintenanceStations.OilChangeServicePoint;
 import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.view.ResultView;
+
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,10 +36,11 @@ public class MyEngine extends Engine {
      * Service Points and random number generator with different distributions are created here.
      * We use exponent distribution for customer arrival times and normal distribution for the
      * service times.
+     * @param arrivalContinuousGenerator the generator used to create a customer arrivals
      */
 
-    public MyEngine(VisualizeController vc, ContinuousGenerator arrivalContinuousGenerator) {
-        super(vc);
+    public MyEngine(ContinuousGenerator arrivalContinuousGenerator) {
+//        super();
 
         // set arrivalContinuousGenerator
         this.arrivalContinuousGenerator = arrivalContinuousGenerator;
@@ -80,6 +81,11 @@ public class MyEngine extends Engine {
     }
 
     //  Store simulation time locally
+
+    /**
+     * Sets the total simulation Time
+     * @param simulationTime Ending time of the simulation
+     */
     @Override
     public void setSimulationTime(double simulationTime) {
         super.setSimulationTime(simulationTime);
@@ -87,6 +93,14 @@ public class MyEngine extends Engine {
     }
 
     // Method to request stop
+
+    /**
+     * Requests the Simulation to stop
+     * <p>
+     * This method sets a stop flag, updates the simulation time to the current
+     * clock value, and ensures the engine's current process deregisters properly.
+     * </p>
+     */
     public void requestStop() {
         System.out.println("Trying to stop simulation...");
         stopSimulation = true;
@@ -172,15 +186,16 @@ public class MyEngine extends Engine {
          */
 
         Platform.runLater(() -> {
-            ResultView.getInstance().getController().addResult(new ResultData(
+            ResultData resultData = new ResultData(
                     servicePoints.get(ServicePointTypes.TIRE_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.CUSTOMER_SERVICE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.MAINTENANCE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.OIL_CHANGE).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.OTHER_REPAIRS).serviceTime / currentTime,
                     servicePoints.get(ServicePointTypes.INSPECTION).serviceTime / currentTime,
-                    ((Customer.getTotalServed() / currentTime) * 60)
-            ));
+                    ((Customer.getTotalServed() / currentTime) * 60));
+            ResultView.getInstance().getController().addResult(resultData);
+            DataStore.getInstance().addResult(resultData);
         });
 
         Clock.getInstance().setClock(0); // Reset clock for potential next run

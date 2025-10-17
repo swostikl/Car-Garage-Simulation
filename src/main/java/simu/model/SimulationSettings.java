@@ -1,6 +1,7 @@
 package simu.model;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /**
  * class for the configurable settings for the simulation run.
@@ -92,5 +93,12 @@ public class SimulationSettings implements Serializable {
     /** Sets the inspection failure rate. */
     public void setInspectionFailRate(double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        SimulationSettings that = (SimulationSettings) o;
+        return Double.compare(inspectionFailRate, that.inspectionFailRate) == 0 && Objects.equals(arrivalTimeMean, that.arrivalTimeMean) && Objects.equals(arrivalTimeVariance, that.arrivalTimeVariance) && Objects.equals(totalSimulationTime, that.totalSimulationTime) && Objects.equals(serviceRequiredMean, that.serviceRequiredMean) && Objects.equals(serviceRequiredVariance, that.serviceRequiredVariance);
     }
 }
