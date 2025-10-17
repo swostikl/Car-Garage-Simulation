@@ -52,7 +52,7 @@ public class Event implements Comparable<Event> {
 	}
 
     /**
-     *  Campares the event with another event based on the simulation time
+     *  Compares the event with another event based on the simulation time
      * @param arg the event to compare with
      * @return -1 if this event occurs earlier, 1 if later and 0 if at the same time
      */
