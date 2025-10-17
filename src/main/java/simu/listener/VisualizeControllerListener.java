@@ -16,7 +16,7 @@ public class VisualizeControllerListener extends VisualizeController {
 
     /**
      * Initializes the listener with the actual {@link VisualizeController} instance
-     * @param vc the controller top delegate GUI updates to
+     * @param vc the controller to delegate GUI updates to
      */
     public void init(VisualizeController vc) {
         this.vc = vc;
