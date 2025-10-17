@@ -1,16 +1,17 @@
 package simu.model;
 
 import simu.framework.Process;
+import simu.framework.ProcessManager;
 
 /**
- * A thread of type {@code Process} that will delay the simulation for a given milliseconds
+ * A thread of type {@link Process} that will delay the simulation for a given milliseconds
  */
 public class DelayProcess extends Process {
     private volatile int delayMs;
     private volatile boolean running = true;
 
     /**
-     * Constructs a new {@code DelayProcess} with the given delay duration
+     * Constructs a new {@link DelayProcess} with the given delay duration
      * @param delayMs the delay time in milliseconds
      */
     public DelayProcess(int delayMs) {
@@ -19,7 +20,7 @@ public class DelayProcess extends Process {
     }
 
     /**
-     * Main process loop. Waits for activation from the {@code ProcessManager},
+     * Main process loop. Waits for activation from the {@link ProcessManager},
      * then sleeps for the configured delay time, and yields control back.
      * <p>
      * This method will continue looping until {@link #deregister()} is called,

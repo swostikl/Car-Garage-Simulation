@@ -11,7 +11,7 @@ public class PlatformInfo {
     /**
      * Private constructor for singleton pattern.
      * <p>
-     * Detects the operating system and sets the {@code isMac} flag.
+     * Detects the operating system and sets the {@link #isMac} flag.
      * </p>
      */
 
@@ -21,9 +21,9 @@ public class PlatformInfo {
     }
 
     /**
-     * Returns the singleton instance of {@code PlatformInfo}.
+     * Returns the singleton instance of {@link PlatformInfo}.
      *
-     * @return the {@code PlatformInfo} instance
+     * @return the {@link PlatformInfo} instance
      */
 
     public static PlatformInfo getInstance() {

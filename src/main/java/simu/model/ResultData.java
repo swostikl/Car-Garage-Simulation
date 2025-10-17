@@ -32,7 +32,7 @@ public class ResultData implements Serializable {
     private final DecimalFormat customerThroughputFormat = new DecimalFormat("#.#######");
 
     /**
-     * Creates a new {@code ResultData} object containing the utilization rates and throughput metrics.
+     * Creates a new {@link ResultData} object containing the utilization rates and throughput metrics.
      * @param tireChangeServiceUtilizationRate utilization rate of the Tire Change service point
      * @param customerServiceUtilizationRate    utilization rate of the Customer Service point
      * @param maintenanceServiceUtilizationRate utilization rate of the Maintenance service point

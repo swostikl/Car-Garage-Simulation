@@ -34,7 +34,7 @@ public class FileLoader {
     }
 
     /**
-     * Saves the current{@link DataStore} instance to the specified file
+     * Saves the current {@link DataStore} instance to the specified file
      *
      * @param file the file to which data will be saved
      *
