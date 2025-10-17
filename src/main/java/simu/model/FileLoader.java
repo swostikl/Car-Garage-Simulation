@@ -53,6 +53,7 @@ public class FileLoader {
     /**
      * Saves the current {@link DataStore} instance to the last used file
      *
+     * @throws NoFileSetException if no file has been set to save to, or if an I/O error occurs during saving
      */
 
     public static void saveToFile() throws NoFileSetException {
