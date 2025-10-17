@@ -144,6 +144,7 @@ public class StepperViewController {
 
     /**
      * Stops simulation and cleans up processes and UI elements
+     * @deprecated This method is deprecated and will be removed in future versions. Use appropriate cleanup logic in your application shutdown handler instead.
      */
     @Deprecated
     public void stopSimulation() {
