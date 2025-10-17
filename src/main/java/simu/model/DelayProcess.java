@@ -22,7 +22,7 @@ public class DelayProcess extends Process {
      * Main process loop. Waits for activation from the {@code ProcessManager},
      * then sleeps for the configured delay time, and yields control back.
      * <p>
-     * This method will continue looping until {@link #stopDelay()} is called,
+     * This method will continue looping until {@link #deregister()} is called,
      * or the thread is interrupted.
      * </p>
      */
@@ -57,18 +57,5 @@ public class DelayProcess extends Process {
      */
     public int getDelayMs() {
         return delayMs;
-    }
-
-    /**
-     * stops the delay process
-     * <p>
-     * This method sets the {@code running} flag to {@code false} and deregisters
-     * the process from the {@code ProcessManager}, effectively ending its loop.
-     * </p>
-     */
-
-    public void stopDelay() {
-        running = false;
-        deregister(); // Removing from ProcessManager
     }
 }

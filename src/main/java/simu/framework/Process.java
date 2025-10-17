@@ -58,6 +58,9 @@ public abstract class Process extends Thread {
         }
     }
 
+    /**
+     * Remove current Process (Thread) from the Process Manager
+     */
     public void deregister() {
         pm.removeProcess(this);
         synchronized (lock) {

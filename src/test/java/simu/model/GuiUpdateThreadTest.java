@@ -3,6 +3,7 @@ package simu.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import simu.controller.VisualizeController;
+import simu.listener.VisualizeControllerListener;
 import simu.model.servicePoints.ServicePointTypes;
 
 import java.util.HashMap;
@@ -20,7 +21,7 @@ class GuiUpdateThreadTest {
         vcMock = mock(VisualizeController.class);
 
         // Inject the mock into the listener (singleton)
-        simu.listener.VisualizeControllerListener listener = simu.listener.VisualizeControllerListener.getInstance();
+        VisualizeControllerListener listener = VisualizeControllerListener.getInstance();
         listener.init(vcMock);
 
         // Mock service points
@@ -29,7 +30,7 @@ class GuiUpdateThreadTest {
             ServicePoint spMock = mock(ServicePoint.class);
             when(spMock.isReserved()).thenReturn(false);
             servicePoints.put(type, spMock);
-            Customer.getTotalServed();
+//            Customer.getTotalServed();
         }
     }
 

@@ -16,7 +16,5 @@ class InterruptTest {
         });
         interrupt.run();
         verify(interrupt, times(1)).await();
-
-
     }
 }

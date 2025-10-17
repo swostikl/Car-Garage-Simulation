@@ -19,13 +19,13 @@ class FileLoaderTest {
     void setUp() throws IOException {
         tempFile = File.createTempFile("testDataStore", ".tmp");
         tempFile.deleteOnExit();
-        DataStore.getInstance().clearInstance();
+        DataStore.clearInstance();
     }
 
     @AfterEach
     void tearDown(){
         FileLoader.clearLoader(); // clears the loader state after each test
-        DataStore.getInstance().clearInstance();
+        DataStore.clearInstance();
     }
 
     @Test
@@ -44,7 +44,6 @@ class FileLoaderTest {
     @Test
     void saveToFileAs() throws IOException, CannotLoadFileException {
         assertDoesNotThrow(() -> FileLoader.saveToFileAs(tempFile));
-
     }
 
 

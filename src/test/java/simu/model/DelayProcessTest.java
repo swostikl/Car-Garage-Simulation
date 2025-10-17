@@ -43,31 +43,16 @@ class DelayProcessTest {
 
 
     @Test
-    void testStopDelay() {
-        assertDoesNotThrow(()-> delayProcess.stopDelay(),"Stop delay should not throw any exceptions");
-    }
-
-
-    @Test
-    void testStopDelayCallsDeregister() {
-        // prevent actual logic of deregister
-        doNothing().when(delayProcess).deregister();
-
-        delayProcess.stopDelay();
-
-        // verify that deregister() is called exactly once
-        verify(delayProcess, times(1)).deregister();
+    void testDeregister() {
+        assertDoesNotThrow(()-> delayProcess.deregister(),"Stop delay should not throw any exceptions");
     }
 
     @Test
-    void testRunTerminateAfterStop() throws InterruptedException{
-        Thread t = new Thread(delayProcess::run);
-        t.start();
-
-        Thread.sleep(200);  // let it run in a bit
-        delayProcess.stopDelay(); // stop process
-        t.join(1000);  // wait for terminate
-        assertFalse(t.isAlive(), " Thread should be stop after stopDelay() is called ");
+    void testRunTerminateAfterStop() throws InterruptedException {
+        ProcessManager pm = new ProcessManager();
+        pm.addProcess(delayProcess);
+        delayProcess.deregister();
+        assertFalse(pm.containProcess(delayProcess));
     }
 
 }
