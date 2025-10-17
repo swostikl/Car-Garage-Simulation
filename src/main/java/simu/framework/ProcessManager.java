@@ -19,7 +19,8 @@ public class ProcessManager {
     }
 
     /**
-     * Add a process to the process manager and start it.
+     * Add a {@link Process} to the process manager and start it.
+     * When a {@link Process} is started, {@link simu.framework.Process#deregister()} must be called from its instance to remove the process from {@link ProcessManager}
      * @param p Process
      */
     synchronized public void addProcess(Process p) {
