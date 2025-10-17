@@ -24,7 +24,7 @@ public abstract class Process extends Thread {
     }
 
     /**
-     * Sets the {@link ProcessManager} foe this process
+     * Sets the {@link ProcessManager} for this process
      * @param pm the {@code ProcessManager} to manage this process
      */
     public void setPm(ProcessManager pm) {
