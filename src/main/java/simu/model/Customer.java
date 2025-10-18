@@ -17,7 +17,7 @@ public class Customer {
     private static final MaintenanceType[] MAINTENANCE_TYPES = MaintenanceType.values();
     private static int totalServed = 0; // total number of customer served
     private static int i = 1;
-    private static long sum = 0;    //sum of all service time
+    private static double sum = 0;    //sum of all service time
     private final Random rand = new Random();
     private final int id;
     private final boolean needInspection; // check  need inspection or not
@@ -198,9 +198,9 @@ public class Customer {
         Trace.out(Trace.Level.INFO, "Customer " + id + " removed: " + removalTime);
         Trace.out(Trace.Level.INFO, "Customer " + id + " stayed: " + (removalTime - arrivalTime));
 
-        sum += (long) (removalTime - arrivalTime);
+        sum += (removalTime - arrivalTime);
         totalServed++; // increment global counter (to see total number of customer being served
-        double mean = (double) sum / totalServed;
+        double mean = sum / totalServed;
         System.out.println("Current mean of the customer service times " + mean);
         System.out.println(" Total number of customer served : " + totalServed);
     }
