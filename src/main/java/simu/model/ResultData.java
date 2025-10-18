@@ -128,8 +128,28 @@ public class ResultData implements Serializable {
 
     @Override
     public boolean equals(Object o) {
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ResultData that = (ResultData) o;
-        return Double.compare(customerServiceUtilizationRate, that.customerServiceUtilizationRate) == 0 && Double.compare(maintenanceServiceUtilizationRate, that.maintenanceServiceUtilizationRate) == 0 && Double.compare(tireChangeServiceUtilizationRate, that.tireChangeServiceUtilizationRate) == 0 && Double.compare(oilChangeServiceUtilizationRate, that.oilChangeServiceUtilizationRate) == 0 && Double.compare(repairServiceUtilizationRate, that.repairServiceUtilizationRate) == 0 && Double.compare(inspectionServiceUtilizationRate, that.inspectionServiceUtilizationRate) == 0 && Double.compare(customerThroughput, that.customerThroughput) == 0 && Objects.equals(df, that.df) && Objects.equals(customerThroughputFormat, that.customerThroughputFormat);
+        return Double.compare(customerServiceUtilizationRate, that.customerServiceUtilizationRate) == 0 &&
+                Double.compare(maintenanceServiceUtilizationRate, that.maintenanceServiceUtilizationRate) == 0 &&
+                Double.compare(tireChangeServiceUtilizationRate, that.tireChangeServiceUtilizationRate) == 0 &&
+                Double.compare(oilChangeServiceUtilizationRate, that.oilChangeServiceUtilizationRate) == 0 &&
+                Double.compare(repairServiceUtilizationRate, that.repairServiceUtilizationRate) == 0 &&
+                Double.compare(inspectionServiceUtilizationRate, that.inspectionServiceUtilizationRate) == 0 &&
+                Double.compare(customerThroughput, that.customerThroughput) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+                customerServiceUtilizationRate,
+                maintenanceServiceUtilizationRate,
+                tireChangeServiceUtilizationRate,
+                oilChangeServiceUtilizationRate,
+                repairServiceUtilizationRate,
+                inspectionServiceUtilizationRate,
+                customerThroughput
+        );
     }
 }
