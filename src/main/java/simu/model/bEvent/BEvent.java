@@ -1,7 +1,6 @@
 package simu.model.bEvent;
 
 import eduni.distributions.ContinuousGenerator;
-import simu.controller.VisualizeController;
 import simu.framework.ArrivalProcess;
 import simu.framework.Clock;
 import simu.framework.Event;
@@ -21,11 +20,12 @@ public class BEvent {
 
     /**
      * Execute B Event
-     * @param servicePoints service point HashMap
-     * @param arrivalProcess arrival process
-     * @param event event to be run
+     *
+     * @param servicePoints        service point HashMap
+     * @param arrivalProcess       arrival process
+     * @param event                event to be run
      * @param maintenanceGenerator maintenance generator (Continuous Generator)
-     * @param inspectionFailRate inspection fail rate (0.0 - 1.0)
+     * @param inspectionFailRate   inspection fail rate (0.0 - 1.0)
      */
     static public void runBEvent(
             // pass something here if needed
