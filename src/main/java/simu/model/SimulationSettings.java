@@ -101,4 +101,16 @@ public class SimulationSettings implements Serializable {
         SimulationSettings that = (SimulationSettings) o;
         return Double.compare(inspectionFailRate, that.inspectionFailRate) == 0 && Objects.equals(arrivalTimeMean, that.arrivalTimeMean) && Objects.equals(arrivalTimeVariance, that.arrivalTimeVariance) && Objects.equals(totalSimulationTime, that.totalSimulationTime) && Objects.equals(serviceRequiredMean, that.serviceRequiredMean) && Objects.equals(serviceRequiredVariance, that.serviceRequiredVariance);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(
+            arrivalTimeMean,
+            arrivalTimeVariance,
+            totalSimulationTime,
+            serviceRequiredMean,
+            serviceRequiredVariance,
+            inspectionFailRate
+        );
+    }
 }
