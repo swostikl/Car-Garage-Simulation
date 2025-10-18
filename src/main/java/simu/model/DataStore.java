@@ -137,4 +137,9 @@ public class DataStore implements Serializable {
         DataStore dataStore = (DataStore) o;
         return Objects.equals(resultDataList, dataStore.resultDataList) && Objects.equals(simulationSettings, dataStore.simulationSettings);
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resultDataList, simulationSettings);
+    }
 }
