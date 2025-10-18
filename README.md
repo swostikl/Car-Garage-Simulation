@@ -82,12 +82,13 @@ flowchart TD
     style start height:0px
 ```
 # Simulation Instructions
-- [1] Download the Zip file 
-- [2] Open the Simulator and load the Setup Window.
-- [3] Enter the required input Parameters.
-- [4] Adjust the inspection failure rate and speed if necessary.
-- [5] Click Run to start the simulation.
-- [6] Observe the real-time process in the Simulation window.
-- [7] Use the Stepper Control Window to pause, resume, or step through events.
-- [8] Once the simulation completes, the result view will automatically appear when the simulation exits.
-- [9] Interpret the performance data and adjust parameters for further experiment.
+1. Download the .jar file from the latest [release](https://github.com/swostikl/Car-Garage-Simulation/releases).
+2. Run the JAR file with JDK or JRE 21 ([get Temurin JDK or JRE version 21](https://adoptium.net/en-GB/temurin/releases?version=21&os=any&arch=any))
+3. Open the Simulator and load the Setup Window.
+4. Enter the required input Parameters.
+5. Adjust the inspection failure rate and speed if necessary.
+6. Click Run to start the simulation.
+7. Observe the real-time process in the Simulation window.
+8. Use the Stepper Control Window to pause, resume, or step through events.
+9. Once the simulation completes, the result view will automatically appear when the simulation exits.
+10. Interpret the performance data and adjust parameters for further experiment.
