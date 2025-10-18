@@ -19,12 +19,12 @@ public class Customer {
     private static int i = 1;
     private static long sum = 0;    //sum of all service time
     private final Random rand = new Random();
-    private double arrivalTime;
-    private double removalTime;
     private final int id;
     private final boolean needInspection; // check  need inspection or not
-    private boolean passedInspection; // inspection is passed or not
     private final LinkedList<MaintenanceType> mt;
+    private double arrivalTime;
+    private double removalTime;
+    private boolean passedInspection; // inspection is passed or not
 
 
     /**
@@ -81,6 +81,7 @@ public class Customer {
     }
 
     // Randomly pick a maintenance type
+
     /**
      * Method to randomly pick a maintenance type
      *

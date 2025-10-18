@@ -6,8 +6,7 @@ import org.mockito.Mockito;
 import simu.framework.ProcessManager;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.spy;
 
 class DelayProcessTest {
     private DelayProcess delayProcess;
@@ -16,13 +15,14 @@ class DelayProcessTest {
     @BeforeEach
     void setUp() {
         //Spy on DelayProcess to verify method calls
-        delayProcess = spy (new DelayProcess(500){
+        delayProcess = spy(new DelayProcess(500) {
             @Override
-            public void await(){
+            public void await() {
                 //no-op for testing
             }
+
             @Override
-            public void giveUp(){
+            public void giveUp() {
                 // no-op for testing
             }
         });
@@ -37,14 +37,14 @@ class DelayProcessTest {
     }
 
     @Test
-    void getDelayMsTest(){
-        assertEquals(500, delayProcess.getDelayMs() , " Initial delay should match constructor");
+    void getDelayMsTest() {
+        assertEquals(500, delayProcess.getDelayMs(), " Initial delay should match constructor");
     }
 
 
     @Test
     void testDeregister() {
-        assertDoesNotThrow(()-> delayProcess.deregister(),"Stop delay should not throw any exceptions");
+        assertDoesNotThrow(() -> delayProcess.deregister(), "Stop delay should not throw any exceptions");
     }
 
     @Test

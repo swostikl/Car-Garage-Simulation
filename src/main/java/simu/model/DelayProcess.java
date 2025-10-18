@@ -8,10 +8,11 @@ import simu.framework.ProcessManager;
  */
 public class DelayProcess extends Process {
     private volatile int delayMs;
-    private volatile boolean running = true;
+    private final boolean running = true;
 
     /**
      * Constructs a new {@link DelayProcess} with the given delay duration
+     *
      * @param delayMs the delay time in milliseconds
      */
     public DelayProcess(int delayMs) {
@@ -46,6 +47,7 @@ public class DelayProcess extends Process {
 
     /**
      * Set delay time
+     *
      * @param delayMs delay time (in milliseconds)
      */
     public void setDelay(int delayMs) {
@@ -54,6 +56,7 @@ public class DelayProcess extends Process {
 
     /**
      * Get delay time in ms
+     *
      * @return delay in ms
      */
     public int getDelayMs() {

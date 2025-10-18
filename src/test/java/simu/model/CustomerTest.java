@@ -2,20 +2,12 @@ package simu.model;
 
 import eduni.distributions.ContinuousGenerator;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import simu.framework.Event;
-import simu.framework.EventList;
 import simu.framework.Trace;
-import simu.model.servicePoints.CustomerServicePoint;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CustomerTest {
-
-    private Customer c;
 
     private final ContinuousGenerator continuousGenerator = new ContinuousGenerator() {
         @Override
@@ -24,13 +16,13 @@ class CustomerTest {
         }
 
         @Override
-        public void setSeed(long seed) {
-
+        public long getSeed() {
+            return 0;
         }
 
         @Override
-        public long getSeed() {
-            return 0;
+        public void setSeed(long seed) {
+
         }
 
         @Override
@@ -38,6 +30,7 @@ class CustomerTest {
 
         }
     };
+    private Customer c;
 
     @BeforeAll
     static void beforeAll() {

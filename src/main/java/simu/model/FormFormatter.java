@@ -2,14 +2,13 @@ package simu.model;
 
 import simu.model.Exceptions.ZeroValueException;
 
-import java.text.DecimalFormat;
-
 /**
- *  Utility class for validating and formatting numeric input values from text fields.
+ * Utility class for validating and formatting numeric input values from text fields.
  */
 public class FormFormatter {
     /**
      * Method used to format string in {@link javafx.scene.control.TextField} into double
+     *
      * @param valText the string representation of the numeric value (e.g. "10.5" or "1,14")
      * @return the parsed {@code double} value
      * @throws ZeroValueException when the value is zero or contains only decimal point

@@ -7,7 +7,8 @@ import simu.model.Exceptions.CannotLoadFileException;
 
 import java.io.File;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class DataStoreTest {
 
@@ -20,7 +21,7 @@ class DataStoreTest {
         testFile = new File(tempDir, "temp.simuc");
         DataStore.clearInstance();
         ResultData resultData = new ResultData(1, 1, 1, 1, 1, 1, 1);
-        ResultData resultData1 = new ResultData(2, 2 ,2 ,2 ,2 ,2, 2);
+        ResultData resultData1 = new ResultData(2, 2, 2, 2, 2, 2, 2);
         DataStore.getInstance().addResult(resultData);
         DataStore.getInstance().addResult(resultData1);
         DataStore.getInstance().setSimulationSettings(new SimulationSettings("1", "1", "1", "1", "1", 1));

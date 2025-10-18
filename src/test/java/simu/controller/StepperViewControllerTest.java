@@ -1,7 +1,7 @@
 package simu.controller;
 
+import javafx.embed.swing.JFXPanel;
 import javafx.fxml.FXMLLoader;
-
 import javafx.scene.control.Button;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -10,13 +10,14 @@ import org.mockito.ArgumentCaptor;
 import simu.framework.Process;
 import simu.framework.ProcessManager;
 import simu.model.DelayProcess;
-import javafx.embed.swing.JFXPanel;
 import test.PrivateFieldAccess;
 
 import java.io.IOException;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 class StepperViewControllerTest {
 

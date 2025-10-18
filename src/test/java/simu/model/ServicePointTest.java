@@ -60,7 +60,7 @@ public class ServicePointTest {
         customerServicePoint.beginService();
         verify(eventList).add(eventArgumentCaptor.capture());
         EventType eventType = (EventType) eventArgumentCaptor.getValue().getType();
-        
+
         // assert
         assertEquals(EventType.DEP_CS_INSPECTION, eventType);
     }

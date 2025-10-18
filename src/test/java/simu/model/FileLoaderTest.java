@@ -23,7 +23,7 @@ class FileLoaderTest {
     }
 
     @AfterEach
-    void tearDown(){
+    void tearDown() {
         FileLoader.clearLoader(); // clears the loader state after each test
         DataStore.clearInstance();
     }

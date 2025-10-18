@@ -33,13 +33,14 @@ public class ResultData implements Serializable {
 
     /**
      * Creates a new {@link ResultData} object containing the utilization rates and throughput metrics.
-     * @param tireChangeServiceUtilizationRate utilization rate of the Tire Change service point
+     *
+     * @param tireChangeServiceUtilizationRate  utilization rate of the Tire Change service point
      * @param customerServiceUtilizationRate    utilization rate of the Customer Service point
      * @param maintenanceServiceUtilizationRate utilization rate of the Maintenance service point
      * @param oilChangeServiceUtilizationRate   utilization rate of the oil change service point
-     * @param repairServiceUtilizationRate  utilization rate of the other repairs service point
-     * @param inspectionServiceUtilizationRate utilization rate of the Inspection service point
-     * @param customerThroughput average number of customers served per hour (customers/hour)
+     * @param repairServiceUtilizationRate      utilization rate of the other repairs service point
+     * @param inspectionServiceUtilizationRate  utilization rate of the Inspection service point
+     * @param customerThroughput                average number of customers served per hour (customers/hour)
      *
      *
      */
@@ -66,7 +67,8 @@ public class ResultData implements Serializable {
     }
 
     /**
-     *Returns the utilization rate of the Maintenance service point as a percentage string.
+     * Returns the utilization rate of the Maintenance service point as a percentage string.
+     *
      * @return the formatted Maintenance utilization rate (e.g.{@code "77.2%"})
      */
     public String getMaintenanceServiceUtilizationRate() {
@@ -115,6 +117,7 @@ public class ResultData implements Serializable {
     public String getInspectionServiceUtilizationRate() {
         return df.format(inspectionServiceUtilizationRate * 100) + " %";
     }
+
     /**
      * Returns the overall customer throughput of the simulation.
      *

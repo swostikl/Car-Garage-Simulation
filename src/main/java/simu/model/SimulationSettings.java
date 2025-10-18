@@ -17,12 +17,13 @@ public class SimulationSettings implements Serializable {
 
     /**
      * constructs a new {@code SimulationSettings} object with the specified parameters.
-     * @param arrivalTimeMean the mean arrival time for customers
-     * @param arrivalTimeVariance the variance for the arrival time
-     * @param totalSimulationTime the total duration of the simulation
-     * @param serviceRequiredMean the mean service requires per customer
+     *
+     * @param arrivalTimeMean         the mean arrival time for customers
+     * @param arrivalTimeVariance     the variance for the arrival time
+     * @param totalSimulationTime     the total duration of the simulation
+     * @param serviceRequiredMean     the mean service requires per customer
      * @param serviceRequiredVariance the variance of the service time
-     * @param inspectionFailRate the probability of the failed inspection (0.0-0.1)
+     * @param inspectionFailRate      the probability of the failed inspection (0.0-1.0)
      */
     public SimulationSettings(String arrivalTimeMean, String arrivalTimeVariance, String totalSimulationTime, String serviceRequiredMean, String serviceRequiredVariance, double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
@@ -47,50 +48,72 @@ public class SimulationSettings implements Serializable {
         this.arrivalTimeMean = arrivalTimeMean;
     }
 
-    /** Returns the variance of the arrival time */
+    /**
+     * Returns the variance of the arrival time
+     */
     public String getArrivalTimeVariance() {
         return arrivalTimeVariance;
     }
 
-    /** Sets the variance of the arrival time */
+    /**
+     * Sets the variance of the arrival time
+     */
     public void setArrivalTimeVariance(String arrivalTimeVariance) {
         this.arrivalTimeVariance = arrivalTimeVariance;
     }
 
-    /** Returns the total simulation time */
+    /**
+     * Returns the total simulation time
+     */
     public String getTotalSimulationTime() {
         return totalSimulationTime;
     }
 
-    /** Sets the total simulation time */
+    /**
+     * Sets the total simulation time
+     */
     public void setTotalSimulationTime(String totalSimulationTime) {
         this.totalSimulationTime = totalSimulationTime;
     }
 
-    /** Returns the mean service time required per person */
+    /**
+     * Returns the mean service time required per person
+     */
     public String getServiceRequiredMean() {
         return serviceRequiredMean;
     }
-    /** Sets the mean of the service time required */
+
+    /**
+     * Sets the mean of the service time required
+     */
     public void setServiceRequiredMean(String serviceRequiredMean) {
         this.serviceRequiredMean = serviceRequiredMean;
     }
 
-    /** Returns the variance of the service time required. */
+    /**
+     * Returns the variance of the service time required.
+     */
     public String getServiceRequiredVariance() {
         return serviceRequiredVariance;
     }
-    /** Sets the variance of the service time required. */
+
+    /**
+     * Sets the variance of the service time required.
+     */
     public void setServiceRequiredVariance(String serviceRequiredVariance) {
         this.serviceRequiredVariance = serviceRequiredVariance;
     }
 
-    /** Returns the inspection failure rate. */
+    /**
+     * Returns the inspection failure rate.
+     */
     public double getInspectionFailRate() {
         return inspectionFailRate;
     }
 
-    /** Sets the inspection failure rate. */
+    /**
+     * Sets the inspection failure rate.
+     */
     public void setInspectionFailRate(double inspectionFailRate) {
         this.inspectionFailRate = inspectionFailRate;
     }
@@ -105,12 +128,12 @@ public class SimulationSettings implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(
-            arrivalTimeMean,
-            arrivalTimeVariance,
-            totalSimulationTime,
-            serviceRequiredMean,
-            serviceRequiredVariance,
-            inspectionFailRate
+                arrivalTimeMean,
+                arrivalTimeVariance,
+                totalSimulationTime,
+                serviceRequiredMean,
+                serviceRequiredVariance,
+                inspectionFailRate
         );
     }
 }

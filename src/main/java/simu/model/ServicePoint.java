@@ -23,6 +23,7 @@ import java.util.LinkedList;
  * Service point collects measurement parameters.
  */
 public abstract class ServicePoint {
+    private final LinkedList<Customer> queue = new LinkedList<>(); // Data Structure used
     protected ContinuousGenerator generator;
     protected EventList eventList;
     protected EventType eventTypeScheduled;
@@ -30,7 +31,6 @@ public abstract class ServicePoint {
     protected double serviceTime;
     protected int customerServed;
     protected Customer currentCustomer; //to Check who is being served currently
-    private final LinkedList<Customer> queue = new LinkedList<>(); // Data Structure used
 
     /**
      * Create the service point with a waiting queue.
@@ -107,6 +107,7 @@ public abstract class ServicePoint {
 
     /**
      * Returns the queue of customers currently waiting at the service point
+     *
      * @return a {@link LinkedList} containing the {@link Customer} objects in the queue
      */
 

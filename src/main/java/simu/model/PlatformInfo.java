@@ -35,6 +35,7 @@ public class PlatformInfo {
 
     /**
      * Is a mac
+     *
      * @return {@code true} if is Mac, {@code false} if not
      */
     public boolean getIsMac() {

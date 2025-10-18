@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import simu.controller.ResultViewController;
 import simu.model.DataStore;
-import simu.model.ResultData;
 
 import java.io.IOException;
 

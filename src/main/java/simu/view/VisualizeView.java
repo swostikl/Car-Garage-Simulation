@@ -76,6 +76,7 @@ public class VisualizeView {
 
     /**
      * Get visualize view controller
+     *
      * @return visualize view controller
      */
     public VisualizeController getController() {

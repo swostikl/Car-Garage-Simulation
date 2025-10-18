@@ -3,7 +3,9 @@ package simu.model;
 import simu.model.Exceptions.CannotLoadFileException;
 import simu.model.Exceptions.NoFileSetException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -103,6 +105,7 @@ public class DataStore implements Serializable {
 
     /**
      * Method to set SimulationSettings
+     *
      * @param s parameters for simulation settings
      */
     public synchronized void setSimulationSettings(SimulationSettings s) {

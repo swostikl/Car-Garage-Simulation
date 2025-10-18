@@ -14,6 +14,7 @@ public class FileLoader {
 
     /**
      * Loads a {@link DataStore} object from a specified file
+     *
      * @param file the file to load data from
      * @return the deserialized {@link DataStore} object
      * @throws CannotLoadFileException if the file is null or an error occurs during loading

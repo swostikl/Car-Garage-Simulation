@@ -17,7 +17,6 @@ import simu.model.servicePoints.maintenanceStations.OtherServicePoint;
 import simu.model.servicePoints.maintenanceStations.TireChangeServicePoint;
 import simu.view.ResultView;
 
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +35,7 @@ public class MyEngine extends Engine {
      * Service Points and random number generator with different distributions are created here.
      * We use exponent distribution for customer arrival times and normal distribution for the
      * service times.
+     *
      * @param arrivalContinuousGenerator the generator used to create a customer arrivals
      */
 
@@ -69,7 +69,7 @@ public class MyEngine extends Engine {
          */
 
         // Create all service points in the correct order
-        servicePoints.put(ServicePointTypes.CUSTOMER_SERVICE ,new CustomerServicePoint(customerServiceTime, eventList));
+        servicePoints.put(ServicePointTypes.CUSTOMER_SERVICE, new CustomerServicePoint(customerServiceTime, eventList));
         servicePoints.put(ServicePointTypes.MAINTENANCE, new MaintenanceServicePoint(maintenanceServiceTime, eventList));
         servicePoints.put(ServicePointTypes.TIRE_CHANGE, new TireChangeServicePoint(tireChangeServiceTime, eventList));
         servicePoints.put(ServicePointTypes.OIL_CHANGE, new OilChangeServicePoint(oilChangeServiceTime, eventList));
@@ -84,6 +84,7 @@ public class MyEngine extends Engine {
 
     /**
      * Sets the total simulation Time
+     *
      * @param simulationTime Ending time of the simulation
      */
     @Override
