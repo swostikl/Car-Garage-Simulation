@@ -123,7 +123,7 @@ public class DataStore implements Serializable {
      *
      * @param data ResultData to be removed
      */
-    public void removeResult(ResultData data) {
+    public synchronized void removeResult(ResultData data) {
         resultDataList.remove(data);
     }
 
