@@ -8,9 +8,6 @@ import java.text.DecimalFormat;
  *  Utility class for validating and formatting numeric input values from text fields.
  */
 public class FormFormatter {
-    /** Decimal format for potential number formatting needs. */
-    private static final DecimalFormat df = new DecimalFormat("#.##");
-
     /**
      * Method used to format string in {@link javafx.scene.control.TextField} into double
      * @param valText the string representation of the numeric value (e.g. "10.5" or "1,14")
