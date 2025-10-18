@@ -8,7 +8,7 @@ import simu.model.ServicePoint;
  */
 public class VisualizeControllerListener extends VisualizeController {
 
-    private VisualizeController vc;
+    private volatile VisualizeController vc;
 
     private static VisualizeControllerListener instance;
 
