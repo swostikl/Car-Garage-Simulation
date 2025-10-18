@@ -89,5 +89,5 @@ flowchart TD
 - [5] Click Run to start the simulation.
 - [6] Observe the real-time process in the Simulation window.
 - [7] Use the Stepper Control Window to pause, resume, or step through events.
-- [8] Once completes, result view will automatically appear when the simulation exists.
+- [8] Once completes, result view will automatically appear when the simulation exits.
 - [9] Interpret the performance data and adjust parameters for further experiment.
