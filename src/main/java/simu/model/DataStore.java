@@ -3,18 +3,21 @@ package simu.model;
 import simu.model.Exceptions.CannotLoadFileException;
 import simu.model.Exceptions.NoFileSetException;
 
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
+/**
+ * A data class used to store data
+ */
 public class DataStore implements Serializable {
 
-    private List<ResultData> resultDataList;
-    private SimulationSettings simulationSettings;
-
     private static DataStore instance = null;
-
-    private static File currentFile;
+    private final List<ResultData> resultDataList;
+    private SimulationSettings simulationSettings;
 
     private DataStore(DataStore entity) {
         this.resultDataList = entity.resultDataList;
@@ -33,55 +36,16 @@ public class DataStore implements Serializable {
 
     /**
      * Load DataStore from a file and set it as the singleton instance.
+     *
      * @param file File to load the DataStore from
      */
     public static void loadFromFile(File file) throws CannotLoadFileException {
-        if (file == null) {
-            throw new CannotLoadFileException();
-        }
-        try (FileInputStream fis = new FileInputStream(file);
-             ObjectInputStream ois = new ObjectInputStream(fis)) {
-            Object loadedObject = ois.readObject();
-            instance = new DataStore((DataStore) loadedObject);
-            System.out.println("Data loaded from file: " + file.getAbsolutePath());
-            currentFile = file;
-        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-            throw new CannotLoadFileException();
-        }
+        instance = new DataStore(FileLoader.loadFromFile(file));
     }
-
-    /**
-     * Save the current DataStore instance to a specified file.
-     * @param file File to save the DataStore to
-     */
-    public void saveToFileAs(File file) {
-        try (FileOutputStream fos = new FileOutputStream(file);
-             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(this);
-            System.out.println("Data saved to file: " + file.getAbsolutePath());
-            currentFile = file;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
-     * Save the current DataStore instance to the last used file.
-     * @throws NoFileSetException if no file has been set yet
-     */
-    public void saveToFile() throws NoFileSetException {
-        if (currentFile != null) {
-            saveToFileAs(currentFile);
-        } else {
-            throw new NoFileSetException();
-        }
-    }
-
-
 
     /**
      * Get the singleton instance of DataStore.
+     *
      * @return DataStore instance
      */
     public static DataStore getInstance() {
@@ -92,53 +56,93 @@ public class DataStore implements Serializable {
     }
 
     /**
+     * Method to clear singleton instance
+     */
+    public static void clearInstance() {
+        instance = null;
+        FileLoader.clearLoader();
+    }
+
+    /**
+     * Save the current DataStore instance to a specified file.
+     *
+     * @param file File to save the DataStore to
+     */
+    public synchronized void saveToFileAs(File file) {
+        try {
+            FileLoader.saveToFileAs(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Save the current DataStore instance to the last used file.
+     *
+     * @throws NoFileSetException if no file has been set yet
+     */
+    public synchronized void saveToFile() throws NoFileSetException {
+        FileLoader.saveToFile();
+    }
+
+    /**
      * Get the list of ResultData.
+     *
      * @return List of ResultData
      */
-    public List<ResultData> getResultDataList() {
+    public synchronized List<ResultData> getResultDataList() {
         return resultDataList;
     }
 
     /**
      * Get the simulation settings.
+     *
      * @return SimulationSettings
      */
-    public SimulationSettings getSimulationSettings() {
+    public synchronized SimulationSettings getSimulationSettings() {
         return simulationSettings;
     }
 
-//    /**
-//     * Initialize the DataStore singleton instance with the provided settings if it hasn't been initialized yet.
-//     * @param settings SimulationSettings to initialize the DataStore with
-//     */
-//    public static void init(SimulationSettings settings) {
-//        if (instance == null) {
-//            instance = new DataStore(settings);
-//        }
-//    }
+    /**
+     * Method to set SimulationSettings
+     *
+     * @param s parameters for simulation settings
+     */
+    public synchronized void setSimulationSettings(SimulationSettings s) {
+        this.simulationSettings = s;
+    }
 
     /**
      * Add a ResultData entry to the list.
+     *
      * @param data ResultData to be added
      */
-    public void addResult(ResultData data) {
+    public synchronized void addResult(ResultData data) {
         resultDataList.add(data);
     }
 
     /**
      * Remove a ResultData entry from the list.
+     *
      * @param data ResultData to be removed
      */
-    public void removeResult(ResultData data) {
+    public synchronized void removeResult(ResultData data) {
         resultDataList.remove(data);
     }
 
-    public void setSimulationSettings(SimulationSettings s) {
-        this.simulationSettings = s;
+    public DataStore copy() {
+        return new DataStore(this);
     }
 
-    public static void clearInstance() {
-        instance = null;
-        currentFile = null;
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        DataStore dataStore = (DataStore) o;
+        return Objects.equals(resultDataList, dataStore.resultDataList) && Objects.equals(simulationSettings, dataStore.simulationSettings);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(resultDataList, simulationSettings);
     }
 }

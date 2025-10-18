@@ -1,5 +1,4 @@
 import javafx.application.Application;
-import simu.view.ResultView;
 import simu.view.SetupView;
 
 

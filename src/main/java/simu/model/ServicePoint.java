@@ -1,32 +1,35 @@
 package simu.model;
 
 import eduni.distributions.ContinuousGenerator;
-import simu.framework.*;
+import simu.framework.Clock;
+import simu.framework.Event;
+import simu.framework.EventList;
+import simu.framework.Trace;
+
 import java.util.LinkedList;
 
 /**
  * Service Point implements the functionalities, calculations and reporting.
- *
+ * <p>
  * TODO: This must be modified to actual implementation. Things to be added:
  *     - functionalities of the service point
  *     - measurement variables added
  *     - getters to obtain measurement values
- *
+ * <p>
  * Service point has a queue where customers are waiting to be serviced.
  * Service point simulated the servicing time using the given random number generator which
  * generated the given event (customer serviced) for that time.
- *
+ * <p>
  * Service point collects measurement parameters.
  */
 public abstract class ServicePoint {
-    private LinkedList<Customer> queue = new LinkedList<>(); // Data Structure used
+    private final LinkedList<Customer> queue = new LinkedList<>(); // Data Structure used
     protected ContinuousGenerator generator;
     protected EventList eventList;
     protected EventType eventTypeScheduled;
     protected boolean reserved = false;
     protected double serviceTime;
     protected int customerServed;
-
     protected Customer currentCustomer; //to Check who is being served currently
 
     /**
@@ -35,9 +38,9 @@ public abstract class ServicePoint {
      * @param generator Random number generator for service time simulation
      * @param eventList Simulator event list, needed for the insertion of service ready event
      */
-    public ServicePoint(ContinuousGenerator generator, EventList eventList){
-       this.eventList = eventList;
-       this.generator = generator;
+    public ServicePoint(ContinuousGenerator generator, EventList eventList) {
+        this.eventList = eventList;
+        this.generator = generator;
         this.serviceTime = 0;
     }
 
@@ -47,7 +50,7 @@ public abstract class ServicePoint {
      * @param a Customer to be queued
      */
     public void addQueue(Customer a) { // The first customer of the queue is always in service
-       queue.add(a);
+        queue.add(a);
     }
 
     /**
@@ -57,31 +60,31 @@ public abstract class ServicePoint {
      * @return Customer retrieved from the waiting queue
      */
     public Customer removeQueue() {       // Remove serviced customer
-       reserved = false;
+        reserved = false;
         currentCustomer = null; //eta
         customerServed++;
-       return queue.poll();
+        return queue.poll();
     }
 
     /**
      * Begins a new service, customer is on the queue during the service
-     *
+     * <p>
      * Inserts a new event to the event list when the service should be ready.
      */
     public void beginService() {      // Begins a new service, customer is on the queue during the service
-       currentCustomer = queue.peek(); // track active customer
+        currentCustomer = queue.peek(); // track active customer
         Trace.out(Trace.Level.INFO, "Starting a new service for the customer #" + queue.peek().getId());
 
-       reserved = true;
-       double serviceTime = generator.sample();
+        reserved = true;
+        double serviceTime = generator.sample();
 
-       // SAFETY CHECK: Prevent negative service times from crashing simulation
-       if (serviceTime < 0) {
-           System.out.println("WARNING: Negative service time generated (" + serviceTime + "), using 1.0 instead");
-           serviceTime = 1.0; // Minimum service time
-       }
+        // SAFETY CHECK: Prevent negative service times from crashing simulation
+        if (serviceTime < 0) {
+            System.out.println("WARNING: Negative service time generated (" + serviceTime + "), using 1.0 instead");
+            serviceTime = 1.0; // Minimum service time
+        }
 
-       eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock()+serviceTime));
+        eventList.add(new Event(eventTypeScheduled, Clock.getInstance().getClock() + serviceTime));
     }
 
     /**
@@ -89,8 +92,8 @@ public abstract class ServicePoint {
      *
      * @return logical value indicating service state
      */
-    public boolean isReserved(){
-       return reserved;
+    public boolean isReserved() {
+        return reserved;
     }
 
     /**
@@ -98,9 +101,15 @@ public abstract class ServicePoint {
      *
      * @return logical value indicating queue status
      */
-    public boolean isOnQueue(){
-       return !queue.isEmpty();
+    public boolean isOnQueue() {
+        return !queue.isEmpty();
     }
+
+    /**
+     * Returns the queue of customers currently waiting at the service point
+     *
+     * @return a {@link LinkedList} containing the {@link Customer} objects in the queue
+     */
 
     protected LinkedList<Customer> getQueue() {
         return queue;
@@ -108,6 +117,7 @@ public abstract class ServicePoint {
 
     /**
      * Get the number of customers in the queue
+     *
      * @return numbers of customer in the queue
      */
     public int onQueue() {
@@ -116,9 +126,10 @@ public abstract class ServicePoint {
 
     /**
      * Getter for controller display
+     *
      * @return number of customers service
      */
-    public Customer getCurrentCustomer(){
+    public Customer getCurrentCustomer() {
         return currentCustomer;
     }
 

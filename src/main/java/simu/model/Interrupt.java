@@ -1,8 +1,10 @@
 package simu.model;
 
 import simu.framework.Process;
-import simu.framework.ProcessManager;
 
+/**
+ * A thread of type {@link Process} that pauses the simulation
+ */
 public class Interrupt extends Process {
     public Interrupt() {
         super();

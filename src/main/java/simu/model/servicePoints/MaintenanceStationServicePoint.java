@@ -4,6 +4,9 @@ import eduni.distributions.ContinuousGenerator;
 import simu.framework.EventList;
 import simu.model.ServicePoint;
 
+/**
+ * Abstract class for maintenance stations
+ */
 public abstract class MaintenanceStationServicePoint extends ServicePoint {
 
 
@@ -17,5 +20,6 @@ public abstract class MaintenanceStationServicePoint extends ServicePoint {
         super(generator, eventList);
     }
 
-    @Override abstract public void beginService();
+    @Override
+    abstract public void beginService();
 }

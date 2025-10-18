@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * About window, required for Mac NSMenu
+ */
 public class AboutView {
 
     public Stage aboutView() throws IOException {

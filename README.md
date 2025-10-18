@@ -1,8 +1,8 @@
 # 🚗 Car-Garage Simulation (Java)
-The Car Garage Simulation is a Java-based application that models the operations of a modern automotive garage. This object-oriented program demonstrates key Java concepts including inheritance, polymorphism, collections, and exception han-dling while simulating real-world garage operations.
+The Car Garage Simulation is a Java-based application that models the operations of a modern automotive garage. This object-oriented program demonstrates key Java concepts including inheritance, polymorphism, collections, and exception handling while simulating real-world garage operations.
 
 # Overview
-Car garages manage complex operation involving multiple vehicles, each requiring different services such as maintenance, repair, or inspection. Managing these oper-ations manually can lead to inefficiency, errors and delayed service. The “Car Gar-age Simulation” project aims to digitally model these operations with specialized service.
+Car garages manage complex operations involving multiple vehicles, each requiring different services such as maintenance, repair, or inspection. Managing these operations manually can lead to inefficiency, errors and delayed service. The “Car Garage Simulation” project aims to digitally model these operations with specialized service.
 
 
 # 🌟 Features
@@ -82,3 +82,12 @@ flowchart TD
     style start height:0px
 ```
 # Simulation Instructions
+- [1] Download the Zip file 
+- [2] Open the Simulator and load the Setup Window.
+- [3] Enter the required input Parameters.
+- [4] Adjust the inspection failure rate and speed if necessary.
+- [5] Click Run to start the simulation.
+- [6] Observe the real-time process in the Simulation window.
+- [7] Use the Stepper Control Window to pause, resume, or step through events.
+- [8] Once the simulation completes, the result view will automatically appear when the simulation exits.
+- [9] Interpret the performance data and adjust parameters for further experiment.
